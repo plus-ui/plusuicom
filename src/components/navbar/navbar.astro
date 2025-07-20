@@ -1,0 +1,124 @@
+---
+import Container from "@components/container.astro";
+import Link from "@components/ui/link.astro";
+import Dropdown from "./dropdown.astro";
+import { StickyHeader, Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import logo from "@assets/logo.svg";
+
+const { headerTheme = "light" } = Astro.props;
+
+const menuitems = [
+  {
+    title: "Products",
+    path: "#",
+    children: [
+      { title: "Design System", path: "/design-system" },
+      { title: "UI Library", path: "/ui-library" },
+      { title: "Analytics", path: "/analytics" },
+      { title: "Plus AI", path: "/plus-ai" },
+    ],
+  },
+  {
+    title: "UI Elements",
+    path: "/ui-elements",
+  },
+  {
+    title: "Playground",
+    path: "/playground",
+  },
+  {
+    title: "Docs",
+    path: "/docs",
+    external: true,
+  },
+  {
+    title: "Pricing",
+    path: "/pricing",
+  },
+  {
+    title: "Discover",
+    path: "/discover",
+    children: [
+      { title: "Design System", path: "/design-system" },
+      { title: "UI Library", path: "/ui-library" },
+      { title: "Analytics", path: "/analytics" },
+      { title: "Plus AI", path: "/plus-ai" },
+    ],
+  },
+];
+---
+
+<StickyHeader
+  data-theme={headerTheme}
+  class="sticky top-0 border-b z-20 transition-all"
+  scrollY={50}
+  defaultClass="py-5 border-transparent"
+  activeClass="py-2 bg-color-surface/80 border-gray-200 backdrop-blur-lg"
+  transition:persist
+>
+  <Container>
+    <div
+      class="flex flex-col lg:flex-row justify-between items-center relative z-10"
+    >
+      <div class="flex items-center justify-start gap-12">
+        <Astronav>
+          <div class="flex w-full lg:w-auto items-center justify-between gap-2">
+            <img src={logo.src} alt="Plus UI" class="w-5 h-5" />
+            <a
+              href="/"
+              class="text-lg flex items-center transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500 focus-visible:outline-none focus-visible:shadow-outline-indigo rounded-full px-2 -ml-2"
+            >
+              <span class="font-bold text-xl text-color-default">Plus UI</span>
+            </a>
+            <div class="block lg:hidden">
+              <MenuIcon class="w-4 h-4 text-gray-800" />
+            </div>
+          </div>
+          <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+            <ul class="flex flex-col lg:flex-row lg:gap-2">
+              {
+                menuitems.map((item, index) => (
+                  <>
+                    {item.children && (
+                      <Dropdown
+                        title={item.title}
+                        children={item.children}
+                        lastItem={index === menuitems.length - 1}
+                      />
+                    )}
+
+                    {!item.children && (
+                      <li>
+                        <a
+                          href={item.path}
+                          class="flex lg:px-3 py-1.5 font-sans-tight text-base font-normal tracking-[0.01em] text-color-default hover:text-indigo-600 focus-visible:ring-2 focus-visible:ring-offset-2 transition focus-visible:ring-indigo-500 focus-visible:outline-none focus-visible:shadow-outline-indigo rounded-full"
+                        >
+                          {item.title}
+                        </a>
+                      </li>
+                    )}
+                  </>
+                ))
+              }
+            </ul>
+            <div class="lg:hidden flex items-center mt-3 gap-4">
+              <Link href="#" style="muted" block size="md">Log in</Link>
+              <Link href="#" size="md" block>Try for Free</Link>
+            </div>
+          </MenuItems>
+        </Astronav>
+      </div>
+      <div>
+        <div class="hidden lg:flex items-center gap-2.5">
+          <plus-button kind="text" size="sm"> Sign in </plus-button>
+          <plus-button status="primary" size="sm">
+            <div class="flex items-center justify-center gap-2">
+              <span>Get all-access</span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </plus-button>
+        </div>
+      </div>
+    </div>
+  </Container>
+</StickyHeader>

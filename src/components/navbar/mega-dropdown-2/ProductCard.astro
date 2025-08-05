@@ -1,0 +1,75 @@
+---
+const { item } = Astro.props;
+---
+
+<a 
+  href={item.path} 
+  class="group/card relative rounded-xl p-6 transition-all duration-200 hover:shadow-lg cursor-pointer block"
+  style={`background: ${item.background || 'rgb(248, 250, 252)'}`}
+>
+  <!-- Category Badge -->
+  <div class="inline-flex items-center gap-2 mb-4">
+    <div class="w-2 h-2 rounded-full bg-black"></div>
+    <span class="text-sm font-medium text-gray-700">{item.category}</span>
+  </div>
+  
+  <!-- Title -->
+  <h3 class="text-xl font-semibold text-gray-900 mb-4 group-hover/card:text-indigo-600 transition-colors">
+    {item.title}
+  </h3>
+  
+  <!-- Image/Visual -->
+  {item.image && (
+    <div class="mb-4">
+      <div class="w-full h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden">
+        <!-- Placeholder for now, you can add actual images later -->
+        <div class="w-full h-full bg-gray-300 rounded-lg flex items-center justify-center">
+          <span class="text-gray-500 text-sm">Image</span>
+        </div>
+      </div>
+    </div>
+  )}
+  
+  <!-- Description -->
+  <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+    {item.description}
+  </p>
+  
+  <!-- Features List -->
+  {item.features && (
+    <div class="space-y-2 mb-4">
+      {item.features.map((feature) => (
+        <div class="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors">
+          {feature}
+        </div>
+      ))}
+    </div>
+  )}
+  
+  <!-- Integration Icons -->
+  {item.integrations && (
+    <div class="flex items-center gap-2">
+      {item.integrations.map((integration) => (
+        <div class="w-6 h-6 bg-gray-200 rounded flex items-center justify-center">
+          <span class="text-xs font-bold text-gray-600">{integration}</span>
+        </div>
+      ))}
+    </div>
+  )}
+  
+  <!-- Coming Soon Badge -->
+  {item.status === "Coming Soon" && (
+    <div class="absolute top-6 right-6">
+      <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-800">
+        Coming Soon
+      </span>
+    </div>
+  )}
+  
+  <!-- Hover Arrow -->
+  <div class="absolute top-6 right-6 opacity-0 group-hover/card:opacity-100 transition-opacity">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-400">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+    </svg>
+  </div>
+</a> 

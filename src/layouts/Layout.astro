@@ -9,8 +9,7 @@ import "@fontsource-variable/inter/index.css";
 import "@fontsource-variable/inter-tight/index.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../styles/global.css";
-// import "@plusui/library/dist/components/index.js";
-
+import "@plusui/library/dist/index.css";
 
 export interface Props {
   title?: string;
@@ -42,9 +41,6 @@ const makeTitle = title
 <html lang="en" data-theme={theme}>
   <head>
 
-    <script>
-      import "@plusui/library/cdn/components/index.js";
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -85,5 +81,9 @@ const makeTitle = title
     <Navbar headerTheme={headerTheme} />
     <slot />
     <Footer margin={footerMargin} />
+    
+    <script>
+      import "@plusui/library/cdn/components/index.js";
+    </script>
   </body>
 </html>

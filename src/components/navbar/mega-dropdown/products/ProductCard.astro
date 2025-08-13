@@ -49,14 +49,14 @@ const { category, title, path, image, features, integrations, status, hover } = 
 
 <a href={path} class="product-card cursor-pointer group/product-card hover:bg-[var(--hover-bg)] flex flex-1 flex-col items-center gap-7 p-4 transition-colors duration-300 rounded" style={`--hover-bg: var(${hover.bg})`}>
   <div class="flex w-full flex-col gap-3">
-    <div class="relative h-6">
-      <plus-chip invert={category.invert} size="sm" status={category.status} class="absolute top-0 left-0 transition-opacity duration-300 group-hover/product-card:opacity-0">
+    <div class="relative h-6" title={category.text}>
+      <plus-chip invert={category.invert} size="sm" status={category.status} class="absolute top-0 left-0 transition-opacity duration-300 group-hover/product-card:opacity-0 ">
         <i class="fa-solid fa-circle text-xxxs mr-1"></i>
-        {category.text}
+        <span class="line-clamp-1">{category.text}</span>
       </plus-chip>
       <plus-chip invert={!category.invert} size="sm" status={category.status} class="absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover/product-card:opacity-100">
         <i class="fa-solid fa-circle text-xxxs mr-1"></i>
-        {category.text}
+        <span class="line-clamp-1">{category.text}</span>
       </plus-chip>
     </div>
     <div class="flex flex-col gap-2">
@@ -72,8 +72,8 @@ const { category, title, path, image, features, integrations, status, hover } = 
     {
       features.map((feature) => (
         <div class="flex flex-col gap-1">
-          <h4 class="text-color-default text-sm font-semibold">{feature.title}</h4>
-          <p class="text-color-caption text-xs">{feature.description}</p>
+          <h4 class="text-color-default text-sm font-medium line-clamp-1" title={feature.title}>{feature.title}</h4>
+          <p class="text-color-caption text-xs line-clamp-2" title={feature.description}>{feature.description}</p>
         </div>
       ))
     }

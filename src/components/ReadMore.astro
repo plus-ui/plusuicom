@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<div class="read-more-component">
+  <button class="toggle-button text-color-link mt-4 flex cursor-pointer items-center gap-1 font-semibold hover:text-color-primary">
+    <span>Read more</span>
+    <Icon name="mdi:chevron-down" class="h-5 w-5 transition-transform" />
+  </button>
+  <div class="content-wrapper">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .content-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+  }
+  .content-wrapper.expanded {
+    max-height: 3000px; /* Should be larger than the content height */
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.read-more-component').forEach((component) => {
+    const button = component.querySelector('.toggle-button')
+    if (!button) return
+
+    const wrapper = component.querySelector('.content-wrapper')
+    if (!wrapper) return
+
+    const btnSpan = button.querySelector('span')
+    const btnIcon = button.querySelector('svg')
+
+    button.addEventListener('click', () => {
+      const isExpanded = wrapper.classList.contains('expanded')
+
+      if (isExpanded) {
+        // It's expanded, so we're collapsing it.
+        // Move button back to top
+        component.insertBefore(button, wrapper)
+        wrapper.classList.remove('expanded')
+
+        if (btnSpan) btnSpan.textContent = 'Read more'
+        if (btnIcon) btnIcon.classList.remove('rotate-180')
+
+        // Scroll to center the button in the viewport
+        const buttonRect = button.getBoundingClientRect()
+        const absoluteButtonTop = buttonRect.top + window.scrollY
+        const targetScrollY = absoluteButtonTop - window.innerHeight / 2 + buttonRect.height / 2
+
+        window.scrollTo({
+          top: targetScrollY,
+          behavior: 'smooth',
+        })
+      } else {
+        // It's collapsed, so we're expanding it.
+        wrapper.classList.add('expanded')
+        // Move button to end of content
+        wrapper.appendChild(button)
+        if (btnSpan) btnSpan.textContent = 'Read less'
+        if (btnIcon) btnIcon.classList.add('rotate-180')
+      }
+    })
+  })
+</script>

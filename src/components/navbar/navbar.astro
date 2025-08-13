@@ -1,6 +1,5 @@
 ---
 import Container from '@components/container.astro'
-import Link from '@components/ui/link.astro'
 import Dropdown from './dropdown.astro'
 import MegaDropdownContainer from './mega-dropdown/MegaDropdownContainer.astro'
 import { StickyHeader, Astronav, MenuItems, MenuIcon } from 'astro-navbar'
@@ -123,6 +122,45 @@ const menuitems = [
         status: 'Coming Soon',
       },
       {
+        // category: "For POs",
+        category: {
+          invert: false,
+          status: 'default',
+          text: 'For Data Scientes',
+          disabled: true,
+        },
+        hover: {
+          bg: '--background-color-color-disabled-default',
+        },
+        title: 'Plus AI',
+        path: '/plus-ai',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ipsum dolor.',
+        background: 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)',
+        // features: [
+        //   "Monitoring Dashboard",
+        //   "Performance Overview",
+        //   "AI Suggestion",
+        // ],
+        features: [
+          {
+            title: 'Monitoring Dashboard',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          },
+          {
+            title: 'Performance Overview',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          },
+          {
+            title: 'AI Suggestion',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          },
+        ],
+        image: 'analytics',
+        integrations: false,
+        status: 'Coming Soon',
+      },
+
+      {
         // category: "For Agencies & Companies",
         category: {
           invert: true,
@@ -133,8 +171,8 @@ const menuitems = [
         hover: {
           bg: '--background-color-color-warning-invert-default',
         },
-        title: 'Plus AI',
-        path: '/plus-ai',
+        title: 'Enterprise',
+        path: '/enterprise',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ipsum dolor.',
         background: 'linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%)',
         // features: [
@@ -186,6 +224,7 @@ const menuitems = [
     children: [
       {
         title: 'About',
+        path: '/about',
         type: 'links',
         items: [
           { title: 'Why Plus UI?', path: '/about' },
@@ -197,6 +236,7 @@ const menuitems = [
       {
         title: 'Resources',
         type: 'links',
+        path: '/resources',
         items: [
           {
             title: 'Plus UI Academy',
@@ -222,6 +262,7 @@ const menuitems = [
       {
         title: 'Tools',
         type: 'links',
+        path: '/tools',
         items: [
           {
             title: 'Accessibility Checker',
@@ -244,6 +285,7 @@ const menuitems = [
       {
         title: 'Compare',
         type: 'compare',
+        path: '/compare',
         items: [
           { title: 'vs Ant Design', path: '/compare/ant-design' },
           { title: 'vs MUI', path: '/compare/mui' },
@@ -256,7 +298,7 @@ const menuitems = [
         title: 'Featured guide',
         type: 'featured',
         featuredTitle: 'How to build a team hub on Plus UI',
-        path: '/guides/team-hub',
+        path: '/featured',
         cta: 'Get insight',
         image: '/api/placeholder/200/100',
       },
@@ -270,77 +312,71 @@ const menuitems = [
   class="sticky top-0 z-20 border-b transition-all"
   scrollY={50}
   defaultClass="py-5 border-transparent"
-  activeClass="py-2 bg-color-surface/80 border-color-disabled backdrop-blur-lg"
+  activeClass="py-2 bg-color-surface/90 border-color-disabled backdrop-blur-lg"
   transition:persist
 >
   <Container>
-    <div class="relative z-10 flex flex-col items-center justify-between lg:flex-row">
-      <div class="flex w-full flex-col items-center justify-between gap-4 lg:w-auto lg:flex-row lg:justify-start lg:gap-12">
-        <Astronav>
-          <div class="flex w-full items-center justify-between gap-2 lg:w-auto">
-            <a
-              href="/"
-              class="focus-visible:shadow-outline-indigo -ml-2 flex items-center gap-2 rounded px-2 text-lg transition focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              <img src={logo.src} alt="Plus UI" class="h-5 w-5" />
-              <span class="text-color-default text-xl font-bold">Plus UI</span>
-            </a>
-            <div class="block lg:hidden">
-              <MenuIcon class="text-color-default h-5 w-5" />
+    <div class="relative z-10 flex w-full flex-col items-center justify-between gap-4 lg:flex-row lg:gap-6 xl:gap-12">
+      <Astronav>
+        <div class="flex w-full items-center justify-between gap-2 text-nowrap lg:w-auto">
+          <a
+            href="/"
+            class="focus-visible:shadow-outline-indigo -ml-2 flex items-center gap-2 rounded px-2 text-lg transition focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+          >
+            <img src={logo.src} alt="Plus UI" class="h-5 w-5" />
+            <span class="text-color-default text-xl font-bold">Plus UI</span>
+          </a>
+          <div class="block lg:hidden">
+            <MenuIcon class="text-color-default h-5 w-5" />
+          </div>
+        </div>
+        <MenuItems class="mt-2 hidden w-full items-center justify-between lg:mt-0 lg:flex lg:gap-2 xl:gap-4">
+          <ul class="flex flex-col lg:flex-row lg:gap-2">
+            {
+              menuitems.map((item, index) => (
+                <>
+                  {item.children && item.type !== 'mega' && <Dropdown title={item.title} children={item.children} lastItem={index === menuitems.length - 1} />}
+
+                  {item.children && item.type === 'mega' && <MegaDropdownContainer title={item.title} type={item.megaType} children={item.children} />}
+
+                  {!item.children && (
+                    <li class="text-nowrap">
+                      <a
+                        href={item.path}
+                        class="font-sans-tight text-color-default hover:bg-color-default-hovered focus-visible:shadow-outline-indigo flex rounded px-3 py-1.5 text-base font-medium tracking-[0.01em] transition focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+                      >
+                        {item.title}
+                      </a>
+                    </li>
+                  )}
+                </>
+              ))
+            }
+          </ul>
+          <div class="mt-3 flex items-center gap-2 lg:mt-0 xl:gap-4">
+            <div class="hidden items-center gap-2 lg:flex xl:gap-4">
+              <!-- figma -->
+              <a href="#" class="flex h-6 w-6 items-center justify-center">
+                <img src={figma.src} alt="Figma" class="h-5" />
+              </a>
+              <!-- github -->
+              <a href="#" class="flex h-6 w-6 items-center justify-center">
+                <img src={github.src} alt="GitHub" class="h-6 w-6" />
+              </a>
+            </div>
+            <div class="bg-color-disabled-default hidden h-6 w-px lg:block"></div>
+            <div class="flex w-full items-center gap-2.5 text-nowrap lg:w-fit">
+              <plus-button kind="text" size="sm" full-width class="w-full [--border-color:var(--plus-color-border-default)] lg:w-fit lg:[--border-color:transparent]"> Sign in </plus-button>
+              <plus-button status="primary" size="sm" full-width class="w-full lg:w-fit">
+                <div class="flex items-center justify-center gap-2">
+                  <span>Get all-access</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </plus-button>
             </div>
           </div>
-          <MenuItems class="mt-2 hidden w-full lg:mt-0 lg:flex lg:w-auto">
-            <ul class="flex flex-col lg:flex-row lg:gap-2">
-              {
-                menuitems.map((item, index) => (
-                  <>
-                    {item.children && item.type !== 'mega' && <Dropdown title={item.title} children={item.children} lastItem={index === menuitems.length - 1} />}
-
-                    {item.children && item.type === 'mega' && <MegaDropdownContainer title={item.title} type={item.megaType} children={item.children} />}
-
-                    {!item.children && (
-                      <li>
-                        <a
-                          href={item.path}
-                          class="font-sans-tight text-color-default hover:bg-color-default-hovered focus-visible:shadow-outline-indigo flex rounded py-1.5 text-base font-normal tracking-[0.01em] transition focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:outline-none lg:px-3"
-                        >
-                          {item.title}
-                        </a>
-                      </li>
-                    )}
-                  </>
-                ))
-              }
-            </ul>
-            <div class="mt-3 flex items-center gap-4 lg:hidden">
-              <Link href="#" style="muted" block size="md">Sign in</Link>
-              <Link href="#" size="md" block>Get all-access</Link>
-            </div>
-          </MenuItems>
-        </Astronav>
-      </div>
-      <div class="hidden items-center gap-4 lg:flex">
-        <div class="flex items-center gap-4">
-          <!-- figma -->
-          <a href="#" class="flex items-center justify-center h-6 w-6">
-            <img src={figma.src} alt="Figma" class="h-5" />
-          </a>
-          <!-- github -->
-          <a href="#" class="flex items-center justify-center h-6 w-6">
-            <img src={github.src} alt="GitHub" class="h-6 w-6" />
-          </a>
-        </div>
-        <div class="bg-color-disabled-default h-6 w-px"></div>
-        <div class="flex items-center gap-2.5">
-          <plus-button kind="text" size="sm"> Sign in </plus-button>
-          <plus-button status="primary" size="sm">
-            <div class="flex items-center justify-center gap-2">
-              <span>Get all-access</span>
-              <i class="fa-solid fa-chevron-right"></i>
-            </div>
-          </plus-button>
-        </div>
-      </div>
+        </MenuItems>
+      </Astronav>
     </div>
   </Container>
 </StickyHeader>

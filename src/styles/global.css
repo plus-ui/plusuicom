@@ -21,11 +21,11 @@
     'Segoe UI Symbol', 'Noto Color Emoji';
     
 
-  --breakpoint-sm: calc(40rem + 40px);
-  --breakpoint-md: calc(48rem + 40px);
-  --breakpoint-lg: calc(64rem + 40px);
-  --breakpoint-xl: calc(80rem + 40px);
-  --breakpoint-2xl: calc(96rem + 40px);
+  /* --breakpoint-sm: calc(40rem + 40px);
+  --breakpoint-md: calc(48rem + 40px); */
+  /* --breakpoint-lg: calc(64rem + 40px); */
+  /* --breakpoint-xl: calc(80rem + 40px);
+  --breakpoint-2xl: calc(96rem + 40px); */
 
   --text-xxxs: 0.5rem; /* 8px */
   --text-xxxs--line-height: calc(1 / 0.5);
@@ -54,7 +54,7 @@
   
   .wrapper-sm { max-width: var(--breakpoint-sm); }
   .wrapper-md { max-width: var(--breakpoint-md); }
-  .wrapper-lg { max-width: var(--breakpoint-lg); }
-  .wrapper-xl { max-width: var(--breakpoint-xl); }
-  .wrapper-2xl { max-width: var(--breakpoint-2xl); }
+  .wrapper-lg { max-width: calc(var(--breakpoint-lg) + 40px); }
+  .wrapper-xl { max-width: calc(var(--breakpoint-xl) + 40px); }
+  .wrapper-2xl { max-width: calc(var(--breakpoint-2xl) + 40px); }
 }

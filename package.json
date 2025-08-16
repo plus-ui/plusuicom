@@ -11,7 +11,8 @@
   "dependencies": {
     "@astrojs/lit": "^4.3.0",
     "@astrojs/mdx": "^4.3.3",
-    "@astrojs/sitemap": "^3.4.2",
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/sitemap": "^3.5.0",
     "@fontsource-variable/inter": "^5.2.6",
     "@fontsource-variable/inter-tight": "^5.2.6",
     "@fortawesome/fontawesome-free": "^6.7.2",
@@ -20,10 +21,13 @@
     "@plusui/library": "^0.1.8",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.12.8",
+    "astro": "^5.13.0",
     "astro-icon": "^1.1.5",
     "astro-navbar": "^2.4.0",
     "astro-seo": "^0.8.4",
+    "framer-motion": "^12.23.12",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

@@ -1,0 +1,51 @@
+---
+import Container from "@components/container.astro";
+---
+
+<section class="unified-docs-section py-16 lg:py-24">
+  <Container>
+    <div class="text-center mb-16">
+      <h2 class="text-3xl lg:text-5xl font-bold mb-6">
+        Unified System
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Complete design system documentation and guidelines in one place.
+      </p>
+    </div>
+    
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h3 class="text-2xl font-bold mb-4">Complete Documentation</h3>
+        <p class="text-gray-600 mb-6">
+          Access comprehensive guides, API references, and examples for every component.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-center">
+            <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+            <span>Component API Documentation</span>
+          </li>
+          <li class="flex items-center">
+            <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+            <span>Design System Guidelines</span>
+          </li>
+          <li class="flex items-center">
+            <div class="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+            <span>Interactive Examples</span>
+          </li>
+        </ul>
+        <button class="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+          View Documentation
+        </button>
+      </div>
+      
+      <div class="bg-gray-50 p-8 rounded-2xl">
+        <div class="space-y-4">
+          <div class="h-8 bg-gray-200 rounded w-3/4"></div>
+          <div class="h-32 bg-gray-300 rounded"></div>
+          <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+          <div class="h-6 bg-gray-200 rounded w-2/3"></div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

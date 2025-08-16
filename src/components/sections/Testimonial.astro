@@ -1,0 +1,58 @@
+---
+import Container from "@components/container.astro";
+---
+
+<section class="testimonial-section py-16 lg:py-24 bg-gray-50">
+  <Container>
+    <div class="text-center mb-16">
+      <h2 class="text-3xl lg:text-5xl font-bold mb-6">
+        What People Say
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Hear from developers and teams who trust our component library.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Testimonial Cards -->
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+          <div>
+            <h4 class="font-semibold">John Doe</h4>
+            <p class="text-sm text-gray-600">Senior Developer</p>
+          </div>
+        </div>
+        <p class="text-gray-700">
+          "Amazing component library that saved us weeks of development time."
+        </p>
+      </div>
+      
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+          <div>
+            <h4 class="font-semibold">Jane Smith</h4>
+            <p class="text-sm text-gray-600">Product Manager</p>
+          </div>
+        </div>
+        <p class="text-gray-700">
+          "The best component library we've used. Clean, accessible, and performant."
+        </p>
+      </div>
+      
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+          <div>
+            <h4 class="font-semibold">Mike Johnson</h4>
+            <p class="text-sm text-gray-600">Tech Lead</p>
+          </div>
+        </div>
+        <p class="text-gray-700">
+          "Exceptional quality and documentation. Highly recommend to any team."
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>

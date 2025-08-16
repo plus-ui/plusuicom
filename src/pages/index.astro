@@ -1,18 +1,50 @@
 ---
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
+
+// Section imports
+import Hero from "@components/sections/Hero.astro";
+import Proof from "@components/sections/Proof.astro";
+import Showcase from "@components/sections/Showcase.astro";
+import Features from "@components/sections/Features.astro";
+import Specifications from "@components/sections/Specifications.astro";
+import Testimonial from "@components/sections/Testimonial.astro";
+import UnifiedDocs from "@components/sections/UnifiedDocs.astro";
+import Resources from "@components/sections/Resources.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import Templates from "@components/sections/Templates.astro";
 ---
 
 <Layout theme="light" headerTheme="light">
-  <Container>
-    <div class="min-h-[calc(100vh-20rem)] flex items-center justify-center">
-      <div class="mt-16 text-center">
-        <h1
-          class="text-6xl lg:text-9xl font-bold lg:tracking-tight bg-gradient-to-b from-indigo-600 to-indigo-300 bg-clip-text text-transparent"
-        >
-          Plus UI Library
-        </h1>
-      </div>
-    </div>
-  </Container>
+  <main>
+    <!-- Hero Section - 2 Column Layout -->
+    <Hero />
+    
+    <!-- Proof Section - Brand Logos -->
+    <Proof />
+    
+    <!-- Showcase Section - Animated Tabs -->
+    <Showcase />
+    
+    <!-- Features Section - Vertical Tabs -->
+    <Features />
+    
+    <!-- Specifications Section -->
+    <Specifications />
+    
+    <!-- Testimonial Section -->
+    <Testimonial />
+    
+    <!-- Unified System Docs Section -->
+    <UnifiedDocs />
+    
+    <!-- Resources Section -->
+    <Resources />
+    
+    <!-- FAQ Section -->
+    <FAQ />
+    
+    <!-- Templates Section -->
+    <Templates />
+  </main>
 </Layout>

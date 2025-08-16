@@ -1,0 +1,43 @@
+---
+import Container from "@components/container.astro";
+---
+
+<section class="specifications-section py-16 lg:py-24">
+  <Container>
+    <div class="text-center mb-16">
+      <h2 class="text-3xl lg:text-5xl font-bold mb-6">
+        Specifications
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Technical details and capabilities of our system.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Specification Cards -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <div class="w-12 h-12 bg-blue-100 rounded-lg mb-4"></div>
+        <h3 class="text-xl font-semibold mb-2">Performance</h3>
+        <p class="text-gray-600">
+          Lightning-fast components optimized for production use.
+        </p>
+      </div>
+      
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <div class="w-12 h-12 bg-green-100 rounded-lg mb-4"></div>
+        <h3 class="text-xl font-semibold mb-2">Accessibility</h3>
+        <p class="text-gray-600">
+          WCAG 2.1 AA compliant components with screen reader support.
+        </p>
+      </div>
+      
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <div class="w-12 h-12 bg-purple-100 rounded-lg mb-4"></div>
+        <h3 class="text-xl font-semibold mb-2">Customization</h3>
+        <p class="text-gray-600">
+          Highly customizable themes and component variations.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,37 +1,22 @@
 ---
-import Container from "@components/container.astro";
+import Container from '@components/container.astro'
+import ShowcaseTabs from '@components/ui/ShowcaseTabs.tsx'
 ---
 
-<section class="showcase-section py-16 lg:py-24">
+<section class="showcase-section bg-color-surface text-color-default py-16 lg:py-24" data-theme="dark">
   <Container>
-    <div class="text-center mb-16">
-      <h2 class="text-3xl lg:text-5xl font-bold mb-6">
-        Showcase
+    <div class="mb-12 text-center">
+     
+      <plus-chip kind="filled" shape="rounded" size="lg" class="mb-5">Showcase</plus-chip>
+
+      <h2 class="mb-2.5 text-3xl font-bold lg:text-4xl">
+        Build Smarter<br />
+        with Modular UI Foundations
       </h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Discover our powerful features through interactive demonstrations.
-      </p>
+      <p class="mx-auto max-w-2xl text-lg text-color-caption">Modular components, tokens, templates, and real-time monitoring</p>
     </div>
-    
-    <!-- Animated Tabs Structure -->
-    <div class="showcase-tabs">
-      <!-- Tab Navigation -->
-      <div class="flex justify-center mb-8">
-        <div class="flex bg-gray-100 p-1 rounded-lg">
-          <button class="px-6 py-2 rounded-md bg-white shadow-sm font-medium">Tab 1</button>
-          <button class="px-6 py-2 rounded-md text-gray-600 font-medium">Tab 2</button>
-          <button class="px-6 py-2 rounded-md text-gray-600 font-medium">Tab 3</button>
-        </div>
-      </div>
-      
-      <!-- Tab Content -->
-      <div class="bg-gray-50 p-8 rounded-2xl min-h-[400px] flex items-center justify-center">
-        <div class="text-center">
-          <div class="w-32 h-32 bg-blue-200 rounded-lg mx-auto mb-4"></div>
-          <h3 class="text-xl font-semibold mb-2">Feature Content</h3>
-          <p class="text-gray-600">Animated content will be displayed here</p>
-        </div>
-      </div>
-    </div>
+
+    {/* Interactive Tabs */}
+    <ShowcaseTabs client:load />
   </Container>
 </section>

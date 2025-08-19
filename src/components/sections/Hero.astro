@@ -1,6 +1,7 @@
 ---
 import Container from '@components/container.astro'
 import WidgetPreview from '@components/WidgetPreview.tsx'
+import { Icon } from 'astro-icon/components'
 ---
 
 <section class="hero-section lg:py-4 bg-color-default-default">
@@ -18,7 +19,7 @@ import WidgetPreview from '@components/WidgetPreview.tsx'
         <!-- tech badges -->
         <div class="mb-8 flex flex-row items-center justify-start lg:gap-4 gap-2">
           <div class="flex flex-row items-center lg:gap-3 gap-2">
-            <img src="/src/assets/navbar/logos/figma.png" alt="Figma" class="h-5 w-3 object-contain" />
+            <Icon name="logos:figma" class="h-5 w-5" />
             <p class="text-base">
               <span class="font-normal">Made in </span>
               <span class="font-bold">Figma</span>
@@ -28,7 +29,7 @@ import WidgetPreview from '@components/WidgetPreview.tsx'
           <div class="bg-color-divider h-4 w-px"></div>
 
           <div class="flex flex-row items-center lg:gap-3 gap-2">
-            <img src="/src/assets/navbar/logos/lit.png" alt="Lit" class="h-6 w-5 object-contain" />
+            <Icon name="logos:lit-icon" class="h-5 w-5" />
             <p class="text-base">
               <span class="font-normal">Powered by </span>
               <span class="font-bold">Lit</span>
@@ -38,7 +39,7 @@ import WidgetPreview from '@components/WidgetPreview.tsx'
           <div class="bg-color-divider h-4 w-px"></div>
 
           <div class="flex flex-row items-center lg:gap-3 gap-2">
-            <img src="/src/assets/navbar/logos/react.png" alt="React" class="h-6 w-6 object-contain" />
+            <Icon name="logos:react" class="h-5 w-5" />
             <p class="text-base">
               <span class="font-normal">Built for </span>
               <span class="font-bold">React</span>

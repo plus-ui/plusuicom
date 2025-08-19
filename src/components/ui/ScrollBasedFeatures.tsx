@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { Icon } from '@iconify/react';
 
 interface FeatureItem {
   id: string;
   icon: string;
   title: string;
   description: string;
-  logos: Array<{
-    src: string;
-    alt: string;
-    className?: string;
-  }>;
+  logos: Array<string>;
   visualType: 'color' | 'image' | 'video';
   visualContent: string;
 }
@@ -132,18 +129,19 @@ const ScrollBasedFeatures: React.FC<ScrollBasedFeaturesProps> = ({
                   
                   {/* Logos */}
                   <motion.div 
-                    className="flex flex-row items-center gap-2 grayscale filter"
+                    className={`flex flex-row items-center gap-3  ${
+                      activeFeatureIndex === index ? '' : 'grayscale filter'
+                    }`}
                     animate={{
                       opacity: activeFeatureIndex === index ? 1 : 0.6,
                     }}
                     transition={{ duration: 0.3 }}
                   >
                     {feature.logos.map((logo, logoIndex) => (
-                      <img
-                        key={logoIndex}
-                        src={logo.src}
-                        alt={logo.alt}
-                        className={logo.className || "h-7 w-7"}
+                      <Icon 
+                        key={`${feature.id}-logo-${logoIndex}`}
+                        icon={`logos:${logo}`}
+                        className="h-6 w-6"
                       />
                     ))}
                   </motion.div>

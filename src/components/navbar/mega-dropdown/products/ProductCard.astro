@@ -5,36 +5,17 @@ import designSystem from '@assets/navbar/design-system.png'
 import uiLibrary from '@assets/navbar/ui-library.png'
 import analytics from '@assets/navbar/analytics.png'
 import plusAi from '@assets/navbar/plus-ai.png'
-
-// src/assets/navbar/logos
-// src/assets/navbar/logos/angular.png
-// src/assets/navbar/logos/apple.png
-// src/assets/navbar/logos/figma.png
-// src/assets/navbar/logos/google.png
-// src/assets/navbar/logos/javascript.png
-// src/assets/navbar/logos/react.png
-// src/assets/navbar/logos/vue.png
-// src/assets/navbar/logos/xbox.png
-
-// logos
-import angular from '@assets/navbar/logos/angular.png'
-import apple from '@assets/navbar/logos/apple.png'
-import figma from '@assets/navbar/logos/figma.png'
-import google from '@assets/navbar/logos/google.png'
-import javascript from '@assets/navbar/logos/javascript.png'
-import react from '@assets/navbar/logos/react.png'
-import vue from '@assets/navbar/logos/vue.png'
-import xbox from '@assets/navbar/logos/xbox.png'
+import { Icon } from 'astro-icon/components'
 
 const logos = {
-  angular: angular.src,
-  apple: apple.src,
-  figma: figma.src,
-  google: google.src,
-  javascript: javascript.src,
-  react: react.src,
-  vue: vue.src,
-  xbox: xbox.src,
+  angular: 'angular-icon',
+  apple: 'apple',
+  figma: 'figma',
+  google: 'google-icon',
+  javascript: 'javascript',
+  react: 'react',
+  vue: 'vue',
+  microsoft: 'microsoft-icon',
 }
 
 const images = {
@@ -83,7 +64,7 @@ const { category, title, path, image, features, integrations, status, hover } = 
       integrations &&
         integrations.map((integration) => (
           <div class="flex h-6 w-6 items-center justify-center">
-            <img src={logos[integration]} alt={integration} class="h-full w-auto grayscale filter transition-all duration-300 group-hover/product-card:grayscale-0" />
+            <Icon name={`logos:${logos[integration]}`} class="h-5 w-5 grayscale filter transition-all duration-300 group-hover/product-card:grayscale-0" />
           </div>
         ))
     }

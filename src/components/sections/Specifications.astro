@@ -1,42 +1,37 @@
 ---
-import Container from "@components/container.astro";
+import Container from '@components/container.astro'
+import TokenArchitecture from '@components/ui/TokenArchitecture.tsx'
 ---
 
-<section class="specifications-section py-16 lg:py-24">
+<section class="specifications-section bg-color-surface text-color-default py-16 lg:py-24" data-theme="dark">
   <Container>
-    <div class="text-center mb-16">
-      <h2 class="text-3xl lg:text-5xl font-bold mb-6">
-        Specifications
-      </h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Technical details and capabilities of our system.
-      </p>
+    <div class="mb-25 text-center">
+      <plus-chip kind="filled" shape="full" class="mb-5 block">Specifications</plus-chip>
+
+      <h2 class="mb-2.5 text-3xl font-bold lg:text-4xl">Enterprise-Class, Complete UI</h2>
+      <p class="text-color-caption mx-auto max-w-2xl text-lg">A robust UI ecosystem built for speed, consistency, <br />and enterprise-grade governance</p>
     </div>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Specification Cards -->
-      <div class="bg-white p-6 rounded-xl shadow-sm border">
-        <div class="w-12 h-12 bg-blue-100 rounded-lg mb-4"></div>
-        <h3 class="text-xl font-semibold mb-2">Performance</h3>
-        <p class="text-gray-600">
-          Lightning-fast components optimized for production use.
-        </p>
+
+    <div class="flex flex-col gap-7">
+      <div class="flex flex-row gap-7">
+        <!-- Token Architecture -->
+        <TokenArchitecture client:load />
+
+        <!-- Powerful Integrations -->
+        <div class="border-color-default flex w-full flex-col items-center justify-between rounded-lg border border-solid px-6 pt-9 pb-5">
+          <div class="flex flex-col items-center text-center">
+            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-700 text-2xl"><i class="fa-solid fa-plug"></i></div>
+            <h3 class="text-color-default mb-2.5 text-3xl font-semibold">Powerful Integrations</h3>
+            <p class="text-color-caption text-xl">Extendable and flexible for integrations with popular tools like FontAwesome and Tailwind CSS.</p>
+          </div>
+        </div>
       </div>
-      
-      <div class="bg-white p-6 rounded-xl shadow-sm border">
-        <div class="w-12 h-12 bg-green-100 rounded-lg mb-4"></div>
-        <h3 class="text-xl font-semibold mb-2">Accessibility</h3>
-        <p class="text-gray-600">
-          WCAG 2.1 AA compliant components with screen reader support.
-        </p>
+      <div class="flex">
+        <!-- Ready to use themes -->
       </div>
-      
-      <div class="bg-white p-6 rounded-xl shadow-sm border">
-        <div class="w-12 h-12 bg-purple-100 rounded-lg mb-4"></div>
-        <h3 class="text-xl font-semibold mb-2">Customization</h3>
-        <p class="text-gray-600">
-          Highly customizable themes and component variations.
-        </p>
+      <div class="flex flex-row gap-7">
+        <!-- Accessibility of WCAG 2.11 -->
+        <!-- Light & Dark Mode -->
       </div>
     </div>
   </Container>

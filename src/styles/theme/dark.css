@@ -109,3 +109,116 @@
   --border-color-color-ring: var(--color-blue-700);
   --border-color-color-disabled: var(--color-neutral-700);
 }
+
+
+[data-theme="light"] {
+  --background-color-color-surface: var(--color-base-white);
+  --background-color-color-disabled-default: var(--color-neutral-200);
+  --background-color-color-transparent: var(--color-base-transparent);
+  --background-color-color-divider: var(--color-neutral-400);
+  --background-color-color-modal: var(--color-base-white);
+  --background-color-color-overlay: var(--color-neutral-950);
+
+  --background-color-color-default-default: var(--color-neutral-100);
+  --background-color-color-default-hovered: var(--color-neutral-200);
+  --background-color-color-default-pressed: var(--color-neutral-300);
+  --background-color-color-default-focused: var(--color-neutral-100);
+  --background-color-color-default-loading: var(--color-neutral-300);
+  --background-color-color-default-invert-default: var(--color-neutral-700);
+  --background-color-color-default-invert-hovered: var(--color-neutral-800);
+  --background-color-color-default-invert-pressed: var(--color-neutral-900);
+  --background-color-color-default-invert-focused: var(--color-neutral-700);
+  --background-color-color-default-invert-loading: var(--color-neutral-900);
+
+  --background-color-color-primary-default: var(--color-primary-700);
+  --background-color-color-primary-hovered: var(--color-primary-800);
+  --background-color-color-primary-pressed: var(--color-primary-900);
+  --background-color-color-primary-focused: var(--color-primary-700);
+  --background-color-color-primary-loading: var(--color-primary-900);
+  --background-color-color-primary-invert-default: var(--color-primary-100);
+  --background-color-color-primary-invert-hovered: var(--color-primary-200);
+  --background-color-color-primary-invert-pressed: var(--color-primary-300);
+  --background-color-color-primary-invert-focused: var(--color-primary-100);
+  --background-color-color-primary-invert-loading: var(--color-primary-300);
+
+  --background-color-color-info-default: var(--color-info-700);
+  --background-color-color-info-hovered: var(--color-info-800);
+  --background-color-color-info-pressed: var(--color-info-900);
+  --background-color-color-info-focused: var(--color-info-700);
+  --background-color-color-info-loading: var(--color-info-900);
+  --background-color-color-info-invert-default: var(--color-info-100);
+  --background-color-color-info-invert-hovered: var(--color-info-200);
+  --background-color-color-info-invert-pressed: var(--color-info-300);
+  --background-color-color-info-invert-focused: var(--color-info-100);
+  --background-color-color-info-invert-loading: var(--color-info-300);
+
+  --background-color-color-success-default: var(--color-success-700);
+  --background-color-color-success-hovered: var(--color-success-800);
+  --background-color-color-success-pressed: var(--color-success-900);
+  --background-color-color-success-focused: var(--color-success-700);
+  --background-color-color-success-loading: var(--color-success-900);
+  --background-color-color-success-invert-default: var(--color-success-100);
+  --background-color-color-success-invert-hovered: var(--color-success-200);
+  --background-color-color-success-invert-pressed: var(--color-success-300);
+  --background-color-color-success-invert-focused: var(--color-success-100);
+  --background-color-color-success-invert-loading: var(--color-success-300);
+
+  --background-color-color-warning-default: var(--color-warning-700);
+  --background-color-color-warning-hovered: var(--color-warning-800);
+  --background-color-color-warning-pressed: var(--color-warning-900);
+  --background-color-color-warning-focused: var(--color-warning-700);
+  --background-color-color-warning-loading: var(--color-warning-900);
+  --background-color-color-warning-invert-default: var(--color-warning-100);
+  --background-color-color-warning-invert-hovered: var(--color-warning-200);
+  --background-color-color-warning-invert-pressed: var(--color-warning-300);
+  --background-color-color-warning-invert-focused: var(--color-warning-100);
+  --background-color-color-warning-invert-loading: var(--color-warning-300);
+
+  --background-color-color-danger-default: var(--color-danger-700);
+  --background-color-color-danger-hovered: var(--color-danger-800);
+  --background-color-color-danger-pressed: var(--color-danger-900);
+  --background-color-color-danger-focused: var(--color-danger-700);
+  --background-color-color-danger-loading: var(--color-danger-900);
+  --background-color-color-danger-invert-default: var(--color-danger-100);
+  --background-color-color-danger-invert-hovered: var(--color-danger-200);
+  --background-color-color-danger-invert-pressed: var(--color-danger-300);
+  --background-color-color-danger-invert-focused: var(--color-danger-100);
+  --background-color-color-danger-invert-loading: var(--color-danger-300);
+
+  --text-color-color-base: var(--color-base-white);
+  --text-color-color-default: var(--color-neutral-950);
+  --text-color-color-primary: var(--color-primary-700);
+  --text-color-color-info: var(--color-info-700);
+  --text-color-color-success: var(--color-success-700);
+  --text-color-color-warning: var(--color-warning-700);
+  --text-color-color-danger: var(--color-danger-700);
+  --text-color-color-placeholder: var(--color-neutral-500);
+  --text-color-color-caption: var(--color-neutral-600);
+  --text-color-color-link: var(--color-blue-700);
+  --text-color-color-visited: var(--color-purple-700);
+  --text-color-color-loading: var(--color-neutral-700);
+  --text-color-color-disabled: var(--color-neutral-400);
+
+  --text-color-color-base-invert: var(--color-neutral-950);
+  --text-color-color-default-invert: var(--color-base-white);
+  --text-color-color-primary-invert: var(--color-primary-100);
+  --text-color-color-info-invert: var(--color-info-100);
+  --text-color-color-success-invert: var(--color-success-100);
+  --text-color-color-warning-invert: var(--color-warning-100);
+  --text-color-color-danger-invert: var(--color-danger-100);
+  --text-color-color-placeholder-invert: var(--color-neutral-500);
+  --text-color-color-caption-invert: var(--color-neutral-100);
+  --text-color-color-link-invert: var(--color-blue-100);
+  --text-color-color-visited-invert: var(--color-purple-100);
+  --text-color-color-loading-invert: var(--color-neutral-100);
+
+  --border-color-color-base: var(--color-base-white);
+  --border-color-color-default: var(--color-neutral-400);
+  --border-color-color-primary: var(--color-primary-700);
+  --border-color-color-info: var(--color-info-700);
+  --border-color-color-success: var(--color-success-700);
+  --border-color-color-warning: var(--color-warning-700);
+  --border-color-color-danger: var(--color-danger-700);
+  --border-color-color-ring: var(--color-blue-300);
+  --border-color-color-disabled: var(--color-neutral-300);
+}

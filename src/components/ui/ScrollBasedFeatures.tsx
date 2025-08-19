@@ -58,7 +58,7 @@ const ScrollBasedFeatures: React.FC<ScrollBasedFeaturesProps> = ({
           <img 
             src={feature.visualContent} 
             alt={feature.title}
-            className="h-full w-full object-cover rounded-lg"
+            className="h-full w-full object-contain rounded-lg"
           />
         );
       case 'video':
@@ -155,7 +155,7 @@ const ScrollBasedFeatures: React.FC<ScrollBasedFeaturesProps> = ({
           {/* Right Side - Visual Content */}
           <div className="flex-1 lg:max-w-[36.25rem]">
             <motion.div 
-              className="sticky top-24 lg:top-32 h-[250px] sm:h-[350px] lg:h-[500px] rounded-lg overflow-hidden shadow-lg"
+              className="sticky top-24 lg:top-32 h-[250px] sm:h-[350px] lg:h-[500px] overflow-hidden"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -173,9 +173,6 @@ const ScrollBasedFeatures: React.FC<ScrollBasedFeaturesProps> = ({
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     {getVisualContent(feature)}
-                    
-                    {/* Gradient Overlay for better text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                   </motion.div>
                 ))}
               </div>

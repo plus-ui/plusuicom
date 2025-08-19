@@ -13,8 +13,8 @@ const featuresData = [
         { src: "/src/assets/navbar/logos/angular.png", alt: "Angular", className: "h-7 w-7" },
         { src: "/src/assets/navbar/logos/vue.png", alt: "Vue.js", className: "h-5 w-5" }
       ],
-      visualType: "color" as const,
-      visualContent: "bg-color-default-default"
+      visualType: "image" as const,
+      visualContent: "/src/assets/features/unified-styling.png"
     },
     {
       id: "cross-framework",
@@ -26,8 +26,8 @@ const featuresData = [
         { src: "/src/assets/navbar/logos/angular.png", alt: "Angular", className: "h-7 w-7" },
         { src: "/src/assets/navbar/logos/vue.png", alt: "Vue.js", className: "h-5 w-5" }
       ],
-      visualType: "color" as const,
-      visualContent: "bg-color-primary-default"
+      visualType: "image" as const,
+      visualContent: "/src/assets/features/cross-framework.png"
     },
     {
       id: "ui-monitoring",
@@ -39,13 +39,13 @@ const featuresData = [
         { src: "/src/assets/navbar/logos/angular.png", alt: "Angular", className: "h-7 w-7" },
         { src: "/src/assets/navbar/logos/vue.png", alt: "Vue.js", className: "h-5 w-5" }
       ],
-      visualType: "color" as const,
-      visualContent: "bg-color-success-default"
+      visualType: "image" as const,
+      visualContent: "/src/assets/features/ui-monitoring.png"
     }
   ]
 ---
 
-<section class="features-section bg-gray-50 py-16 lg:py-24">
+<section class="features-section py-16 lg:py-24">
   <Container>
     <div class="mb-16 text-center">
       <plus-chip kind="filled" shape="rounded" size="lg" class="mb-5">Features</plus-chip>

@@ -1,0 +1,51 @@
+---
+import Layout from "@layouts/Layout.astro";
+import logo from '@assets/logo.svg'
+
+---
+
+<Layout theme="light" headerTheme="light" noNavbar noFooter>
+  <div class="flex h-screen min-h-full flex-col">
+    <!-- Header with Plus UI logo -->
+     <header class="flex justify-center pt-20 pb-16">
+      <div class="flex flex-col items-center space-y-4">
+        <div class="flex items-center space-x-2">
+          <img src={logo.src} alt="Plus UI" class="h-8 w-8" />
+          <span class="text-color-default text-xl font-semibold">Plus UI</span>
+        </div>
+
+        <!-- User avatars for social proof -->
+        <div class="flex items-center space-x-2">
+          <div class="flex items-center -space-x-2">
+            <img class="h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <img class="h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <img class="h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <img class="h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <div class="text-color-success bg-color-success-invert-default border-color-base z-10 rounded-full border-2 border-solid px-2 py-1 text-sm font-bold">10,000+ users</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex flex-col flex-1 items-center justify-between px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="w-full max-w-md">
+        <slot />
+      </div>
+       {/* Sign up link */}
+      <div class="text-center">
+        <p class="text-sm text-gray-600">
+          Don't have an account?
+          <a
+            href="/register"
+            class="font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-500"
+          >
+            Sign up
+          </a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer space -->
+  </div>
+</Layout>

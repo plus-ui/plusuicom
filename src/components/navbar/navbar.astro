@@ -4,8 +4,8 @@ import Dropdown from './dropdown.astro'
 import MegaDropdownContainer from './mega-dropdown/MegaDropdownContainer.astro'
 import { StickyHeader, Astronav, MenuItems, MenuIcon } from 'astro-navbar'
 import logo from '@assets/logo.svg'
-import figma from '@assets/navbar/logos/figma.png'
-import github from '@assets/navbar/logos/github.png'
+import { Icon } from 'astro-icon/components'
+
 
 const { headerTheme = 'light' } = Astro.props
 
@@ -195,7 +195,7 @@ const menuitems = [
           },
         ],
         image: 'plusAi',
-        integrations: ['google', 'apple', 'xbox'],
+        integrations: ['google', 'apple', 'microsoft'],
       },
     ],
   },
@@ -357,22 +357,57 @@ const menuitems = [
             <div class="hidden items-center gap-2 lg:flex xl:gap-4">
               <!-- figma -->
               <a href="#" class="flex h-6 w-6 items-center justify-center">
-                <img src={figma.src} alt="Figma" class="h-5" />
+                <Icon name="logos:figma" class="h-5 w-5" />
               </a>
               <!-- github -->
               <a href="#" class="flex h-6 w-6 items-center justify-center">
-                <img src={github.src} alt="GitHub" class="h-6 w-6" />
+                <Icon name="logos:github-icon" class="h-5 w-5" />
               </a>
             </div>
             <div class="bg-color-disabled-default hidden h-6 w-px lg:block"></div>
             <div class="flex w-full items-center gap-2.5 text-nowrap lg:w-fit">
-              <plus-button kind="text" size="sm" full-width class="w-full [--border-color:var(--plus-color-border-default)] lg:w-fit lg:[--border-color:transparent]"> Sign in </plus-button>
-              <plus-button status="primary" size="sm" full-width class="w-full lg:w-fit">
-                <div class="flex items-center justify-center gap-2">
-                  <span>Get all-access</span>
-                  <i class="fa-solid fa-chevron-right"></i>
+              <!-- Auth buttons for non-logged in users -->
+              <div id="auth-buttons" class="flex w-full items-center gap-2.5 lg:w-fit">
+                <a href="/login">
+                  <plus-button kind="text" size="sm" full-width class="w-full [--border-color:var(--plus-color-border-default)] lg:w-fit lg:[--border-color:transparent]"> Sign in </plus-button>
+                </a>
+                <a href="/register">
+                  <plus-button status="primary" size="sm" full-width class="w-full lg:w-fit">
+                    <div class="flex items-center justify-center gap-2">
+                      <span>Get all-access</span>
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </plus-button>
+                </a>
+              </div>
+              
+              <!-- User menu for logged in users (hidden by default) -->
+              <div id="user-menu" class="hidden items-center gap-3">
+                <div class="flex items-center gap-2">
+                  <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-user text-gray-600 text-sm"></i>
+                  </div>
+                  <div class="relative">
+                    <button id="user-menu-button" class="flex items-center gap-1 text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                      <i class="fas fa-bars text-lg"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                      <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                        <i class="fas fa-dashboard mr-2"></i>Dashboard
+                      </a>
+                      <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                        <i class="fas fa-user mr-2"></i>Profile
+                      </a>
+                      <div class="border-t border-gray-200 my-2"></div>
+                      <button id="logout-button" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 transition-colors duration-200">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Sign out
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </plus-button>
+              </div>
             </div>
           </div>
         </MenuItems>
@@ -380,3 +415,79 @@ const menuitems = [
     </div>
   </Container>
 </StickyHeader>
+
+<script>
+  // Auth state management for navbar
+  function initNavbarAuth() {
+    const authButtons = document.getElementById('auth-buttons');
+    const userMenu = document.getElementById('user-menu');
+    const userMenuButton = document.getElementById('user-menu-button');
+    const userDropdown = document.getElementById('user-dropdown');
+    const logoutButton = document.getElementById('logout-button');
+
+    // Check authentication status
+    function checkAuthStatus() {
+      const userSession = localStorage.getItem('plus_user_session');
+      
+      if (userSession && authButtons && userMenu) {
+        // User is logged in
+        authButtons.style.display = 'none';
+        userMenu.style.display = 'flex';
+      } else if (authButtons && userMenu) {
+        // User is not logged in
+        authButtons.style.display = 'flex';
+        userMenu.style.display = 'none';
+      }
+    }
+
+    // Toggle user dropdown
+    if (userMenuButton && userDropdown) {
+      userMenuButton.addEventListener('click', () => {
+        userDropdown.classList.toggle('hidden');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!userMenuButton.contains(event.target as Node) && !userDropdown.contains(event.target as Node)) {
+          userDropdown.classList.add('hidden');
+        }
+      });
+    }
+
+    // Handle logout
+    if (logoutButton) {
+      logoutButton.addEventListener('click', async () => {
+        try {
+          // Clear localStorage
+          localStorage.removeItem('plus_user_session');
+          localStorage.removeItem('plus_register_step');
+          localStorage.removeItem('plus_register_data');
+          localStorage.removeItem('plus_onboarding_data');
+          localStorage.removeItem('plus_plan_selection');
+          
+          // Redirect to home page
+          window.location.href = '/';
+        } catch (error) {
+          console.error('Logout failed:', error);
+        }
+      });
+    }
+
+    // Check auth status on page load
+    checkAuthStatus();
+
+    // Listen for storage changes (login/logout from other tabs)
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'plus_user_session') {
+        checkAuthStatus();
+      }
+    });
+  }
+
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbarAuth);
+  } else {
+    initNavbarAuth();
+  }
+</script>

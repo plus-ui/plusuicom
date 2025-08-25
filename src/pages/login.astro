@@ -1,0 +1,11 @@
+---
+import LoginForm from '../components/auth/LoginForm'
+import AuthGuard from '../components/auth/AuthGuard'
+import AuthLayout from '@layouts/AuthLayout.astro'
+---
+
+<AuthLayout>
+  <AuthGuard requireAuth={false} client:load>
+    <LoginForm client:load />
+  </AuthGuard>
+</AuthLayout>

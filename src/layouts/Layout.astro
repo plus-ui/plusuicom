@@ -16,6 +16,8 @@ export interface Props {
   footerMargin?: boolean;
   theme?: "light" | "dark";
   headerTheme?: "light" | "dark";
+  noNavbar?: boolean;
+  noFooter?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -30,6 +32,8 @@ const {
   footerMargin = true,
   theme = "light",
   headerTheme = "light",
+  noNavbar = false,
+  noFooter = false,
 } = Astro.props;
 
 const makeTitle = title
@@ -78,9 +82,9 @@ const makeTitle = title
     <ClientRouter />
   </head>
   <body class="font-sans antialiased text-color-default bg-color-surface">
-    <Navbar headerTheme={headerTheme} />
+    {!noNavbar && <Navbar headerTheme={headerTheme} />}
     <slot />
-    <Footer margin={footerMargin} />
+    {!noFooter && <Footer margin={footerMargin} />}
     
     <script>
       import "@plusui/library/cdn/components/index.js";

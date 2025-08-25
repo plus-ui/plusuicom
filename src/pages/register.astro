@@ -1,0 +1,11 @@
+---
+import AuthLayout from '../layouts/AuthLayout.astro'
+import RegisterFlow from '../components/auth/RegisterFlow'
+import AuthGuard from '../components/auth/AuthGuard'
+---
+
+<AuthLayout title="Create your free account - Plus UI">
+  <AuthGuard requireAuth={false} client:load>
+    <RegisterFlow client:load />
+  </AuthGuard>
+</AuthLayout>

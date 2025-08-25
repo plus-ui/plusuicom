@@ -1,0 +1,19 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Sidebar from '@components/dashboard/Sidebar.astro'
+import Container from '@components/container.astro'
+---
+
+<Layout theme="light" headerTheme="light">
+  <Container>
+    <div class="flex">
+      <!-- Astro Sidebar -->
+      <Sidebar />
+
+      <!-- Main content area - will be filled by React components -->
+      <div class="flex flex-1 flex-col overflow-hidden">
+        <slot />
+      </div>
+    </div>
+  </Container>
+</Layout>

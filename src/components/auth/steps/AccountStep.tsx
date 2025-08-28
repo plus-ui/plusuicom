@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import FormInput from '../FormInput'
-import SocialButton from '../SocialButton'
-import { authService } from '../../../lib/supabase'
+import { signup } from '../../../lib/auth'
 
 interface AccountStepProps {
   data: any
@@ -12,8 +11,6 @@ interface AccountStepProps {
 export default function AccountStep({ data, onComplete }: AccountStepProps) {
   const [formData, setFormData] = useState({
     email: data?.email || '',
-    firstName: data?.firstName || '',
-    lastName: data?.lastName || '',
     password: data?.password || ''
   })
   const [loading, setLoading] = useState(false)
@@ -25,22 +22,17 @@ export default function AccountStep({ data, onComplete }: AccountStepProps) {
     setError('')
 
     try {
-      const { data: authData, error } = await authService.signUp(
-        formData.email,
-        formData.password,
-        formData.firstName,
-        formData.lastName
-      )
+      const result = await signup(formData.email, formData.password)
       
-      if (error) {
-        setError((error as any)?.message || 'Kayıt olurken bir hata oluştu')
+      if (!result.success) {
+        setError(result.error || 'Kayıt olurken bir hata oluştu')
         return
       }
 
       // Save account data and proceed to next step
       onComplete({
         ...formData,
-        userId: authData.user?.id
+        userId: result.user?.id
       })
     } catch (err) {
       setError('Beklenmeyen bir hata oluştu')
@@ -49,33 +41,7 @@ export default function AccountStep({ data, onComplete }: AccountStepProps) {
     }
   }
 
-  const handleSocialRegister = async (provider: 'google' | 'github') => {
-    setLoading(true)
-    try {
-      const { data, error } = await authService.signInWithOAuth(provider)
-      
-      if (error) {
-        setError((error as any)?.message || 'OAuth kaydı başarısız oldu')
-        return
-      }
-
-      // In a real implementation, handle OAuth flow
-      console.log(`OAuth URL: ${data.url}`)
-      // For demo, proceed to next step with mock data
-      onComplete({
-        email: 'user@example.com',
-        firstName: 'Test',
-        lastName: 'User',
-        provider
-      })
-    } catch (err) {
-      setError('OAuth kaydı sırasında hata oluştu')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const isFormValid = formData.email && formData.firstName && formData.lastName && formData.password
+  const isFormValid = formData.email && formData.password && formData.password.length >= 6
 
   return (
     <div className="space-y-8">
@@ -86,29 +52,7 @@ export default function AccountStep({ data, onComplete }: AccountStepProps) {
         </h1>
       </div>
 
-      {/* Social registration buttons */}
-      <div className="space-y-3">
-        <SocialButton 
-          provider="google" 
-          onClick={() => handleSocialRegister('google')}
-          disabled={loading}
-        />
-        <SocialButton 
-          provider="github" 
-          onClick={() => handleSocialRegister('github')}
-          disabled={loading}
-        />
-      </div>
 
-      {/* Divider */}
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300" />
-        </div>
-        <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-gray-500">OR</span>
-        </div>
-      </div>
 
       {/* Error message */}
       {error && (
@@ -129,30 +73,10 @@ export default function AccountStep({ data, onComplete }: AccountStepProps) {
           icon="email"
         />
 
-        <div className="grid grid-cols-2 gap-3">
-          <FormInput
-            label="Name"
-            type="text"
-            placeholder="Enter your first name"
-            value={formData.firstName}
-            onChange={(value) => setFormData(prev => ({ ...prev, firstName: value }))}
-            required
-          />
-          
-          <FormInput
-            label="Surname"
-            type="text"
-            placeholder="Enter your surname"
-            value={formData.lastName}
-            onChange={(value) => setFormData(prev => ({ ...prev, lastName: value }))}
-            required
-          />
-        </div>
-
         <FormInput
           label="Password"
           type="password"
-          placeholder="Enter your password"
+          placeholder="Enter your password (min 6 characters)"
           value={formData.password}
           onChange={(value) => setFormData(prev => ({ ...prev, password: value }))}
           required

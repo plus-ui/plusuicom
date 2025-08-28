@@ -1,0 +1,11 @@
+---
+import { TOKEN_STORAGE_KEY } from '../lib/api';
+
+// Clear the auth token cookie
+const { cookies, redirect } = Astro;
+cookies.delete(TOKEN_STORAGE_KEY, { path: '/' });
+
+// Redirect to login page immediately
+return redirect('/login');
+---
+

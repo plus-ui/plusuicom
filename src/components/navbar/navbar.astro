@@ -2,12 +2,16 @@
 import Container from '@components/container.astro'
 import Dropdown from './dropdown.astro'
 import MegaDropdownContainer from './mega-dropdown/MegaDropdownContainer.astro'
+import AuthDropdown from './auth-dropdown.astro'
 import { StickyHeader, Astronav, MenuItems, MenuIcon } from 'astro-navbar'
 import logo from '@assets/logo.svg'
 import { Icon } from 'astro-icon/components'
 
 
-const { headerTheme = 'light' } = Astro.props
+const { headerTheme = 'light', headerBorder = false } = Astro.props
+
+// Get user from middleware (already cached/authenticated)
+const user = Astro.locals.user || null
 
 const menuitems = [
   {
@@ -367,7 +371,7 @@ const menuitems = [
             <div class="bg-color-disabled-default hidden h-6 w-px lg:block"></div>
             <div class="flex w-full items-center gap-2.5 text-nowrap lg:w-fit">
               <!-- Auth buttons for non-logged in users -->
-              <div id="auth-buttons" class="flex w-full items-center gap-2.5 lg:w-fit">
+              <div id="auth-buttons" class={user ? "hidden w-full items-center gap-2.5 lg:w-fit" : "flex w-full items-center gap-2.5 lg:w-fit"}>
                 <a href="/login">
                   <plus-button kind="text" size="sm" full-width class="w-full [--border-color:var(--plus-color-border-default)] lg:w-fit lg:[--border-color:transparent]"> Sign in </plus-button>
                 </a>
@@ -381,32 +385,9 @@ const menuitems = [
                 </a>
               </div>
               
-              <!-- User menu for logged in users (hidden by default) -->
-              <div id="user-menu" class="hidden items-center gap-3">
-                <div class="flex items-center gap-2">
-                  <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-                    <i class="fas fa-user text-gray-600 text-sm"></i>
-                  </div>
-                  <div class="relative">
-                    <button id="user-menu-button" class="flex items-center gap-1 text-gray-700 hover:text-gray-900 transition-colors duration-200">
-                      <i class="fas fa-bars text-lg"></i>
-                    </button>
-                    
-                    <!-- Dropdown menu -->
-                    <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                      <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200">
-                        <i class="fas fa-dashboard mr-2"></i>Dashboard
-                      </a>
-                      <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200">
-                        <i class="fas fa-user mr-2"></i>Profile
-                      </a>
-                      <div class="border-t border-gray-200 my-2"></div>
-                      <button id="logout-button" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 transition-colors duration-200">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Sign out
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <!-- User menu for logged in users -->
+              <div id="user-menu" class={user ? "flex items-center gap-3" : "hidden items-center gap-3"}>
+                <AuthDropdown user={user} />
               </div>
             </div>
           </div>
@@ -417,77 +398,5 @@ const menuitems = [
 </StickyHeader>
 
 <script>
-  // Auth state management for navbar
-  function initNavbarAuth() {
-    const authButtons = document.getElementById('auth-buttons');
-    const userMenu = document.getElementById('user-menu');
-    const userMenuButton = document.getElementById('user-menu-button');
-    const userDropdown = document.getElementById('user-dropdown');
-    const logoutButton = document.getElementById('logout-button');
-
-    // Check authentication status
-    function checkAuthStatus() {
-      const userSession = localStorage.getItem('plus_user_session');
-      
-      if (userSession && authButtons && userMenu) {
-        // User is logged in
-        authButtons.style.display = 'none';
-        userMenu.style.display = 'flex';
-      } else if (authButtons && userMenu) {
-        // User is not logged in
-        authButtons.style.display = 'flex';
-        userMenu.style.display = 'none';
-      }
-    }
-
-    // Toggle user dropdown
-    if (userMenuButton && userDropdown) {
-      userMenuButton.addEventListener('click', () => {
-        userDropdown.classList.toggle('hidden');
-      });
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', (event) => {
-        if (!userMenuButton.contains(event.target as Node) && !userDropdown.contains(event.target as Node)) {
-          userDropdown.classList.add('hidden');
-        }
-      });
-    }
-
-    // Handle logout
-    if (logoutButton) {
-      logoutButton.addEventListener('click', async () => {
-        try {
-          // Clear localStorage
-          localStorage.removeItem('plus_user_session');
-          localStorage.removeItem('plus_register_step');
-          localStorage.removeItem('plus_register_data');
-          localStorage.removeItem('plus_onboarding_data');
-          localStorage.removeItem('plus_plan_selection');
-          
-          // Redirect to home page
-          window.location.href = '/';
-        } catch (error) {
-          console.error('Logout failed:', error);
-        }
-      });
-    }
-
-    // Check auth status on page load
-    checkAuthStatus();
-
-    // Listen for storage changes (login/logout from other tabs)
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'plus_user_session') {
-        checkAuthStatus();
-      }
-    });
-  }
-
-  // Initialize when DOM is loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNavbarAuth);
-  } else {
-    initNavbarAuth();
-  }
+  // Auth state is managed server-side using httpOnly cookies for security
 </script>

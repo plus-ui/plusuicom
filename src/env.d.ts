@@ -1,11 +1,14 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
-import * as React from 'react'
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'plus-button': any;
-    }
+declare namespace App {
+  interface Locals {
+    user: {
+      id: string;
+      email: string;
+      user_metadata?: {
+        [key: string]: any;
+      };
+    } | null;
   }
 }

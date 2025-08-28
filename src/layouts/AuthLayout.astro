@@ -1,13 +1,12 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import Layout from '@layouts/Layout.astro'
 import logo from '@assets/logo.svg'
-
 ---
 
 <Layout theme="light" headerTheme="light" noNavbar noFooter>
   <div class="flex h-screen min-h-full flex-col">
     <!-- Header with Plus UI logo -->
-     <header class="flex justify-center pt-20 pb-16">
+    <header class="flex justify-center pt-20 pb-16">
       <div class="flex flex-col items-center space-y-4">
         <div class="flex items-center space-x-2">
           <img src={logo.src} alt="Plus UI" class="h-8 w-8" />
@@ -28,20 +27,19 @@ import logo from '@assets/logo.svg'
     </header>
 
     <!-- Main content -->
-    <main class="flex flex-col flex-1 items-center justify-between px-4 sm:px-6 lg:px-8 mb-16">
+    <main class="mb-16 flex flex-1 flex-col items-center justify-between px-4 sm:px-6 lg:px-8">
       <div class="w-full max-w-md">
+        <div class="text-center">
+          <h1 class="text-color-default text-3xl font-semibold">Log in to your account</h1>
+        </div>
+
         <slot />
       </div>
-       {/* Sign up link */}
+      {/* Sign up link */}
       <div class="text-center">
         <p class="text-sm text-gray-600">
           Don't have an account?
-          <a
-            href="/register"
-            class="font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-500"
-          >
-            Sign up
-          </a>
+          <a href="/register" class="font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-500"> Sign up </a>
         </p>
       </div>
     </main>

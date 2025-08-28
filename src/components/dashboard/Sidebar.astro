@@ -1,162 +1,160 @@
 ---
 interface Props {
-  currentView?: string;
+  currentView?: string
 }
 
-const { currentView = "profile" } = Astro.props;
+const { currentView = 'profile' } = Astro.props
 
 const accountMenuItems = [
   {
-    id: "profile",
-    label: "Profile",
-    icon: "fas fa-user",
+    id: 'overview',
+    label: 'Overview',
+    icon: 'fas fa-tachometer-alt',
+    description: 'Dashboard overview and quick actions',
+    href: '/dashboard',
   },
   {
-    id: "settings",
-    label: "Settings",
-    icon: "fas fa-cog",
+    id: 'profile',
+    label: 'Profile',
+    icon: 'fas fa-user',
+    description: 'Manage your personal information',
+    href: '/dashboard/profile',
   },
-];
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: 'fas fa-cog',
+    description: 'Configure your account preferences',
+    href: '/dashboard/settings',
+  },
+]
 
 const workspaceMenuItems = [
   {
-    id: "members",
-    label: "Members",
-    icon: "fas fa-users",
+    id: 'members',
+    label: 'Members',
+    icon: 'fas fa-users',
+    description: 'Manage team members and permissions',
+    href: '/dashboard/members',
   },
   {
-    id: "bookmark",
-    label: "Bookmark",
-    icon: "fas fa-bookmark",
+    id: 'bookmark',
+    label: 'Bookmarks',
+    icon: 'fas fa-bookmark',
+    description: 'Your saved items and favorites',
+    href: '/dashboard/bookmark',
   },
   {
-    id: "collections",
-    label: "Collections",
-    icon: "fas fa-layer-group",
+    id: 'collections',
+    label: 'Collections',
+    icon: 'fas fa-layer-group',
+    description: 'Organize your work into collections',
+    href: '/dashboard/collections',
   },
-];
+]
 
 const purchaseMenuItems = [
   {
-    id: "plans",
-    label: "Plans",
-    icon: "fas fa-check-circle",
+    id: 'plans',
+    label: 'Plans',
+    icon: 'fas fa-check-circle',
+    description: 'View and manage your subscription',
+    href: '/dashboard/plans',
   },
   {
-    id: "payment-methods",
-    label: "Payment Methods",
-    icon: "fas fa-credit-card",
+    id: 'payment-methods',
+    label: 'Payment Methods',
+    icon: 'fas fa-credit-card',
+    description: 'Manage your payment options',
+    href: '/dashboard/payment-methods',
   },
   {
-    id: "licences",
-    label: "Licences",
-    icon: "fas fa-file-contract",
+    id: 'licences',
+    label: 'Licenses',
+    icon: 'fas fa-file-contract',
+    description: 'View your active licenses',
+    href: '/dashboard/licences',
   },
   {
-    id: "downloads",
-    label: "Downloads",
-    icon: "fas fa-download",
+    id: 'downloads',
+    label: 'Downloads',
+    icon: 'fas fa-download',
+    description: 'Access your purchased content',
+    href: '/dashboard/downloads',
   },
-];
+]
 ---
 
-<div class="flex w-64 flex-col ">
-  
+<div class="bg-color-surface w-60">
   <!-- Navigation -->
-  <nav class="flex-1 space-y-8 px-4 py-6">
+  <nav class="flex-1 space-y-6">
     <!-- Account Section -->
     <div>
-      <h3 class="mb-3 px-3 text-xs font-semibold tracking-wide text-gray-500 uppercase">
-        Account
-      </h3>
-      <div class="space-y-1">
-        {accountMenuItems.map((item) => (
-          <button
-            data-view={item.id}
-            class={`sidebar-menu-item flex w-full items-center space-x-3 rounded-lg px-3 py-2 text-sm transition-colors duration-200 ${
-              currentView === item.id
-                ? "bg-gray-100 text-gray-900"
-                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            }`}
-          >
-            <i class={`${item.icon} h-5 w-5`}></i>
-            <span>{item.label}</span>
-          </button>
-        ))}
+      <h3 class="text-color-caption mb-2 text-sm font-semibold">Account</h3>
+      <div class="space-y-0.5">
+        {
+          accountMenuItems.map((item) => (
+            <a
+              href={item.href}
+              class={`group text-color-default hover:bg-color-default-hovered active:bg-color-default-pressed flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200 ${
+                currentView === item.id ? 'bg-color-default-default' : ''
+              }`}
+              title={item.description}
+            >
+              <div class={`flex h-5 w-5 items-center justify-center`}>
+                <i class={`${item.icon}`} />
+              </div>
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
 
     <!-- Workspace Section -->
     <div>
-      <h3 class="mb-3 px-3 text-xs font-semibold tracking-wide text-gray-500 uppercase">
-        Workspace
-      </h3>
+      <h3 class="text-color-caption mb-2 text-sm font-semibold">Workspace</h3>
       <div class="space-y-1">
-        {workspaceMenuItems.map((item) => (
-          <button
-            data-view={item.id}
-            class={`sidebar-menu-item flex w-full items-center space-x-3 rounded-lg px-3 py-2 text-sm transition-colors duration-200 ${
-              currentView === item.id
-                ? "bg-gray-100 text-gray-900"
-                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            }`}
-          >
-            <i class={`${item.icon} h-5 w-5`}></i>
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {
+          workspaceMenuItems.map((item) => (
+          <a
+              href={item.href}
+              class={`group text-color-default hover:bg-color-default-hovered active:bg-color-default-pressed flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200 ${
+                currentView === item.id ? 'bg-color-default-default' : ''
+              }`}
+              title={item.description}
+            >
+              <div class={`flex h-5 w-5 items-center justify-center`}>
+                <i class={`${item.icon}`} />
+              </div>
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
 
     <!-- Purchases Section -->
     <div>
-      <h3 class="mb-3 px-3 text-xs font-semibold tracking-wide text-gray-500 uppercase">
-        Purchases
-      </h3>
+      <h3 class="text-color-caption mb-2 text-sm font-semibold">Purchases</h3>
       <div class="space-y-1">
-        {purchaseMenuItems.map((item) => (
-          <button
-            data-view={item.id}
-            class={`sidebar-menu-item flex w-full items-center space-x-3 rounded-lg px-3 py-2 text-sm transition-colors duration-200 ${
-              currentView === item.id
-                ? "bg-gray-100 text-gray-900"
-                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            }`}
-          >
-            <i class={`${item.icon} h-5 w-5`}></i>
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {
+          purchaseMenuItems.map((item) => (
+          <a
+              href={item.href}
+              class={`group text-color-default hover:bg-color-default-hovered active:bg-color-default-pressed flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200 ${
+                currentView === item.id ? 'bg-color-default-default' : ''
+              }`}
+              title={item.description}
+            >
+              <div class={`flex h-5 w-5 items-center justify-center`}>
+                <i class={`${item.icon}`} />
+              </div>
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </nav>
-
 </div>
-
-<script>
-  // Client-side menu interaction
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuItems = document.querySelectorAll('.sidebar-menu-item');
-    
-    menuItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        const viewId = (e.currentTarget as HTMLElement).dataset.view;
-        if (viewId) {
-          // Dispatch custom event for React component to listen
-          window.dispatchEvent(new CustomEvent('dashboard-view-change', {
-            detail: { view: viewId }
-          }));
-          
-          // Update active states
-          menuItems.forEach(mi => {
-            mi.classList.remove('bg-gray-100', 'text-gray-900');
-            mi.classList.add('text-gray-600');
-          });
-          
-          (e.currentTarget as HTMLElement).classList.add('bg-gray-100', 'text-gray-900');
-          (e.currentTarget as HTMLElement).classList.remove('text-gray-600');
-        }
-      });
-    });
-  });
-</script>

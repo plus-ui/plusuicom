@@ -1,11 +1,18 @@
 ---
 import AuthLayout from '../layouts/AuthLayout.astro'
 import RegisterFlow from '../components/auth/RegisterFlow'
-import AuthGuard from '../components/auth/AuthGuard'
+import { TOKEN_STORAGE_KEY } from '../lib/api'
+
+// Check if user is already logged in
+const { cookies, redirect } = Astro
+const authToken = cookies.get(TOKEN_STORAGE_KEY)
+
+if (authToken) {
+  console.log('✅ User already logged in, redirecting to dashboard')
+  return redirect('/dashboard')
+}
 ---
 
 <AuthLayout title="Create your free account - Plus UI">
-  <AuthGuard requireAuth={false} client:load>
-    <RegisterFlow client:load />
-  </AuthGuard>
+  <RegisterFlow client:load />
 </AuthLayout>

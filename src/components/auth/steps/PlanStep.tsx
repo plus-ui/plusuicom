@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { subscriptionPlans } from '../../../lib/supabase'
+import { subscriptionPlans } from '../../../lib/auth'
 
 interface PlanStepProps {
   data: any

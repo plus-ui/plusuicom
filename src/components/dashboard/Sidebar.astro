@@ -1,0 +1,160 @@
+---
+interface Props {
+  currentView?: string
+}
+
+const { currentView = 'profile' } = Astro.props
+
+const accountMenuItems = [
+  {
+    id: 'overview',
+    label: 'Overview',
+    icon: 'fas fa-tachometer-alt',
+    description: 'Dashboard overview and quick actions',
+    href: '/dashboard',
+  },
+  {
+    id: 'profile',
+    label: 'Profile',
+    icon: 'fas fa-user',
+    description: 'Manage your personal information',
+    href: '/dashboard/profile',
+  },
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: 'fas fa-cog',
+    description: 'Configure your account preferences',
+    href: '/dashboard/settings',
+  },
+]
+
+const workspaceMenuItems = [
+  {
+    id: 'members',
+    label: 'Members',
+    icon: 'fas fa-users',
+    description: 'Manage team members and permissions',
+    href: '/dashboard/members',
+  },
+  {
+    id: 'bookmark',
+    label: 'Bookmarks',
+    icon: 'fas fa-bookmark',
+    description: 'Your saved items and favorites',
+    href: '/dashboard/bookmark',
+  },
+  {
+    id: 'collections',
+    label: 'Collections',
+    icon: 'fas fa-layer-group',
+    description: 'Organize your work into collections',
+    href: '/dashboard/collections',
+  },
+]
+
+const purchaseMenuItems = [
+  {
+    id: 'plans',
+    label: 'Plans',
+    icon: 'fas fa-check-circle',
+    description: 'View and manage your subscription',
+    href: '/dashboard/plans',
+  },
+  {
+    id: 'payment-methods',
+    label: 'Payment Methods',
+    icon: 'fas fa-credit-card',
+    description: 'Manage your payment options',
+    href: '/dashboard/payment-methods',
+  },
+  {
+    id: 'licences',
+    label: 'Licenses',
+    icon: 'fas fa-file-contract',
+    description: 'View your active licenses',
+    href: '/dashboard/licences',
+  },
+  {
+    id: 'downloads',
+    label: 'Downloads',
+    icon: 'fas fa-download',
+    description: 'Access your purchased content',
+    href: '/dashboard/downloads',
+  },
+]
+---
+
+<div class="bg-color-surface w-60">
+  <!-- Navigation -->
+  <nav class="flex-1 space-y-6">
+    <!-- Account Section -->
+    <div>
+      <h3 class="text-color-caption mb-2 text-sm font-semibold">Account</h3>
+      <div class="space-y-0.5">
+        {
+          accountMenuItems.map((item) => (
+            <a
+              href={item.href}
+              class={`group text-color-default hover:bg-color-default-hovered active:bg-color-default-pressed flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200 ${
+                currentView === item.id ? 'bg-color-default-default' : ''
+              }`}
+              title={item.description}
+            >
+              <div class={`flex h-5 w-5 items-center justify-center`}>
+                <i class={`${item.icon}`} />
+              </div>
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Workspace Section -->
+    <div>
+      <h3 class="text-color-caption mb-2 text-sm font-semibold">Workspace</h3>
+      <div class="space-y-1">
+        {
+          workspaceMenuItems.map((item) => (
+          <a
+              href={item.href}
+              class={`group text-color-default hover:bg-color-default-hovered active:bg-color-default-pressed flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200 ${
+                currentView === item.id ? 'bg-color-default-default' : ''
+              }`}
+              title={item.description}
+            >
+              <div class={`flex h-5 w-5 items-center justify-center`}>
+                <i class={`${item.icon}`} />
+              </div>
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Purchases Section -->
+    <div>
+      <h3 class="text-color-caption mb-2 text-sm font-semibold">Purchases</h3>
+      <div class="space-y-1">
+        {
+          purchaseMenuItems.map((item) => (
+          <a
+              href={item.href}
+              class={`group text-color-default hover:bg-color-default-hovered active:bg-color-default-pressed flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-all duration-200 ${
+                currentView === item.id ? 'bg-color-default-default' : ''
+              }`}
+              title={item.description}
+            >
+              <div class={`flex h-5 w-5 items-center justify-center`}>
+                <i class={`${item.icon}`} />
+              </div>
+              <span>{item.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
+</div>

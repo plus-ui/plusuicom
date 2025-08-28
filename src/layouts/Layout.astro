@@ -16,6 +16,9 @@ export interface Props {
   footerMargin?: boolean;
   theme?: "light" | "dark";
   headerTheme?: "light" | "dark";
+  noNavbar?: boolean;
+  noFooter?: boolean;
+  headerBorder?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -30,6 +33,9 @@ const {
   footerMargin = true,
   theme = "light",
   headerTheme = "light",
+  noNavbar = false,
+  noFooter = false,
+  headerBorder = false,
 } = Astro.props;
 
 const makeTitle = title
@@ -78,12 +84,109 @@ const makeTitle = title
     <ClientRouter />
   </head>
   <body class="font-sans antialiased text-color-default bg-color-surface">
-    <Navbar headerTheme={headerTheme} />
+    {!noNavbar && <Navbar headerTheme={headerTheme} headerBorder={headerBorder} />}
     <slot />
-    <Footer margin={footerMargin} />
+    {!noFooter && <Footer margin={footerMargin} />}
     
     <script>
       import "@plusui/library/cdn/components/index.js";
+    </script>
+    
+    <script>
+      // Global navigation timing logger
+      let navigationStartTime = performance.now();
+      
+      // Page start log
+      console.log(`🚀 [Navigation] Sayfa yükleniyor: ${window.location.pathname}`);
+      
+      // DOMContentLoaded timing
+      document.addEventListener('DOMContentLoaded', () => {
+        const domTime = performance.now() - navigationStartTime;
+        console.log(`📄 [Navigation] DOM hazır: ${domTime.toFixed(2)}ms`);
+      });
+      
+      // Complete page load timing
+      window.addEventListener('load', () => {
+        const loadTime = performance.now() - navigationStartTime;
+        console.log(`✅ [Navigation] Sayfa tamamen yüklendi: ${loadTime.toFixed(2)}ms`);
+        
+        // Check for slow loading resources
+        setTimeout(() => {
+          if (performance.getEntriesByType) {
+            const resources = performance.getEntriesByType('resource');
+            const apiCalls = resources.filter(r => r.name.includes('plus-ui-backend.onrender.com'));
+            
+            if (apiCalls.length > 0) {
+              console.log(`📡 [Navigation] Backend API çağrıları:`);
+              apiCalls.forEach(api => {
+                const responseTime = api.responseEnd - api.responseStart;
+                const totalTime = api.responseEnd - api.requestStart;
+                console.log(`   ${api.name}: Response ${responseTime.toFixed(2)}ms, Total ${totalTime.toFixed(2)}ms`);
+              });
+            }
+          }
+        }, 100);
+      });
+      
+      // Monitor link clicks for navigation timing
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href && !link.href.startsWith('mailto:') && !link.href.startsWith('tel:')) {
+          const isInternalLink = link.href.includes(window.location.origin);
+          if (isInternalLink) {
+            console.log(`🔗 [Navigation] Link tıklandı: ${link.href}`);
+            navigationStartTime = performance.now();
+          }
+        }
+      });
+      
+      // Backend keep-alive ping system
+      let pingInterval;
+      
+      function startBackendPing() {
+        // Her 4 dakikada bir backend'e ping at (Render.com free tier 5 dakikada uyuyor)
+        pingInterval = setInterval(async () => {
+          try {
+            console.log('🏓 [Ping] Backend keep-alive ping gönderiliyor...');
+            const startTime = performance.now();
+            
+            // Simple HEAD request to keep backend awake
+            const response = await fetch('https://plus-ui-backend.onrender.com/', {
+              method: 'HEAD',
+              mode: 'no-cors'
+            });
+            
+            const endTime = performance.now();
+            console.log(`🏓 [Ping] Backend yanıt verdi: ${(endTime - startTime).toFixed(2)}ms`);
+          } catch (error) {
+            console.log('🏓 [Ping] Backend ping hatası (normal):', error.message);
+          }
+        }, 4 * 60 * 1000); // 4 dakika
+      }
+      
+      function stopBackendPing() {
+        if (pingInterval) {
+          clearInterval(pingInterval);
+          pingInterval = null;
+          console.log('🏓 [Ping] Backend ping durduruldu');
+        }
+      }
+      
+      // Sayfa görünürse ping'i başlat, gizlenirse durdur
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          console.log('👁️ [Ping] Sayfa görünür, ping başlatılıyor');
+          startBackendPing();
+        } else {
+          console.log('👁️ [Ping] Sayfa gizli, ping durduruluyor');
+          stopBackendPing();
+        }
+      });
+      
+      // Sayfa yüklendiğinde ping'i başlat
+      if (document.visibilityState === 'visible') {
+        startBackendPing();
+      }
     </script>
   </body>
 </html>

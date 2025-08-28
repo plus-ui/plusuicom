@@ -1,0 +1,123 @@
+---
+import AuthLayout from '@layouts/AuthLayout.astro'
+import { TOKEN_STORAGE_KEY, apiService } from '../lib/api'
+import { Icon } from 'astro-icon/components'
+
+// Check if user is already logged in
+const { cookies, redirect, request } = Astro
+const authToken = cookies.get(TOKEN_STORAGE_KEY)
+
+if (authToken) {
+  console.log('✅ User already logged in, redirecting to dashboard')
+  return redirect('/dashboard')
+}
+
+// Handle form submission
+let errorMessage = ''
+let successMessage = ''
+
+if (request.method === 'POST') {
+  try {
+    const formData = await request.formData()
+    const email = formData.get('email')?.toString()
+    const password = formData.get('password')?.toString()
+
+    if (!email || !password) {
+      errorMessage = 'Email ve şifre gereklidir'
+    } else if (!email.includes('@')) {
+      errorMessage = 'Geçerli bir email adresi girin'
+    } else {
+      const result = await apiService.login(email, password)
+      
+      if (result.success) {
+        const token = result.data?.session?.access_token
+        
+        if (token && typeof token === 'string') {
+          // Set the token as a cookie
+          cookies.set(TOKEN_STORAGE_KEY, token, {
+            path: "/",
+            httpOnly: true,
+            secure: import.meta.env.PROD,
+            sameSite: "lax",
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+          })
+
+          return redirect("/dashboard")
+        } else {
+          errorMessage = 'Giriş başarısız - token alınamadı'
+        }
+      } else {
+        errorMessage = result.error || 'Giriş başarısız'
+      }
+    }
+  } catch (error) {
+    console.error('Login error:', error)
+    errorMessage = 'Beklenmeyen bir hata oluştu'
+  }
+}
+
+// Check for URL parameters (for backward compatibility)
+const urlParams = new URL(request.url).searchParams
+const urlError = urlParams.get('error')
+const urlSuccess = urlParams.get('success')
+
+if (!errorMessage && urlError) {
+  errorMessage = decodeURIComponent(urlError)
+}
+
+if (!successMessage && urlSuccess) {
+  successMessage = decodeURIComponent(urlSuccess)
+}
+---
+
+<AuthLayout title="Login - Plus UI">
+  <div class="flex items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md space-y-8">
+      <!-- Error/Success Messages -->
+      {errorMessage && <plus-alert status="danger" message={errorMessage} class="mb-4" />}
+      {successMessage && <plus-alert status="success" message={successMessage} class="mb-4" />}
+
+      <!-- Email/Password Form -->
+      <form method="POST" class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            class="relative mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm"
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            class="relative mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+          >
+            Sign in
+          </button>
+        </div>
+
+        <div class="text-center">
+          <p class="text-sm text-gray-600">
+            Test credentials: test@example.com / test1234
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</AuthLayout>

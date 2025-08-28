@@ -2,12 +2,16 @@
 import Container from '@components/container.astro'
 import Dropdown from './dropdown.astro'
 import MegaDropdownContainer from './mega-dropdown/MegaDropdownContainer.astro'
+import AuthDropdown from './auth-dropdown.astro'
 import { StickyHeader, Astronav, MenuItems, MenuIcon } from 'astro-navbar'
 import logo from '@assets/logo.svg'
-import figma from '@assets/navbar/logos/figma.png'
-import github from '@assets/navbar/logos/github.png'
+import { Icon } from 'astro-icon/components'
 
-const { headerTheme = 'light' } = Astro.props
+
+const { headerTheme = 'light', headerBorder = false } = Astro.props
+
+// Get user from middleware (already cached/authenticated)
+const user = Astro.locals.user || null
 
 const menuitems = [
   {
@@ -195,7 +199,7 @@ const menuitems = [
           },
         ],
         image: 'plusAi',
-        integrations: ['google', 'apple', 'xbox'],
+        integrations: ['google', 'apple', 'microsoft'],
       },
     ],
   },
@@ -357,22 +361,34 @@ const menuitems = [
             <div class="hidden items-center gap-2 lg:flex xl:gap-4">
               <!-- figma -->
               <a href="#" class="flex h-6 w-6 items-center justify-center">
-                <img src={figma.src} alt="Figma" class="h-5" />
+                <Icon name="logos:figma" class="h-5 w-5" />
               </a>
               <!-- github -->
               <a href="#" class="flex h-6 w-6 items-center justify-center">
-                <img src={github.src} alt="GitHub" class="h-6 w-6" />
+                <Icon name="logos:github-icon" class="h-5 w-5" />
               </a>
             </div>
             <div class="bg-color-disabled-default hidden h-6 w-px lg:block"></div>
             <div class="flex w-full items-center gap-2.5 text-nowrap lg:w-fit">
-              <plus-button kind="text" size="sm" full-width class="w-full [--border-color:var(--plus-color-border-default)] lg:w-fit lg:[--border-color:transparent]"> Sign in </plus-button>
-              <plus-button status="primary" size="sm" full-width class="w-full lg:w-fit">
-                <div class="flex items-center justify-center gap-2">
-                  <span>Get all-access</span>
-                  <i class="fa-solid fa-chevron-right"></i>
-                </div>
-              </plus-button>
+              <!-- Auth buttons for non-logged in users -->
+              <div id="auth-buttons" class={user ? "hidden w-full items-center gap-2.5 lg:w-fit" : "flex w-full items-center gap-2.5 lg:w-fit"}>
+                <a href="/login">
+                  <plus-button kind="text" size="sm" full-width class="w-full [--border-color:var(--plus-color-border-default)] lg:w-fit lg:[--border-color:transparent]"> Sign in </plus-button>
+                </a>
+                <a href="/register">
+                  <plus-button status="primary" size="sm" full-width class="w-full lg:w-fit">
+                    <div class="flex items-center justify-center gap-2">
+                      <span>Get all-access</span>
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </plus-button>
+                </a>
+              </div>
+              
+              <!-- User menu for logged in users -->
+              <div id="user-menu" class={user ? "flex items-center gap-3" : "hidden items-center gap-3"}>
+                <AuthDropdown user={user} />
+              </div>
             </div>
           </div>
         </MenuItems>
@@ -380,3 +396,7 @@ const menuitems = [
     </div>
   </Container>
 </StickyHeader>
+
+<script>
+  // Auth state is managed server-side using httpOnly cookies for security
+</script>

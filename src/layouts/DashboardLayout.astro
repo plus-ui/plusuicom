@@ -1,0 +1,64 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Sidebar from '@components/dashboard/Sidebar.astro'
+import DashboardHeader from '@components/dashboard/DashboardHeader.astro'
+import Container from '@components/container.astro'
+
+interface Props {
+  currentView?: string
+  title?: string
+  showHeader?: boolean
+  headerTitle?: string
+  headerDescription?: string
+  showSignOut?: boolean
+  headerActions?: {
+    label: string
+    href?: string
+    action?: string
+    method?: 'GET' | 'POST'
+    variant?: 'primary' | 'secondary' | 'danger'
+    icon?: string
+  }[]
+}
+
+const {
+  currentView = 'overview',
+  title = 'Dashboard - Plus UI',
+  showHeader = true,
+  headerTitle = 'Dashboard',
+  headerDescription = 'Welcome back',
+  showSignOut = true,
+  headerActions = [],
+} = Astro.props
+
+const user = Astro.locals.user
+
+// Middleware'den user gelmezse (bir sorun oluşursa) login'e yönlendir.
+// Normalde middleware bu durumu yakalayıp yönlendirmeli. Bu ek bir güvence.
+if (!user) {
+  return Astro.redirect('/login')
+}
+
+// User bilgisini header description'a ekle
+const finalHeaderDescription =
+  headerDescription === 'Welcome back' && user?.email ? `Welcome back, ${user.email}` : headerDescription
+---
+
+<Layout theme="light" headerTheme="light" title={title}>
+  <Container>
+    <div class="flex min-h-[calc(100vh-100px)] space-x-6 py-6">
+      <!-- Astro Sidebar -->
+      <Sidebar currentView={currentView} />
+
+      <!-- Main content area -->
+      <div class="flex flex-1 flex-col overflow-hidden">
+        {showHeader && <DashboardHeader title={headerTitle} description={finalHeaderDescription} showSignOut={showSignOut} actions={headerActions} />}
+
+        <!-- Page Content Container -->
+        <div class="px-6">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </Container>
+</Layout>

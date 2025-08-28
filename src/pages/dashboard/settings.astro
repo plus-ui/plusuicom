@@ -1,0 +1,136 @@
+---
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+---
+
+<DashboardLayout 
+  title="Settings - Plus UI" 
+  currentView="settings"
+  headerTitle="Settings"
+  headerDescription="Configure your account preferences and settings"
+  showSignOut={false}
+>
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <!-- Account Settings -->
+    <div class="bg-white shadow rounded-lg mb-8">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Account Settings</h3>
+        <p class="text-sm text-gray-500">Manage your account preferences and notifications</p>
+      </div>
+
+      <div class="px-6 py-6 space-y-6">
+        <!-- Email Notifications -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-sm font-medium text-gray-900">Email Notifications</h4>
+            <p class="text-sm text-gray-500">Receive email updates about your account</p>
+          </div>
+          <button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-indigo-600" role="switch" aria-checked="true">
+            <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+
+        <!-- Marketing Emails -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-sm font-medium text-gray-900">Marketing Emails</h4>
+            <p class="text-sm text-gray-500">Receive promotional emails and updates</p>
+          </div>
+          <button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-gray-200" role="switch" aria-checked="false">
+            <span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+
+        <!-- Two-Factor Authentication -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-sm font-medium text-gray-900">Two-Factor Authentication</h4>
+            <p class="text-sm text-gray-500">Add an extra layer of security to your account</p>
+          </div>
+          <button class="rounded-lg border border-indigo-600 px-4 py-2 text-sm font-medium text-indigo-600 transition-colors duration-200 hover:border-indigo-700 hover:text-indigo-700">
+            Enable 2FA
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Settings -->
+    <div class="bg-white shadow rounded-lg mb-8">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Privacy Settings</h3>
+        <p class="text-sm text-gray-500">Control your privacy and data sharing preferences</p>
+      </div>
+
+      <div class="px-6 py-6 space-y-6">
+        <!-- Profile Visibility -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-sm font-medium text-gray-900">Profile Visibility</h4>
+            <p class="text-sm text-gray-500">Control who can see your profile information</p>
+          </div>
+          <select class="rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <option>Public</option>
+            <option>Friends Only</option>
+            <option>Private</option>
+          </select>
+        </div>
+
+        <!-- Data Sharing -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-sm font-medium text-gray-900">Data Sharing</h4>
+            <p class="text-sm text-gray-500">Allow us to use your data for improvements</p>
+          </div>
+          <button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-gray-200" role="switch" aria-checked="false">
+            <span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Language & Region -->
+    <div class="bg-white shadow rounded-lg mb-8">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Language & Region</h3>
+        <p class="text-sm text-gray-500">Set your preferred language and timezone</p>
+      </div>
+
+      <div class="px-6 py-6 space-y-6">
+        <!-- Language -->
+        <div>
+          <label for="language" class="block text-sm font-medium text-gray-700 mb-2">
+            Language
+          </label>
+          <select id="language" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <option>English (US)</option>
+            <option>English (UK)</option>
+            <option>Spanish</option>
+            <option>French</option>
+            <option>German</option>
+          </select>
+        </div>
+
+        <!-- Timezone -->
+        <div>
+          <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
+            Timezone
+          </label>
+          <select id="timezone" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <option>UTC-8 (Pacific Time)</option>
+            <option>UTC-5 (Eastern Time)</option>
+            <option>UTC+0 (GMT)</option>
+            <option>UTC+1 (Central European Time)</option>
+            <option>UTC+3 (Moscow Time)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="flex justify-end">
+      <button class="rounded-lg px-6 py-2.5 text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200">
+        Save Settings
+      </button>
+    </div>
+  </div>
+</DashboardLayout>

@@ -1,0 +1,251 @@
+---
+import DashboardLayout from "@layouts/DashboardLayout.astro";
+---
+
+<DashboardLayout 
+  title="Dashboard - Plus UI" 
+  currentView="overview"
+  headerTitle="Dashboard"
+  headerDescription="Welcome back"
+>
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center">
+                <i class="fas fa-project-diagram text-white text-sm"></i>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Active Projects</dt>
+                <dd class="text-lg font-medium text-gray-900">12</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-green-500 rounded-md flex items-center justify-center">
+                <i class="fas fa-users text-white text-sm"></i>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Team Members</dt>
+                <dd class="text-lg font-medium text-gray-900">8</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-purple-500 rounded-md flex items-center justify-center">
+                <i class="fas fa-download text-white text-sm"></i>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Downloads</dt>
+                <dd class="text-lg font-medium text-gray-900">24</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-yellow-500 rounded-md flex items-center justify-center">
+                <i class="fas fa-star text-white text-sm"></i>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Favorites</dt>
+                <dd class="text-lg font-medium text-gray-900">18</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="bg-white shadow rounded-lg mb-8">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Quick Actions</h3>
+        <p class="text-sm text-gray-500">Get started with common tasks</p>
+      </div>
+
+      <div class="px-6 py-6">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="/dashboard/profile" class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+              <i class="fas fa-user text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900">Update Profile</h4>
+              <p class="text-xs text-gray-500">Manage your account information</p>
+            </div>
+          </a>
+
+          <a href="/dashboard/members" class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center mr-3">
+              <i class="fas fa-users text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900">Invite Team</h4>
+              <p class="text-xs text-gray-500">Add new team members</p>
+            </div>
+          </a>
+
+          <a href="/dashboard/plans" class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center mr-3">
+              <i class="fas fa-crown text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900">View Plans</h4>
+              <p class="text-xs text-gray-500">Check your subscription</p>
+            </div>
+          </a>
+
+          <a href="/dashboard/downloads" class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <div class="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center mr-3">
+              <i class="fas fa-download text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900">Downloads</h4>
+              <p class="text-xs text-gray-500">Access your content</p>
+            </div>
+          </a>
+
+          <a href="/dashboard/bookmark" class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <div class="w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center mr-3">
+              <i class="fas fa-bookmark text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900">Bookmarks</h4>
+              <p class="text-xs text-gray-500">View saved items</p>
+            </div>
+          </a>
+
+          <a href="/dashboard/collections" class="flex items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <div class="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center mr-3">
+              <i class="fas fa-layer-group text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900">Collections</h4>
+              <p class="text-xs text-gray-500">Organize your work</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white shadow rounded-lg">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Recent Activity</h3>
+        <p class="text-sm text-gray-500">Your latest actions and updates</p>
+      </div>
+
+      <div class="px-6 py-6">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-download text-blue-600 text-sm"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-gray-900">Downloaded Plus UI Design System</p>
+              <p class="text-xs text-gray-500">2 hours ago</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-user-plus text-green-600 text-sm"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-gray-900">Invited John Doe to your team</p>
+              <p class="text-xs text-gray-500">1 day ago</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-bookmark text-purple-600 text-sm"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-gray-900">Bookmarked Dashboard Templates</p>
+              <p class="text-xs text-gray-500">2 days ago</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-crown text-yellow-600 text-sm"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-gray-900">Upgraded to Pro Plan</p>
+              <p class="text-xs text-gray-500">1 week ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  // Navigation timing logları
+  window.addEventListener('load', () => {
+    if (performance.navigation && performance.timing) {
+      const timing = performance.timing;
+      const navigation = performance.navigation;
+      
+      const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+      const domReadyTime = timing.domContentLoadedEventEnd - timing.navigationStart;
+      const dnslookupTime = timing.domainLookupEnd - timing.domainLookupStart;
+      const connectTime = timing.connectEnd - timing.connectStart;
+      const responseTime = timing.responseEnd - timing.responseStart;
+      const renderTime = timing.loadEventEnd - timing.responseEnd;
+      
+      console.log(`📊 [Dashboard] Sayfa performans metrikleri:`);
+      console.log(`   🌐 DNS Lookup: ${dnslookupTime}ms`);
+      console.log(`   🔗 Connection: ${connectTime}ms`);
+      console.log(`   📡 Response: ${responseTime}ms`);
+      console.log(`   🎨 Render: ${renderTime}ms`);
+      console.log(`   📄 DOM Ready: ${domReadyTime}ms`);
+      console.log(`   ⏱️ Total Load: ${pageLoadTime}ms`);
+      console.log(`   🔄 Navigation Type: ${navigation.type === 0 ? 'navigate' : navigation.type === 1 ? 'reload' : 'back/forward'}`);
+    }
+    
+    // Resource timing
+    if (performance.getEntriesByType) {
+      const resources = performance.getEntriesByType('resource');
+      const slowResources = resources.filter(r => r.duration > 100);
+      
+      if (slowResources.length > 0) {
+        console.log(`⚠️ [Dashboard] Yavaş yüklenen kaynaklar (>100ms):`);
+        slowResources.forEach(resource => {
+          console.log(`   ${resource.name}: ${resource.duration.toFixed(2)}ms`);
+        });
+      }
+    }
+  });
+</script>

@@ -1,192 +1,154 @@
 ---
-import { ClientRouter } from "astro:transitions";
-import { SEO } from "astro-seo";
-import Footer from "@components/footer.astro";
-import Navbar from "@components/navbar/navbar.astro";
+import { ClientRouter } from 'astro:transitions'
+import { SEO } from 'astro-seo'
+import Footer from '@components/layout/footer.astro'
+import Navbar from '@components/layout/navbar/navbar.astro'
+import PerformanceMonitor from '@components/common/PerformanceMonitor.astro'
 
-
-import "@fontsource-variable/inter/index.css";
-import "@fontsource-variable/inter-tight/index.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "../styles/global.css";
-import "@plusui/library/dist/index.css";
+import '@fontsource-variable/inter/index.css'
+import '@fontsource-variable/inter-tight/index.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import '../styles/global.css'
+import '@plusui/library/dist/index.css'
 
 export interface Props {
-  title?: string;
-  footerMargin?: boolean;
-  theme?: "light" | "dark";
-  headerTheme?: "light" | "dark";
-  noNavbar?: boolean;
-  noFooter?: boolean;
-  headerBorder?: boolean;
+  title?: string
+  description?: string
+  keywords?: string
+  image?: string
+  footerMargin?: boolean
+  theme?: 'light' | 'dark'
+  headerTheme?: 'light' | 'dark'
+  noNavbar?: boolean
+  noFooter?: boolean
+  headerBorder?: boolean
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
-const resolvedImageWithDomain = new URL(
-  "/opengraph.jpg",
-  Astro.site
-).toString();
+const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
 
-const {
-  title,
-  footerMargin = true,
-  theme = "light",
-  headerTheme = "light",
-  noNavbar = false,
-  noFooter = false,
-  headerBorder = false,
-} = Astro.props;
+const { 
+  title, 
+  description = 'Plus UI Library - UI Library with high-quality components for Astro, React, Vue and more. Build beautiful interfaces faster.',
+  keywords = 'UI library, component library, Astro, React, Vue, design system, UI components, web development',
+  image,
+  footerMargin = true, 
+  theme = 'light', 
+  headerTheme = 'light', 
+  noNavbar = false, 
+  noFooter = false, 
+  headerBorder = false 
+} = Astro.props
 
-const makeTitle = title
-  ? title + " | " + "Plus UI Library"
-  : "Plus UI Library - UI Library with high-quality components ";
+const makeTitle = title ? `${title} | Plus UI Library` : 'Plus UI Library - High-Quality UI Components'
+const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedImageWithDomain
 ---
 
 <!doctype html>
 <html lang="en" data-theme={theme}>
   <head>
-
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Plus UI Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1e40af" />
+    
+    <!-- Sitemap and Additional Links -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Plus UI Library",
+        "description": "High-quality UI component library for modern web development",
+        "url": "https://plusui.com",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "provider": {
+          "@type": "Organization",
+          "name": "Plus UI",
+          "url": "https://plusui.com"
+        }
+      }
+    </script>
 
     <SEO
       title={makeTitle}
-      description="Plus UI Library - UI Library with high-quality components for Astro."
+      description={description}
       canonical={canonicalURL}
       twitter={{
-        creator: "@plusui",
-        site: "@plusui",
-        card: "summary_large_image",
+        creator: '@plusui',
+        site: '@plusui',
+        card: 'summary_large_image',
       }}
       openGraph={{
         basic: {
           url: canonicalURL,
-          type: "website",
-          title: `Plus UI Library - UI Library with high-quality components for Astro`,
-          image: resolvedImageWithDomain,
+          type: 'website',
+          title: makeTitle,
+          image: resolvedImage,
         },
         image: {
-          alt: "Plus UI Library - UI Library with high-quality components for Astro",
+          alt: 'Plus UI Library - High-Quality UI Components',
+          width: 1200,
+          height: 630,
+        },
+        optional: {
+          locale: 'en_US',
+          siteName: 'Plus UI Library',
         },
       }}
     />
     <style is:global>
-      /* Improve Page speed */
-      /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
+      /* Performance optimizations */
       img {
         content-visibility: auto;
+        loading: lazy;
+      }
+      
+      /* Reduce layout shift */
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Optimize font loading */
+      @font-face {
+        font-display: swap;
       }
     </style>
 
     <ClientRouter />
   </head>
-  <body class="font-sans antialiased text-color-default bg-color-surface">
+  <body class="text-color-default bg-color-surface font-sans antialiased">
     {!noNavbar && <Navbar headerTheme={headerTheme} headerBorder={headerBorder} />}
     <slot />
     {!noFooter && <Footer margin={footerMargin} />}
-    
+
     <script>
-      import "@plusui/library/cdn/components/index.js";
+      import '@plusui/library/cdn/components/index.js'
     </script>
-    
-    <script>
-      // Global navigation timing logger
-      let navigationStartTime = performance.now();
-      
-      // Page start log
-      console.log(`🚀 [Navigation] Sayfa yükleniyor: ${window.location.pathname}`);
-      
-      // DOMContentLoaded timing
-      document.addEventListener('DOMContentLoaded', () => {
-        const domTime = performance.now() - navigationStartTime;
-        console.log(`📄 [Navigation] DOM hazır: ${domTime.toFixed(2)}ms`);
-      });
-      
-      // Complete page load timing
-      window.addEventListener('load', () => {
-        const loadTime = performance.now() - navigationStartTime;
-        console.log(`✅ [Navigation] Sayfa tamamen yüklendi: ${loadTime.toFixed(2)}ms`);
-        
-        // Check for slow loading resources
-        setTimeout(() => {
-          if (performance.getEntriesByType) {
-            const resources = performance.getEntriesByType('resource');
-            const apiCalls = resources.filter(r => r.name.includes('plus-ui-backend.onrender.com'));
-            
-            if (apiCalls.length > 0) {
-              console.log(`📡 [Navigation] Backend API çağrıları:`);
-              apiCalls.forEach(api => {
-                const responseTime = api.responseEnd - api.responseStart;
-                const totalTime = api.responseEnd - api.requestStart;
-                console.log(`   ${api.name}: Response ${responseTime.toFixed(2)}ms, Total ${totalTime.toFixed(2)}ms`);
-              });
-            }
-          }
-        }, 100);
-      });
-      
-      // Monitor link clicks for navigation timing
-      document.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        if (link && link.href && !link.href.startsWith('mailto:') && !link.href.startsWith('tel:')) {
-          const isInternalLink = link.href.includes(window.location.origin);
-          if (isInternalLink) {
-            console.log(`🔗 [Navigation] Link tıklandı: ${link.href}`);
-            navigationStartTime = performance.now();
-          }
-        }
-      });
-      
-      // Backend keep-alive ping system
-      let pingInterval;
-      
-      function startBackendPing() {
-        // Her 4 dakikada bir backend'e ping at (Render.com free tier 5 dakikada uyuyor)
-        pingInterval = setInterval(async () => {
-          try {
-            console.log('🏓 [Ping] Backend keep-alive ping gönderiliyor...');
-            const startTime = performance.now();
-            
-            // Simple HEAD request to keep backend awake
-            const response = await fetch('https://plus-ui-backend.onrender.com/', {
-              method: 'HEAD',
-              mode: 'no-cors'
-            });
-            
-            const endTime = performance.now();
-            console.log(`🏓 [Ping] Backend yanıt verdi: ${(endTime - startTime).toFixed(2)}ms`);
-          } catch (error) {
-            console.log('🏓 [Ping] Backend ping hatası (normal):', error.message);
-          }
-        }, 4 * 60 * 1000); // 4 dakika
-      }
-      
-      function stopBackendPing() {
-        if (pingInterval) {
-          clearInterval(pingInterval);
-          pingInterval = null;
-          console.log('🏓 [Ping] Backend ping durduruldu');
-        }
-      }
-      
-      // Sayfa görünürse ping'i başlat, gizlenirse durdur
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-          console.log('👁️ [Ping] Sayfa görünür, ping başlatılıyor');
-          startBackendPing();
-        } else {
-          console.log('👁️ [Ping] Sayfa gizli, ping durduruluyor');
-          stopBackendPing();
-        }
-      });
-      
-      // Sayfa yüklendiğinde ping'i başlat
-      if (document.visibilityState === 'visible') {
-        startBackendPing();
-      }
-    </script>
+
+    <!-- Performance Monitoring (Development Only) -->
+    <PerformanceMonitor />
   </body>
 </html>

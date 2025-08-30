@@ -1,0 +1,27 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Container from '@components/common/container.astro'
+---
+
+<Layout 
+  title="Page Not Found - 404"
+  theme="light"
+  headerTheme="light"
+>
+  <main class="min-h-[calc(100vh/2)] flex items-center">
+    <Container>
+      <div class="mx-auto max-w-md text-center">
+        <h1 class="mb-4 text-8xl font-bold text-gray-300">404</h1>
+        <h2 class="mb-4 text-2xl font-semibold text-color-default">Page Not Found</h2>
+        <p class="mb-8 text-color-muted">The page you're looking for doesn't exist.</p>
+        
+        <a 
+          href="/" 
+          class="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Go Home
+        </a>
+      </div>
+    </Container>
+  </main>
+</Layout>

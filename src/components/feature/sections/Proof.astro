@@ -1,0 +1,23 @@
+---
+import Container from "@components/common/container.astro";
+import { Image } from 'astro:assets';
+import logos from '@assets/images/icons/logos.png'
+
+---
+
+<section class="proof-section py-6 bg-color-transparent">
+  <Container>
+    <div class="">
+      <Image 
+        src={logos} 
+        alt="Companies and brands using Plus UI Library - trusted by industry leaders" 
+        class="h-full w-auto object-contain" 
+        loading="lazy"
+        format="webp"
+        quality={85}
+        widths={[400, 600, 800, 1000]}
+        sizes="(max-width: 640px) 400px, (max-width: 768px) 600px, (max-width: 1024px) 800px, 1000px"
+      />
+    </div>
+  </Container>
+</section>

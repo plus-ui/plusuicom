@@ -1,21 +1,27 @@
 ---
-import Container from "@components/container.astro";
+// import Container from "@components/common/container.astro";
 import Layout from "@layouts/Layout.astro";
 
 // Section imports
-import Hero from "@components/sections/Hero.astro";
-import Proof from "@components/sections/Proof.astro";
-import Showcase from "@components/sections/Showcase.astro";
-import Features from "@components/sections/Features.astro";
-import Specifications from "@components/sections/Specifications.astro";
-import Testimonial from "@components/sections/Testimonial.astro";
-import UnifiedDocs from "@components/sections/UnifiedDocs.astro";
-import Resources from "@components/sections/Resources.astro";
-import FAQ from "@components/sections/FAQ.astro";
-import Templates from "@components/sections/Templates.astro";
+import Hero from "@components/feature/sections/Hero.astro";
+import Proof from "@components/feature/sections/Proof.astro";
+import Showcase from "@components/feature/sections/Showcase.astro";
+import Features from "@components/feature/sections/Features.astro";
+import Specifications from "@components/feature/sections/Specifications.astro";
+import Testimonial from "@components/feature/sections/Testimonial.astro";
+// import UnifiedDocs from "@components/feature/sections/UnifiedDocs.astro";
+import Resources from "@components/feature/sections/Resources.astro";
+import FAQ from "@components/feature/sections/FAQ.astro";
+import Templates from "@components/feature/sections/Templates.astro";
 ---
 
-<Layout theme="light" headerTheme="light">
+<Layout 
+  title="Plus UI Library - High-Quality UI Components"
+  description="Professional UI component library for Astro, React, Vue and more. Build beautiful, accessible interfaces faster with our comprehensive design system."
+  keywords="UI library, component library, Astro components, React components, Vue components, design system, web development, frontend, UI kit, interface design"
+  theme="light" 
+  headerTheme="light"
+>
   <main>
     <!-- Hero Section - 2 Column Layout -->
     <Hero />

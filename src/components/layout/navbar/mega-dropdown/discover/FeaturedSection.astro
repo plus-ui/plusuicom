@@ -1,0 +1,15 @@
+---
+const { section } = Astro.props
+import cover from '@assets/images/icons/cover.png'
+---
+
+<div class="flex flex-col gap-6 w-60">
+  <h3 class="text-color-placeholder text-sm font-medium">{section.title}</h3>
+  <div class="border-color-disabled rounded border">
+    <img src={cover.src} alt={section.featuredTitle} class="" />
+    <div class="py-6 px-4">
+      <h4 class="text-color-default text-sm font-semibold">{section.featuredTitle}</h4>
+    </div>
+  </div>
+  <a href={section.path} class="text-sm font-medium text-color-default hover:text-color-primary flex items-center gap-2">{section.cta} <i class="fa-solid fa-arrow-right"></i></a>
+</div>

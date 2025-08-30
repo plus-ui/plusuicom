@@ -1,0 +1,39 @@
+---
+export interface Props {
+  class?: string
+  minHeight?: string
+}
+
+const { class: className = '', minHeight = '600px' } = Astro.props
+---
+
+<div class={`relative bg-gray-900/50 overflow-hidden flex-1 flex items-start justify-center rounded border border-solid border-[#092E58] ${className}`} style={`min-height: ${minHeight}`}>
+  <!-- Animated Aurora Background -->
+  <div class="absolute inset-0 z-0">
+    <!-- Blob Layer 1 - Purple to Pink to Blue -->
+    <div
+      class="aurora-blob-1 absolute inset-0 opacity-40"
+      style="background: conic-gradient(from 0deg at 40% 60%, #4c1d95, #7c3aed, #a855f7, #ec4899, #3b82f6, #1e40af, #4c1d95); filter: blur(80px); mix-blend-mode: screen;"
+    >
+    </div>
+
+    <!-- Blob Layer 2 - Pink to Navy to Purple -->
+    <div
+      class="aurora-blob-2 absolute inset-0 opacity-25"
+      style="background: conic-gradient(from 120deg at 60% 40%, #ec4899, #be185d, #1e1b4b, #312e81, #6366f1, #8b5cf6, #ec4899); filter: blur(80px); mix-blend-mode: screen;"
+    >
+    </div>
+
+    <!-- Blob Layer 3 - Deep Navy to Blue to Purple -->
+    <div
+      class="aurora-blob-3 absolute inset-0 opacity-20"
+      style="background: conic-gradient(from 240deg at 30% 70%, #0f172a, #1e40af, #3b82f6, #6366f1, #a855f7, #c084fc, #0f172a); filter: blur(80px); mix-blend-mode: screen;"
+    >
+    </div>
+  </div>
+
+  <!-- Content Slot -->
+  <div class="relative z-10 flex h-full w-full flex-1 items-start justify-center px-20 pt-20">
+    <slot />
+  </div>
+</div>

@@ -1,36 +1,25 @@
----
-// import Container from "@components/common/container.astro";
+--- 
 import Layout from '@layouts/Layout.astro'
 
 // Section imports
-import Hero from '@components/sections/Hero.astro'
-import Proof from '@components/sections/Proof.astro'
-import Showcase from '@components/sections/Showcase.astro'
+import Hero from '@components/sections/design-system/Hero.astro'
 import Features from '@components/sections/Features.astro'
 import Specifications from '@components/sections/Specifications.astro'
-import Testimonial from '@components/sections/Testimonial.astro'
-// import UnifiedDocs from "@components/sections/UnifiedDocs.astro";
 import Resources from '@components/sections/Resources.astro'
 import FAQ from '@components/sections/FAQ.astro'
 import Templates from '@components/sections/Templates.astro'
 ---
 
 <Layout
-  title="Plus UI Library - High-Quality UI Components"
+  title="Plus UI Design System - High-Quality UI Components"
   description="Professional UI component library for Astro, React, Vue and more. Build beautiful, accessible interfaces faster with our comprehensive design system."
   keywords="UI library, component library, Astro components, React components, Vue components, design system, web development, frontend, UI kit, interface design"
   theme="light"
   headerTheme="light"
 >
   <main>
-    <!-- Hero Section - 2 Column Layout -->
+    <!-- Hero Section -->
     <Hero />
-
-    <!-- Proof Section - Brand Logos -->
-    <Proof />
-
-    <!-- Showcase Section - Animated Tabs -->
-    <Showcase />
 
     <!-- Features Section - Vertical Tabs -->
     <Features />
@@ -38,11 +27,6 @@ import Templates from '@components/sections/Templates.astro'
     <!-- Specifications Section -->
     <Specifications />
 
-    <!-- Testimonial Section -->
-    <Testimonial />
-
-    <!-- Unified System Docs Section -->
-    <!-- <UnifiedDocs /> -->
 
     <!-- Resources Section -->
     <Resources />

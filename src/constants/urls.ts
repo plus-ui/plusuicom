@@ -25,8 +25,10 @@ export const SITE_URLS = {
   },
   
   // External URLs
-  github: 'https://github.com/plusui',
-  npm: 'https://www.npmjs.com/org/plusui'
+  github: 'https://github.com/plus-ui',
+  npm: 'https://www.npmjs.com/org/plusui',
+  figma: 'https://www.figma.com/@plusui'
+
 } as const;
 
 // Helper functions for easy URL building

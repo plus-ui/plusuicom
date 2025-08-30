@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export interface AccordionItem {
   id: string;
@@ -20,24 +20,24 @@ interface SingleAccordionProps {
   className?: string;
 }
 
-export function SingleAccordion({ 
-  title, 
-  content, 
-  isOpen, 
-  onToggle, 
-  className = '' 
+export function SingleAccordion({
+  title,
+  content,
+  isOpen,
+  onToggle,
+  className = "",
 }: SingleAccordionProps) {
   return (
-    <div className={`bg-color-surface rounded border border-color-default ${className}`}>
+    <div
+      className={`bg-color-surface border-color-default w-full rounded border ${className}`}
+    >
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-6 py-4 text-left cursor-pointer rounded focus:outline-none "
+        className="flex w-full cursor-pointer items-center justify-between rounded px-6 py-4 text-left focus:outline-none"
         aria-expanded={isOpen}
       >
-        <h3 className="text-xl font-medium text-color-default ">
-          {title}
-        </h3>
-        <div className="flex items-center justify-center w-7  leading-0">
+        <h3 className="text-color-default text-xl font-medium">{title}</h3>
+        <div className="flex w-7 items-center justify-center leading-0">
           {/* <svg
             className={`w-4 h-4 text-color-default transition-transform duration-200 ${
               isOpen ? 'transform rotate-180' : ''
@@ -51,39 +51,39 @@ export function SingleAccordion({
               clipRule="evenodd"
             />
           </svg> */}
-          <div className={`w-4 h-4 text-color-default transition-transform duration-200 ${
-              isOpen ? 'transform rotate-180' : ''
-            }`}>
+          <div
+            className={`text-color-default h-4 w-4 transition-transform duration-200 ${
+              isOpen ? "rotate-180 transform" : ""
+            }`}
+          >
             <i className="fa-solid fa-chevron-down"></i>
           </div>
         </div>
       </button>
-      
+
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 pb-6 pt-2">
-          <div className="text-color-default">
-            {content}
-          </div>
+        <div className="px-6 pt-2 pb-6">
+          <div className="text-color-default">{content}</div>
         </div>
       </div>
     </div>
   );
 }
 
-export default function Accordion({ 
-  items, 
-  allowMultiple = false, 
-  className = '' 
+export default function Accordion({
+  items,
+  allowMultiple = false,
+  className = "",
 }: AccordionProps) {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
 
   const toggleItem = (itemId: string) => {
     const newOpenItems = new Set(openItems);
-    
+
     if (newOpenItems.has(itemId)) {
       newOpenItems.delete(itemId);
     } else {
@@ -92,7 +92,7 @@ export default function Accordion({
       }
       newOpenItems.add(itemId);
     }
-    
+
     setOpenItems(newOpenItems);
   };
 

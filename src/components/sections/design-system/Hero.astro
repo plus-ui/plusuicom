@@ -1,0 +1,64 @@
+---
+import Container from '@components/common/container.astro'
+import AuroraBackground from '@components/ui/display/AuroraBackground.astro'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+
+import heroImage from '@assets/images/heros/Products/design-system-hero.jpg'
+import { SITE_URLS, getComponentDocsUrl } from '@/constants/urls'
+
+---
+
+<section class="hero-section bg-color-default-default text-color-default flex min-h-[calc(100vh-100px)] pt-10 lg:pt-20" data-theme="dark">
+  <Container class="flex flex-1 items-start">
+    <!-- Hero Content -->
+    <div class="flex h-full w-full flex-1 flex-row items-center justify-center gap-12 text-center lg:flex-col">
+      <!-- Text Content -->
+      <!-- User avatars for social proof -->
+
+      <!-- Trusted by 10,000+ designers
+      The most advanced
+      UI Kit & Design System
+      Payments, auth, gating, CRM, email—it's all here. Ditch the cookie cutter platforms and monetize your membership site, SaaS, course or community.
+      Preview in Figma
+      chevron-right
+      Purchase Now
+      chevron-right -->
+
+      <div class="mb-12 flex max-w-3xl flex-col items-center">
+        <div class="mb-6 flex items-center space-x-3">
+          <div class="flex items-center -space-x-2">
+            <img class="border-color-default h-6 w-6 rounded-full border-2" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <img class="border-color-default h-6 w-6 rounded-full border-2" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <img class="border-color-default h-6 w-6 rounded-full border-2" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face" alt="User" />
+          </div>
+          <span>
+            Trusted by <span class="font-bold">10,000+ designers</span>
+          </span>
+        </div>
+        <div>
+          <h1 class="font-sans-tight mb-4 flex flex-col text-5xl font-bold tracking-tight lg:text-6xl">
+            <span>The most advanced</span>
+            <span>UI Kit & Design System</span>
+          </h1>
+          <p class="mb-12 text-xl font-normal">Payments, auth, gating, CRM, email—it's all here. Ditch the cookie cutter platforms and monetize your membership site, SaaS, course or community.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href={SITE_URLS.figma} target="_blank">
+            <plus-button kind="outlined"><Icon name="logos:figma" class="h-5 w-5" /> Preview in Figma</plus-button>
+          </a>
+          <a href={`${SITE_URLS.docs.base}/design-system/overview/`} target="_blank">
+            <plus-button kind="filled" status="primary">Start for Free <i class="fa-solid fa-chevron-right"></i></plus-button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Aurora Background with Hero Image -->
+      <div class="flex w-full flex-1">
+        <AuroraBackground minHeight="100%" class="lg:min-h-[500px]">
+          <Image src={heroImage} alt="Design System Hero" class="w-full rounded-lg shadow-2xl" />
+        </AuroraBackground>
+      </div>
+    </div>
+  </Container>
+</section>

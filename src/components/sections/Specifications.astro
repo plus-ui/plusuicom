@@ -32,63 +32,38 @@ import Container from '@components/common/container.astro'
             <h3 class="text-color-default mb-2.5 text-3xl font-semibold">Token Architecture</h3>
             <p class="text-color-caption text-xl">Enhance your UI with our token system using Hex codes, Aliases, and Semantic tokens for scalable UI.</p>
           </div>
-          
-          <div class="flex w-full flex-col items-center py-6 mt-5">
+
+          <div class="mt-5 flex w-full flex-col items-center py-6">
             {/* Hex Code */}
             <div class={`bg-color-default-default flex w-fit flex-row items-center gap-2.5 rounded-lg px-6 py-2.5 transition-all duration-500 ease-in-out`}>
               <div class={`h-5 w-5 rounded-full transition-all duration-500 ease-in-out bg-indigo-700`}></div>
               <span class="text-color-default font-mono text-sm">#4f46e5</span>
             </div>
-            
-            <div class="w-px h-6 bg-color-divider"></div>
-            
+
+            <div class="bg-color-divider h-6 w-px"></div>
+
             {/* Color Alias */}
             <div class={`bg-color-default-default flex w-fit flex-row items-center gap-2.5 rounded-lg px-6 py-2.5 transition-all duration-500 ease-in-out`}>
               <div class={`h-5 w-5 rounded-full transition-all duration-500 ease-in-out bg-indigo-700`}></div>
               <span class="text-color-default font-mono text-sm">indigo-600</span>
             </div>
-            
-            <div class="w-px h-6 bg-color-divider"></div>
-            
+
+            <div class="bg-color-divider h-6 w-px"></div>
+
             {/* Semantic Token */}
             <div class={`bg-color-default-default flex w-fit flex-row items-center gap-2.5 rounded-lg px-6 py-2.5 transition-all duration-500 ease-in-out`}>
               <div class={`h-5 w-5 rounded-full transition-all duration-500 ease-in-out bg-indigo-700`}></div>
               <span class="text-color-default font-mono text-sm">background/primary/default</span>
             </div>
-            
-            <div class="w-px h-6 bg-color-divider"></div>
-            
+
+            <div class="bg-color-divider h-6 w-px"></div>
+
             {/* Component Examples */}
             <div class="bg-color-default-default flex w-full flex-row items-center justify-around rounded-lg px-7 py-2.5">
-              <plus-button 
-                kind="filled" 
-                status="primary" 
-                size="sm"
-                class="transition-all duration-500 ease-in-out"
-              >
-                Button
-              </plus-button>
-              <plus-checkbox 
-                status="primary" 
-                size="sm" 
-                checked
-                class="transition-all duration-500 ease-in-out"
-              >Checkbox</plus-checkbox>
-              <plus-chip 
-                kind="filled" 
-                status="primary" 
-                size="md" 
-                dismiss
-                class="transition-all duration-500 ease-in-out"
-              >
-                Chip
-              </plus-chip>
-              <plus-toggle 
-                status="primary" 
-                size="lg" 
-                checked 
-                class="w-fit transition-all duration-500 ease-in-out"
-              />
+              <plus-button kind="filled" status="primary" size="sm" class="transition-all duration-500 ease-in-out"> Button </plus-button>
+              <plus-checkbox status="primary" size="sm" checked class="transition-all duration-500 ease-in-out">Checkbox</plus-checkbox>
+              <plus-chip kind="filled" status="primary" size="md" dismiss class="transition-all duration-500 ease-in-out"> Chip </plus-chip>
+              <plus-toggle status="primary" size="lg" checked class="w-fit transition-all duration-500 ease-in-out"></plus-toggle>
             </div>
           </div>
         </div>

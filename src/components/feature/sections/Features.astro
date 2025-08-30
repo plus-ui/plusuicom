@@ -1,0 +1,58 @@
+---
+import Container from '@components/common/container.astro'
+import ScrollBasedFeatures from '@components/ui/interactive/ScrollBasedFeatures.tsx'
+import unifiedStyling from '@assets/images/illustrations/unified-styling.png'
+import crossFramework from '@assets/images/illustrations/cross-framework.png'
+import uiMonitoring from '@assets/images/illustrations/ui-monitoring.png'
+
+const featuresData = [
+    {
+      id: "unified-styling",
+      icon: "fa-solid fa-bolt",
+      title: "Unified Styling, Centralized Control",
+      description: "Standardize your product's visual language with a centralized token system. Distribute a unified set of variables—colors, spacing, typography—across design and code to eliminate inconsistencies, accelerate delivery, and enforce brand integrity at scale.",
+      logos: ['react', 'angular-icon', 'vue'],
+      visualType: "image" as const,
+      visualContent: unifiedStyling.src
+    },
+    {
+      id: "cross-framework",
+      icon: "fa-solid fa-code-branch",
+      title: "Cross-Framework Support",
+      description: "Implement your design system across multiple front-end stacks with zero friction. We provide native support for React, Angular, Vue, and more—ensuring consistency no matter what frameworks your teams use.",
+      logos: ['react', 'angular-icon', 'vue'],
+      visualType: "image" as const,
+      visualContent: crossFramework.src
+    },
+    {
+      id: "ui-monitoring",
+      icon: "fa-solid fa-chart-line",
+      title: "UI Monitoring & Analytics",
+      description: "Track how tokens and components are used across teams, products, and codebases. Identify deviations, measure adoption, and enforce design standards with actionable insights that drive system-wide alignment.",
+      logos: ['react', 'angular-icon', 'vue'],
+      visualType: "image" as const,
+      visualContent: uiMonitoring.src
+    }
+  ]
+---
+
+<section class="features-section py-16 lg:py-24">
+  <Container>
+    <div class="mb-16 text-center">
+      <plus-chip kind="filled" shape="rounded" size="lg" class="mb-5">Features</plus-chip>
+
+      <h2 class="mb-2.5 text-3xl font-bold lg:text-4xl">
+        Everything You Need<br />
+        to Design, Build, and Deliver
+      </h2>
+      <p class="text-color-caption mx-auto max-w-2xl text-lg">
+        A robust design system built for speed, consistency, <br />and enterprise-grade governance
+      </p>
+    </div>
+
+    <ScrollBasedFeatures 
+      features={featuresData}
+      client:load
+    />
+  </Container>
+</section>

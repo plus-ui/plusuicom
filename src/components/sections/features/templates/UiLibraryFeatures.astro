@@ -1,0 +1,60 @@
+---
+import { Section, SectionHead } from '@components/layout'
+import { ScrollBasedFeatures } from '../components'
+
+import crossFramework from '@assets/images/features/cross-framework.png'
+import lightAndFast from '@assets/images/features/light-and-fast.png'
+import robustComponents from '@assets/images/features/robust-components.png'
+import pixelPerfect from '@assets/images/features/pixel-perfect.png'
+
+const featuresData = [
+  {
+    id: 'cross-framework',
+    icon: 'fa-solid fa-bolt',
+    title: 'Multi/Cross-Framework Support',
+    description:
+      'Build once, run everywhere. Our UI library is powered by Lit, enabling lightweight Web Components that integrate natively with React, Angular, Vue, and beyond—zero rewrites required.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: crossFramework.src,
+  },
+  {
+    id: 'light-and-fast',
+    icon: 'fa-solid fa-bolt',
+    title: 'Light and Fast Development',
+    description:
+      'Engineered for performance and productivity. Load times are minimal, bundle sizes are lean, and development workflows are lightning-fast—giving teams more velocity without sacrificing quality.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: lightAndFast.src,
+  },
+  {
+    id: 'easy-integration-with-data-apis',
+    icon: 'fa-solid fa-bolt',
+    title: 'Easy Integration with Data APIs',
+    description: 'Bridge UI and data effortlessly. Our components are designed to plug directly into modern API structures, supporting reactive data binding and seamless backend connectivity.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: robustComponents.src,
+  },
+  {
+    id: 'pixel-perfect-design-to-dev',
+    icon: 'fa-solid fa-bolt',
+    title: 'Pixel-Perfect Design-to-Dev',
+    description: 'Stop guessing and start shipping. Every component is crafted to reflect your design system perfectly, ensuring visual consistency and high fidelity from Figma to frontend.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: pixelPerfect.src,
+  },
+]
+---
+
+<Section>
+  <SectionHead>
+    <Fragment slot="badge"> <plus-chip kind="filled" shape="full">Features</plus-chip> </Fragment>
+    <Fragment slot="title"> Build Faster. Scale Smarter. </Fragment>
+    <Fragment slot="desc"> A cross-framework UI library powered by Web Components, designed for speed, flexibility, and seamless developer experience. </Fragment>
+  </SectionHead>
+
+  <ScrollBasedFeatures features={featuresData} client:load />
+</Section>

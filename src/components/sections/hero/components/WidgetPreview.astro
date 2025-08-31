@@ -1,0 +1,53 @@
+---
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import type { Variants } from 'framer-motion'
+import widget1x1 from '@assets/images/heros/home/widget-1x1.png'
+import widget1x2 from '@assets/images/heros/home/widget-1x2.png'
+import widget1x3 from '@assets/images/heros/home/widget-1x3.png'
+// import widget2x1 from '@assets/images/heros/home/widget-2x1.png'
+// import widget2x2 from '@assets/images/heros/home/widget-2x2.png'
+// import widget2x3 from '@assets/images/heros/home/widget-2x3.png'
+// import widget3x1 from '@assets/images/heros/home/widget-3x1.png'
+// import widget3x2 from '@assets/images/heros/home/widget-3x2.png'
+// import widget3x3 from '@assets/images/heros/home/widget-3x3.png'
+// import widget4x1 from '@assets/images/heros/home/widget-4x1.png'
+// import widget4x2 from '@assets/images/heros/home/widget-4x2.png'
+// import widget4x3 from '@assets/images/heros/home/widget-4x3.png'
+// import widget5x1 from '@assets/images/heros/home/widget-5x1.png'
+// import widget5x2 from '@assets/images/heros/home/widget-5x2.png'
+// import widget5x3 from '@assets/images/heros/home/widget-5x3.png'
+
+import { Image } from 'astro:assets'
+---
+
+<div class={`relative w-full overflow-hidden `}>
+  {/* Hidden reference layout - determines sizes */}
+  <div class="pointer-events-none opacity-0">
+    <div class="mb-4 flex w-full flex-row gap-4">
+      <div class="flex-1">
+        <Image src={widget1x1} alt="" class="h-auto w-full object-contain" loading="lazy" />
+      </div>
+      <div class="flex-1">
+        <Image src={widget1x2} alt="" class="h-auto w-full object-contain" loading="lazy" />
+      </div>
+    </div>
+    <div class="w-full">
+      <Image src={widget1x3} alt="" class="h-auto w-full object-contain" loading="lazy" />
+    </div>
+  </div>
+  {/* Animated Widgets */}
+  <div class="absolute inset-0 flex flex-col">
+    <div class="mb-4 flex w-full flex-row gap-4">
+      <div class="flex-1">
+        <Image src={widget1x1} alt="" class="h-auto w-full object-contain" loading="lazy" />
+      </div>
+      <div class="flex-1">
+        <Image src={widget1x2} alt="" class="h-auto w-full object-contain" loading="lazy" />
+      </div>
+    </div>
+    <div class="w-full">
+      <Image src={widget1x3} alt="" class="h-auto w-full object-contain" loading="lazy" />
+    </div>
+  </div>
+</div>

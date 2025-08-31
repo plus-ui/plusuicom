@@ -1,0 +1,1 @@
+export { default as SectionHead } from "./SectionHead.astro";

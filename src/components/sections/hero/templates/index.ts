@@ -1,0 +1,4 @@
+export { default as HomeHero } from "./HomeHero.astro";
+export { default as DesignSystemHero } from "./DesignSystemHero.astro";
+export { default as UILibraryHero } from "./UILibraryHero.astro";
+export { default as BaseHero } from "./BaseHero.astro";

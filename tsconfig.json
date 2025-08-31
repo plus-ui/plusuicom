@@ -27,6 +27,9 @@
       ],
       "@contents/*": [
         "contents/*"
+      ],
+      "@constants/*": [
+        "constants/*"
       ]
     }
   }

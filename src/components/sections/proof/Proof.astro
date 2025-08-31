@@ -1,0 +1,23 @@
+---
+import { Container, Section } from '@components/layout'
+import { Image } from 'astro:assets'
+
+import amazon from '@assets/images/brand-logos/amazon.png'
+import asana from '@assets/images/brand-logos/asana.png'
+import atlassian from '@assets/images/brand-logos/atlassian.png'
+import canva from '@assets/images/brand-logos/canva.png'
+import databricks from '@assets/images/brand-logos/databricks.png'
+import github from '@assets/images/brand-logos/github.png'
+
+const logos = [amazon, asana, atlassian, canva, databricks, atlassian, asana, github, canva]
+---
+
+<Section dark padding="sm"> 
+  <div class="relative flex flex-row flex-nowrap items-center justify-center gap-11 overflow-hidden">
+    <div class="pointer-events-none absolute top-0 left-0 z-10 h-full w-16 bg-gradient-to-r from-[var(--background-color-color-surface)] to-transparent"></div>
+
+    <div class="pointer-events-none absolute top-0 right-0 z-10 h-full w-16 bg-gradient-to-l from-[var(--background-color-color-surface)] to-transparent"></div>
+
+    {logos.map((logo) => <Image src={logo} alt="Company Logo" class="h-5 w-auto object-contain sm:h-9" />)}
+  </div>
+</Section>

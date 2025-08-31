@@ -1,0 +1,26 @@
+---
+const { align = 'center', className, title, desc, badge } = Astro.props
+---
+
+<div class:list={['mb-16', align === 'center' && 'text-center']}>
+  {
+    Astro.slots.has('badge') && (
+      <div class="mb-4">
+        <slot name="badge">{badge}</slot>
+      </div>
+    )
+  }
+  <h3 class="text-color-default mb-2.5 text-3xl font-bold lg:text-4xl">
+    <slot name="title">{title}</slot>
+  </h3>
+  <p class="ext-color-caption mx-auto max-w-2xl text-lg">
+    <slot name="desc">{desc}</slot>
+  </p>
+  {
+    Astro.slots.has('actions') && (
+      <div class="mt-4">
+        <slot name="actions" />
+      </div>
+    )
+  }
+</div>

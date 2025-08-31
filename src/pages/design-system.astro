@@ -1,13 +1,8 @@
---- 
+---
 import Layout from '@layouts/Layout.astro'
 
 // Section imports
-import Hero from '@components/sections/design-system/Hero.astro'
-import Features from '@components/sections/Features.astro'
-import Specifications from '@components/sections/Specifications.astro'
-import Resources from '@components/sections/Resources.astro'
-import FAQ from '@components/sections/FAQ.astro'
-import Templates from '@components/sections/Templates.astro'
+import { DesignSystemHero, DesignSystemFeatures, Resources, HomeFAQ, Templates } from '@components/sections'
 ---
 
 <Layout
@@ -19,20 +14,16 @@ import Templates from '@components/sections/Templates.astro'
 >
   <main>
     <!-- Hero Section -->
-    <Hero />
+    <DesignSystemHero />
 
     <!-- Features Section - Vertical Tabs -->
-    <Features />
-
-    <!-- Specifications Section -->
-    <Specifications />
-
+    <DesignSystemFeatures />
 
     <!-- Resources Section -->
     <Resources />
 
     <!-- FAQ Section -->
-    <FAQ />
+    <HomeFAQ />
 
     <!-- Templates Section -->
     <Templates />

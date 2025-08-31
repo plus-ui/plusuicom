@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets'
+
+import tokenImg from '@assets/images/specifications/token.png'
+import accessibilityImg from '@assets/images/specifications/accessibility.png'
+import integrationImg from '@assets/images/specifications/integration.png'
+import themeImg from '@assets/images/specifications/theme.png'
+import theme2Img from '@assets/images/specifications/theme-2.png'
+
+import { Section, SectionHead } from '@components/layout'
+---
+
+<Section dark>
+  <SectionHead>
+    <Fragment slot="badge"> <plus-chip kind="filled" invert shape="full">Specifications</plus-chip> </Fragment>
+    <Fragment slot="title"> Enterprise-Class, Complete UI </Fragment>
+    <Fragment slot="desc"> A robust UI ecosystem built for speed, consistency, and enterprise-grade governance </Fragment>
+    <Fragment slot="actions">
+      <plus-button kind="filled" status="primary" size="md"> Start for free <i class="fa-solid fa-chevron-right"></i> </plus-button>
+    </Fragment>
+  </SectionHead>
+  <div class="flex flex-col gap-7">
+    <div class="flex flex-col gap-7 md:flex-row">
+      <div class="flex-1">
+        <Image src={tokenImg} alt="Token Architecture" class="h-auto w-full object-cover" loading="lazy" />
+      </div>
+      <div class="flex flex-1 flex-col gap-7 md:gap-5 lg:gap-7">
+        <Image src={integrationImg} alt="Powerful Integrations" class="h-auto w-full object-cover" loading="lazy" />
+        <Image src={accessibilityImg} alt="Accessibility of WCAG" class="h-auto w-full object-cover" loading="lazy" />
+      </div>
+    </div>
+    <div class="flex flex-row gap-7">
+      <Image src={themeImg} alt="Ready to use themes" class="hidden h-auto w-full object-cover md:block" loading="lazy" />
+      <Image src={theme2Img} alt="Ready to use themes" class="block h-auto w-full object-cover md:hidden" loading="lazy" />
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,26 @@
+---
+const { items } = Astro.props
+
+import ProductCard from './ProductCard.astro'
+---
+
+<div class="flex flex-col gap-1 text-pretty lg:flex-row xl:gap-6">
+  {
+    items.map((item, index) => (
+      <>
+        <ProductCard item={item} />
+        {index < items.length - 1 && <div class="bg-color-disabled-default hidden w-px lg:block" />}
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .product-card {
+    &:hover {
+      .product-card-image {
+        transform: scale(1.2);
+      }
+    }
+  }
+</style>

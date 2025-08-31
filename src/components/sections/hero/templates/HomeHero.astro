@@ -1,0 +1,25 @@
+---
+import BaseHero from './BaseHero.astro'
+import { WidgetPreview } from '@components/sections/hero'
+import { SITE_URLS } from '@/constants/urls'
+---
+
+<BaseHero
+  title={['All-in-one', 'UI ecosystem']}
+  description="A fully integrated UI solution bridging design, development, and strategy. Build, iterate, and optimize UI with enterprise-grade speed and scalability."
+  primaryButton={{
+    text: 'Start for Free',
+    href: SITE_URLS.docs.base || '#',
+    icon: 'fa-solid fa-arrow-right'
+  }}
+  secondaryButton={{
+    text: 'Explore Docs',
+    href: SITE_URLS.docs.base || '#'
+  }}
+  heroImage={null}
+  showAurora={false}
+  layout="two-column"
+  showTechBadges={true}
+>
+  <WidgetPreview className="w-full" />
+</BaseHero>

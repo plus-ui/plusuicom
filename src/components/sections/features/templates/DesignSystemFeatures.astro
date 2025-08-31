@@ -1,0 +1,60 @@
+---
+import { Section, SectionHead } from '@components/layout'
+import { ScrollBasedFeatures } from '../components'
+
+import tokenBasedDesignSystem from '@assets/images/features/token.png'
+import productionReadyExamples from '@assets/images/features/production-ready.png'
+import richAndComprehensiveFoundations from '@assets/images/features/rich-and-comprehensive.png'
+import robustComponents from '@assets/images/features/robust-components.png'
+
+const featuresData = [
+  {
+    id: 'token-based-design-system',
+    icon: 'fa-solid fa-bolt',
+    title: 'Token-Based Design System',
+    description:
+      'Say goodbye to scattered styles. Define your visual language with a centralized set of design tokens—colors, spacing, typography, and more—ensuring consistency across design and code.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: tokenBasedDesignSystem.src,
+  },
+  {
+    id: 'production-ready-examples',
+    icon: 'fa-solid fa-bolt',
+    title: 'Production-Ready Examples with Device Support',
+    description: 'Speed up delivery with responsive, real-world layouts tested across screen sizes. Every component is built with accessibility, responsiveness, and performance in mind.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: productionReadyExamples.src,
+  },
+  {
+    id: 'rich-and-comprehensive-foundations',
+    icon: 'fa-solid fa-bolt',
+    title: 'Rich and Comprehensive Foundations',
+    description:
+      'Establish a rock-solid design foundation with thoughtful decisions around grid systems, spacing scales, typography hierarchies, and color palettes—ready to support any UI challenge.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: richAndComprehensiveFoundations.src,
+  },
+  {
+    id: 'robust-components',
+    icon: 'fa-solid fa-bolt',
+    title: 'Robust Components & Blocks',
+    description: 'Access a growing library of ready-to-use UI components and full-featured blocks. From buttons and cards to dashboards and modals—designed to plug directly into your workflow.',
+    logos: ['react', 'angular-icon', 'vue'],
+    visualType: 'image' as const,
+    visualContent: robustComponents.src,
+  },
+]
+---
+
+<Section>
+  <SectionHead>
+    <Fragment slot="badge"> <plus-chip kind="filled" shape="full">Features</plus-chip> </Fragment>
+    <Fragment slot="title"> Build Once. Scale Everywhere. </Fragment>
+    <Fragment slot="desc"> A powerful, token-based design system built for modern teams—from solo creators to enterprise-scale products. </Fragment>
+  </SectionHead>
+
+  <ScrollBasedFeatures features={featuresData} client:load />
+</Section>

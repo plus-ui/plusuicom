@@ -1,0 +1,26 @@
+---
+import BaseHero from './BaseHero.astro'
+import { Image } from 'astro:assets'
+import heroImage from '@assets/images/heros/design-system/cover.png'
+import { SITE_URLS } from '@/constants/urls'
+---
+
+<BaseHero
+  title={['The most advanced', 'UI Kit & Design System']}
+  description="Payments, auth, gating, CRM, email—it's all here. Ditch the cookie cutter platforms and monetize your membership site, SaaS, course or community."
+  trustText="Trusted by"
+  trustCount="10,000+ designers"
+  primaryButton={{
+    text: 'Start for Free',
+    href: `${SITE_URLS.docs.base}/design-system/overview/`,
+  }}
+  secondaryButton={{
+    text: 'Preview in Figma',
+    href: SITE_URLS.figma,
+    icon: 'logos:figma',
+  }}
+  heroImage={heroImage}
+  showAurora={true}
+>
+  <Image src={heroImage} alt="Design System Hero" class="w-full rounded-lg shadow-2xl" />
+</BaseHero>

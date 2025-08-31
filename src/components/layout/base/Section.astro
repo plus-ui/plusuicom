@@ -1,0 +1,17 @@
+---
+import { Container } from '@components/layout'
+const { class: className, dark = false, padding = 'md', size = 'xl' } = Astro.props
+
+const paddingClasses = {
+  none: '',
+  sm: 'py-6',
+  md: 'py-16 lg:py-24',
+  lg: 'py-24 lg:py-32',
+}
+---
+
+<section class:list={['bg-color-surface text-color-default', paddingClasses[padding], className]} data-theme={dark ? 'dark' : 'light'}>
+  <Container size={size}>
+    <slot />
+  </Container>
+</section>

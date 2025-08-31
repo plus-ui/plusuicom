@@ -1,0 +1,78 @@
+---
+import { Section, SectionHead } from '@components/layout'
+
+import person from '@assets/images/resources/person.png'
+
+const resources = [
+  {
+    id: 1,
+    category: 'Reference',
+    categoryColor: 'bg-purple-600',
+    title: 'Documentation',
+    description: 'A comprehensive guide to the Plus UI library, including usage examples and best practices.',
+    buttonText: 'Explore the Guide',
+    image: person,
+  },
+  {
+    id: 2,
+    category: 'Articles',
+    categoryColor: 'bg-pink-500',
+    title: 'Blog',
+    description: 'A blog about the Plus UI library, including news, updates, and tutorials.',
+    buttonText: 'Get Insight',
+    image: person,
+  },
+  {
+    id: 3,
+    category: 'Help Out',
+    categoryColor: 'bg-blue-600',
+    title: 'Community',
+    description: 'A community of Plus UI users, including discussion forums and support.',
+    buttonText: 'Join Community',
+    image: person,
+  },
+]
+---
+
+<Section>
+  <SectionHead>
+    <Fragment slot="badge"> <plus-chip kind="filled" shape="full">Resources</plus-chip> </Fragment>
+    <Fragment slot="title"> UI Knowledge Hub </Fragment>
+    <Fragment slot="desc"> Explore expert-curated documentation, assets, and UI strategies built for modern product teams. </Fragment>
+  </SectionHead>
+
+  <!-- Resources Grid -->
+  <div class="grid w-full grid-cols-1 gap-9 md:grid-cols-2 xl:grid-cols-3">
+    {
+      resources.map((resource) => (
+        <div class={`bg-color-surface border-color-disabled relative flex flex-col overflow-hidden rounded-lg border`}>
+          <div class="bg-color-disabled-default relative h-64 overflow-hidden rounded-t-lg">
+            <img src={resource.image.src} alt={resource.title} class="absolute inset-0 h-full w-full object-cover" />
+          </div>
+
+          <div class="flex flex-grow flex-col gap-5 p-4">
+            <div class={`inline-flex max-w-fit items-center justify-center rounded-full px-1.5 py-0.5 ${resource.categoryColor}`}>
+              <span class="text-color-base text-xs font-normal">{resource.category}</span>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <h3 class="text-color-default text-2xl font-semibold">{resource.title}</h3>
+              <p class="text-color-default text-base">{resource.description}</p>
+            </div>
+
+            <div class="mt-auto">
+              <plus-button kind="filled" class="group">
+                <div class="flex items-center justify-center gap-2.5">
+                  {resource.buttonText}
+                  <div class="transition-transform duration-200 group-hover:translate-x-0.5">
+                    <i class="fa-solid fa-arrow-right" />
+                  </div>
+                </div>
+              </plus-button>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Section>

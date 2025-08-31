@@ -18,12 +18,6 @@
     Inter Tight Variable, Inter Tight, ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  /* --breakpoint-sm: calc(40rem + 40px);
-  --breakpoint-md: calc(48rem + 40px); */
-  /* --breakpoint-lg: calc(64rem + 40px); */
-  /* --breakpoint-xl: calc(80rem + 40px);
-  --breakpoint-2xl: calc(96rem + 40px); */
-
   --text-xxxs: 0.5rem; /* 8px */
   --text-xxxs--line-height: calc(1 / 0.5);
   --text-xxs: 0.625rem; /* 10px */
@@ -40,116 +34,92 @@
   }
 }
 
-/* Wrapper utility classes - common styles to reduce code repetition */
-@layer utilities {
-  .wrapper-sm,
-  .wrapper-md,
-  .wrapper-lg,
-  .wrapper-xl,
-  .wrapper-2xl {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-
-  .wrapper-sm {
-    max-width: var(--breakpoint-sm);
-  }
-  .wrapper-md {
-    max-width: var(--breakpoint-md);
-  }
-  .wrapper-lg {
-    max-width: calc(var(--breakpoint-lg) + 40px);
-  }
-  .wrapper-xl {
-    max-width: calc(var(--breakpoint-xl) + 40px);
-  }
-  .wrapper-2xl {
-    max-width: calc(var(--breakpoint-2xl) + 40px);
-  }
-}
-
 /* Aurora Background Animations - Purple/Pink/Blue Theme */
 @layer components {
   .aurora-blob-1 {
     animation:
-      aurora-rotate-1 25s linear infinite,
-      aurora-scale-1 18s ease-in-out infinite alternate;
+      aurora-rotate-1 40s linear infinite,
+      aurora-scale-1 30s ease-in-out infinite alternate;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .aurora-blob-2 {
     animation:
-      aurora-rotate-2 35s linear infinite reverse,
-      aurora-scale-2 22s ease-in-out infinite alternate-reverse;
+      aurora-rotate-2 50s linear infinite reverse,
+      aurora-scale-2 35s ease-in-out infinite alternate-reverse;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .aurora-blob-3 {
     animation:
-      aurora-rotate-3 40s linear infinite,
-      aurora-scale-3 28s ease-in-out infinite alternate;
+      aurora-rotate-3 60s linear infinite,
+      aurora-scale-3 45s ease-in-out infinite alternate;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   @keyframes aurora-rotate-1 {
     from {
-      transform: rotate(0deg) scale(1.3);
+      transform: translateZ(0) rotate(0deg) scale(1.2);
     }
     to {
-      transform: rotate(360deg) scale(1.3);
+      transform: translateZ(0) rotate(360deg) scale(1.2);
     }
   }
 
   @keyframes aurora-rotate-2 {
     from {
-      transform: rotate(0deg) scale(1.1);
+      transform: translateZ(0) rotate(0deg) scale(1.0);
     }
     to {
-      transform: rotate(360deg) scale(1.1);
+      transform: translateZ(0) rotate(360deg) scale(1.0);
     }
   }
 
   @keyframes aurora-rotate-3 {
     from {
-      transform: rotate(0deg) scale(1.4);
+      transform: translateZ(0) rotate(0deg) scale(1.3);
     }
     to {
-      transform: rotate(360deg) scale(1.4);
+      transform: translateZ(0) rotate(360deg) scale(1.3);
     }
   }
 
   @keyframes aurora-scale-1 {
     0% {
-      transform: rotate(0deg) scale(1.3);
+      transform: translateZ(0) rotate(0deg) scale(1.2);
     }
     50% {
-      transform: rotate(180deg) scale(1.6);
+      transform: translateZ(0) rotate(180deg) scale(1.4);
     }
     100% {
-      transform: rotate(360deg) scale(1.3);
+      transform: translateZ(0) rotate(360deg) scale(1.2);
     }
   }
 
   @keyframes aurora-scale-2 {
     0% {
-      transform: rotate(0deg) scale(1.1);
+      transform: translateZ(0) rotate(0deg) scale(1.0);
     }
     50% {
-      transform: rotate(-180deg) scale(1.4);
+      transform: translateZ(0) rotate(-180deg) scale(1.2);
     }
     100% {
-      transform: rotate(-360deg) scale(1.1);
+      transform: translateZ(0) rotate(-360deg) scale(1.0);
     }
   }
 
   @keyframes aurora-scale-3 {
     0% {
-      transform: rotate(0deg) scale(1.4);
+      transform: translateZ(0) rotate(0deg) scale(1.3);
     }
     50% {
-      transform: rotate(180deg) scale(1.7);
+      transform: translateZ(0) rotate(180deg) scale(1.5);
     }
     100% {
-      transform: rotate(360deg) scale(1.4);
+      transform: translateZ(0) rotate(360deg) scale(1.3);
     }
   }
 }

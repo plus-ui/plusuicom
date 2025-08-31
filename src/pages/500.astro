@@ -1,65 +1,25 @@
 ---
 import Layout from '@layouts/Layout.astro'
-import Container from '@components/common/container.astro'
-
-interface Props {
-  error?: unknown
-}
-
-const { error } = Astro.props
-
-// Safe error message
-const getErrorMessage = (error: unknown): string => {
-  if (error instanceof Error) {
-    if (import.meta.env.PROD) {
-      return 'A server error occurred.'
-    }
-    return error.message || 'Unknown server error'
-  }
-  return 'An unexpected server error occurred.'
-}
-
-const errorMessage = getErrorMessage(error)
-const isDev = import.meta.env.DEV
+import { Container } from '@components/layout'
 ---
 
-<Layout 
-  title="Server Error - 500"
-  theme="light"
-  headerTheme="light"
->
-  <main class="min-h-screen flex items-center">
-    <Container>
-      <div class="mx-auto max-w-md text-center">
-        <h1 class="mb-4 text-8xl font-bold text-gray-300">500</h1>
-        <h2 class="mb-4 text-2xl font-semibold text-color-default">Server Error</h2>
-        <p class="mb-8 text-color-muted">Something went wrong on our end. Please try again later.</p>
-        
-        {isDev && error && (
-          <div class="mb-8 p-4 bg-red-50 border border-red-200 rounded-lg text-left">
-            <h3 class="font-semibold text-red-800 mb-2">Development Error:</h3>
-            <code class="text-sm text-red-700 whitespace-pre-wrap break-all">
-              {errorMessage}
-            </code>
-          </div>
-        )}
-        
-        <div class="flex gap-4 justify-center">
-          <a 
-            href="/" 
-            class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Go Home
+<Layout title="500 Internal Server Error">
+  <Container>
+    <div class="flex min-h-[calc(100vh-20rem)] items-center justify-center">
+      <div class="mt-16 text-center">
+        <h1 class="bg-gradient-to-b from-indigo-600 to-indigo-300 bg-clip-text text-6xl font-bold text-transparent lg:text-9xl lg:tracking-tight">500</h1>
+        <p class="mt-4 text-lg font-medium text-slate-700 lg:text-2xl">Something went wrong on our server.</p>
+        <div class="mt-10">
+          <a href="/">
+            <plus-button kind="filled" class="group">
+              <div class="flex items-center justify-center gap-2.5">
+                <div class="text-gray-950 transition-transform duration-200 group-hover:-translate-x-0.5"><i class="fa-solid fa-arrow-left"></i></div>
+                Back to Home
+              </div>
+            </plus-button>
           </a>
-          
-          <button 
-            onclick="window.location.reload()" 
-            class="px-6 py-3 border border-gray-300 text-color-default font-medium rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Retry
-          </button>
         </div>
       </div>
-    </Container>
-  </main>
+    </div>
+  </Container>
 </Layout>

@@ -1,0 +1,26 @@
+---
+import BaseHero from './BaseHero.astro'
+import { Image } from 'astro:assets'
+import heroImage from '@assets/images/heros/ui-library/quick-installation.png'
+import { SITE_URLS } from '@/constants/urls'
+---
+
+<BaseHero
+  title={['A future-ready library works ', 'wherever HTML works']}
+  description="Unlock the power of our UI library with seamless integrations, advanced components, and customizable design patterns. Our comprehensive solution is built to fit your workflow, whether you're working with modern frameworks or traditional HTML."
+  trustText="Trusted by"
+  trustCount="10,000+ developers"
+  primaryButton={{
+    text: 'Get Started',
+    href: `${SITE_URLS.docs.base}/ui-library/overview/`,
+  }}
+  secondaryButton={{
+    text: 'View on Github',
+    href: SITE_URLS.github,
+    icon: 'logos:github-icon',
+  }}
+  heroImage={heroImage}
+  showAurora={true}
+>
+  <Image src={heroImage} alt="UI Library Hero" class="w-full rounded-lg shadow-2xl" />
+</BaseHero>

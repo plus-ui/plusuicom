@@ -1,9 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions'
 import { SEO } from 'astro-seo'
-import Footer from '@components/layout/footer.astro'
-import Navbar from '@components/layout/navbar/navbar.astro'
-import PerformanceMonitor from '@components/common/PerformanceMonitor.astro'
+
+import { Navbar, Footer } from '@components/layout'
 
 import '@fontsource-variable/inter/index.css'
 import '@fontsource-variable/inter-tight/index.css'
@@ -28,17 +27,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
 const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
 
-const { 
-  title, 
+const {
+  title,
   description = 'Plus UI Library - UI Library with high-quality components for Astro, React, Vue and more. Build beautiful interfaces faster.',
   keywords = 'UI library, component library, Astro, React, Vue, design system, UI components, web development',
   image,
-  footerMargin = true, 
-  theme = 'light', 
-  headerTheme = 'light', 
-  noNavbar = false, 
-  noFooter = false, 
-  headerBorder = false 
+  footerMargin = true,
+  theme = 'light',
+  headerTheme = 'light',
+  noNavbar = false,
+  noFooter = false,
+  headerBorder = false,
 } = Astro.props
 
 const makeTitle = title ? `${title} | Plus UI Library` : 'Plus UI Library - High-Quality UI Components'
@@ -52,18 +51,18 @@ const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedIm
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Plus UI Team" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#1e40af" />
-    
+
     <!-- Sitemap and Additional Links -->
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
@@ -120,17 +119,17 @@ const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedIm
         content-visibility: auto;
         loading: lazy;
       }
-      
+
       /* Reduce layout shift */
       * {
         box-sizing: border-box;
       }
-      
+
       /* Smooth scrolling */
       html {
         scroll-behavior: smooth;
       }
-      
+
       /* Optimize font loading */
       @font-face {
         font-display: swap;
@@ -149,6 +148,6 @@ const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedIm
     </script>
 
     <!-- Performance Monitoring (Development Only) -->
-    <PerformanceMonitor />
+    <!-- <PerformanceMonitor /> -->
   </body>
 </html>

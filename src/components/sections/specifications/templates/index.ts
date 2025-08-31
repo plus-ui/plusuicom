@@ -1,0 +1,1 @@
+export { default as HomeSpecifications } from "./HomeSpecifications.astro";

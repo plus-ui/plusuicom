@@ -1,0 +1,52 @@
+---
+import { Section, SectionHead } from '@components/layout'
+import { ShowcaseTabs } from '../components'
+
+// import foundationImg from '@assets/images/showcase/foundation.png'
+// import componentsImg from '@assets/images/showcase/components.png'
+// import blocksImg from '@assets/images/showcase/blocks.png'
+
+// const tabs = [
+//   {
+//     id: 'foundations',
+//     label: 'Foundations',
+//     count: 200,
+//     description: 'Centralized style variables for seamless design-to-code sync.',
+//     image: foundationImg,
+//   },
+//   {
+//     id: 'components',
+//     label: 'Components',
+//     count: 50,
+//     description: 'A scalable library of ready-to-use, customizable components.',
+//     image: componentsImg,
+//   },
+//   {
+//     id: 'blocks',
+//     label: 'Blocks',
+//     count: 1000,
+//     description: 'Pre-assembled interface sections -ready to drop in and scale.',
+//     image: blocksImg,
+//   },
+//   {
+//     id: 'templates',
+//     label: 'Templates',
+//     count: 10,
+//     description: 'Ready-to-ship design and development products.',
+//     image: componentsImg,
+//   },
+// ]
+---
+
+<Section class="pb-0 lg:pb-0">
+  <SectionHead>
+    <Fragment slot="badge"> <plus-chip kind="filled" shape="full">Showcase</plus-chip> </Fragment>
+    <Fragment slot="title">
+      Build Smarter<br />
+      with Modular UI Foundations
+    </Fragment>
+    <Fragment slot="desc"> Modular components, tokens, templates, and real-time monitoring </Fragment>
+  </SectionHead>
+
+  <ShowcaseTabs client:load />
+</Section>

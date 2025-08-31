@@ -1,0 +1,43 @@
+---
+import { Dropdown as NavDropdown, DropdownItems } from 'astro-navbar'
+import ProductsView from './products/ProductsView.astro'
+import DiscoverView from './discover/DiscoverView.astro'
+
+const { title, type, children } = Astro.props
+---
+
+<li class="relative isolate z-50">
+  <NavDropdown class="group">
+    <button
+      class="font-sans-tight text-color-default hover:bg-color-default-hovered group-open:bg-color-default-hovered focus-visible:shadow-outline-indigo flex w-full cursor-pointer items-center gap-1.5 rounded px-3 py-1.5 text-base font-medium tracking-[0.01em] transition focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:outline-none lg:w-auto"
+    >
+      <span>{title}</span>
+      <i class="fa-solid fa-chevron-down text-sm transition-transform duration-200 group-open:rotate-180"></i>
+    </button>
+    <DropdownItems>
+      <div
+        class="lg:bg-color-surface border-t-color-disabled border-b-color-disabled z-50 hidden w-full border-l lg:fixed lg:top-full lg:left-1/2 lg:block lg:-translate-x-1/2 lg:transform lg:border-t lg:border-b lg:border-l-0 lg:p-6"
+        transition:persist
+      >
+        <div class="mx-auto flex flex-col px-3" style="width: min(calc(80rem + 40px), 90vw);">
+          {type === 'products' && <ProductsView items={children} />}
+          {type === 'discover' && <DiscoverView items={children} />}
+        </div>
+      </div>
+      <div class="border-color-disabled border-l lg:hidden">
+        <div class="flex flex-col px-3">
+          {
+            children.map((item) => (
+              <a
+                href={item.path}
+                class="focus-visible:shadow-outline-indigo rounded py-1 text-sm text-gray-600 hover:text-indigo-600 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                {item.title}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </DropdownItems>
+  </NavDropdown>
+</li>

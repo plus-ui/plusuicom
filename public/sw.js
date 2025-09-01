@@ -7,10 +7,7 @@ const DYNAMIC_CACHE = 'plusui-dynamic-v1';
 const STATIC_ASSETS = [
   '/',
   '/favicon.svg',
-  '/opengraph.jpg',
-  '/_astro/fa-solid-900.woff2',
-  '/_astro/inter-latin-wght-normal.woff2',
-  '/_astro/inter-tight-latin-wght-normal.woff2'
+  '/opengraph.jpg'
 ];
 
 // Install event - cache static assets
@@ -18,7 +15,15 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then((cache) => {
-        return cache.addAll(STATIC_ASSETS);
+        // Cache each asset individually to handle failures gracefully
+        return Promise.allSettled(
+          STATIC_ASSETS.map(asset => 
+            cache.add(asset).catch(err => {
+              console.warn(`Failed to cache ${asset}:`, err);
+              return null;
+            })
+          )
+        );
       })
       .then(() => {
         return self.skipWaiting();

@@ -173,39 +173,6 @@ const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedIm
         font-display: swap;
       }
       
-      /* Critical layout styles */
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-      
-      /* Prevent layout shift */
-      .hero-section {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-      }
-      
-      /* Mobile optimizations */
-      /* @media (max-width: 640px) {
-        .hero-section {
-          min-height: auto;
-          padding-top: 2rem;
-          padding-bottom: 2rem;
-        } */
-        
-        /* Ensure proper spacing on mobile */
-        /* .flex-col {
-          gap: 1rem;
-        } */
-        
-        /* Better button spacing on mobile */
-        /* .flex-col > * {
-          width: 100%;
-        } */
-      /* } */
     </style>
 
     <ClientRouter />

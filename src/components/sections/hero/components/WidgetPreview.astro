@@ -29,28 +29,76 @@ import { Image } from 'astro:assets'
   <div class="pointer-events-none opacity-0">
     <div class="mb-4 flex w-full flex-row gap-4">
       <div class="flex-1">
-        <Image src={widgetd1x1} alt="" class="h-auto w-full object-contain" loading="lazy" />
+        <Image 
+          src={widgetd1x1} 
+          alt="" 
+          class="h-auto w-full object-contain" 
+          loading="lazy" 
+          decoding="async"
+          fetchpriority="low"
+        />
       </div>
       <div class="flex-1">
-        <Image src={widgetd1x2} alt="" class="h-auto w-full object-contain" loading="lazy" />
+        <Image 
+          src={widgetd1x2} 
+          alt="" 
+          class="h-auto w-full object-contain" 
+          loading="lazy" 
+          decoding="async"
+          fetchpriority="low"
+        />
       </div>
     </div>
     <div class="w-full">
-      <Image src={widgetd1x3} alt="" class="h-auto w-full object-contain" loading="lazy" />
+      <Image 
+        src={widgetd1x3} 
+        alt="" 
+        class="h-auto w-full object-contain" 
+        loading="lazy" 
+        decoding="async"
+        fetchpriority="low"
+      />
     </div>
   </div>
   {/* Animated Widgets */}
   <div class="absolute inset-0 flex flex-col">
     <div class="mb-4 flex w-full flex-row gap-4">
       <div class="flex-1">
-        <Image src={widgetd1x1} alt="" class="h-auto w-full object-contain" loading="lazy" />
+        <Image 
+          src={widgetd1x1} 
+          alt="" 
+          class="h-auto w-full object-contain" 
+          loading="eager" 
+          decoding="async"
+          fetchpriority="high"
+          width={608}
+          height={376}
+        />
       </div>
       <div class="flex-1">
-        <Image src={widgetd1x2} alt="" class="h-auto w-full object-contain" loading="lazy" />
+        <Image 
+          src={widgetd1x2} 
+          alt="" 
+          class="h-auto w-full object-contain" 
+          loading="eager" 
+          decoding="async"
+          fetchpriority="high"
+          width={608}
+          height={376}
+        />
       </div>
     </div>
     <div class="w-full">
-      <Image src={widgetd1x3} alt="" class="h-auto w-full object-contain" loading="lazy" />
+      <Image 
+        src={widgetd1x3} 
+        alt="" 
+        class="h-auto w-full object-contain" 
+        loading="eager" 
+        decoding="async"
+        fetchpriority="high"
+        width={1216}
+        height={376}
+      />
     </div>
   </div>
 </div>

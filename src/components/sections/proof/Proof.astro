@@ -18,6 +18,6 @@ const logos = [amazon, asana, atlassian, canva, databricks, atlassian, asana, gi
 
     <div class="pointer-events-none absolute top-0 right-0 z-10 h-full w-16 bg-gradient-to-l from-[var(--background-color-color-surface)] to-transparent"></div>
 
-    {logos.map((logo) => <Image src={logo} alt="Company Logo" class="h-5 w-auto object-contain sm:h-9" />)}
+    {logos.map((logo) => <Image src={logo} alt="Company Logo" class="h-5 w-auto object-contain sm:h-9" loading="lazy" decoding="async" fetchpriority="low" />)}
   </div>
 </Section>

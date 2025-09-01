@@ -16,6 +16,6 @@ const templates = [template1Img, template2Img, template3Img, template4Img]
 
     <div class="pointer-events-none absolute top-0 right-0 z-10 h-full w-16 bg-gradient-to-l from-[var(--background-color-color-surface)] to-transparent"></div>
 
-    {templates.map((template) => <Image src={template} alt="Template" class="h-[200px] w-auto object-contain sm:h-[300px]" />)}
+    {templates.map((template) => <Image src={template} alt="Template" class="h-[200px] w-auto object-contain sm:h-[300px]" loading="lazy" decoding="async" fetchpriority="low" />)}
   </div>
 </Section>

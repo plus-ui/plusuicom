@@ -13,6 +13,16 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [mdx(), sitemap(), icon(), react()],
   
+  // Image optimization
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+      }
+    }
+  },
+  
   // Type-safe environment variables schema
   env: {
     schema: {
@@ -45,5 +55,18 @@ export default defineConfig({
     ssr: {
       noExternal: ["@plusui/library/cdn/components/index.js"],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            icons: ['@fortawesome/fontawesome-free']
+          }
+        }
+      }
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom']
+    }
   },
 });

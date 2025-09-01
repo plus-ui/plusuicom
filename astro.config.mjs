@@ -61,14 +61,6 @@ export default defineConfig({
           manualChunks: {
             vendor: ['react', 'react-dom'],
             icons: ['@fortawesome/fontawesome-free']
-          },
-          assetFileNames: (assetInfo) => {
-            // Font dosyaları için hash kullanma
-            if (assetInfo.name && (assetInfo.name.endsWith('.woff2') || assetInfo.name.endsWith('.woff') || assetInfo.name.endsWith('.ttf'))) {
-              return 'fonts/[name][extname]';
-            }
-            // Diğer asset'ler için hash kullan
-            return 'assets/[name]-[hash][extname]';
           }
         }
       }

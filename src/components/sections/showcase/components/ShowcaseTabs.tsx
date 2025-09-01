@@ -120,7 +120,7 @@ export default function ShowcaseTabs() {
       </div>
 
       {/* Content Area */}
-      <div className="bg-color-surface/50 relative flex min-h-[600px] flex-1 items-start justify-center overflow-hidden rounded-t">
+      <div className="bg-color-surface/50 relative flex md:min-h-[600px] flex-1 items-start justify-center overflow-hidden rounded-t">
         <div className="absolute inset-0 z-0">
           <div
             className="aurora-blob-1 absolute inset-0 opacity-30"
@@ -152,7 +152,7 @@ export default function ShowcaseTabs() {
             }}
           ></div>
         </div>
-        <div className="relative z-10 flex h-full w-full flex-1 items-start justify-center px-20 pt-20">
+        <div className="relative z-10 flex h-full w-full flex-1 items-start justify-center px-4 pt-4 pb-4 lg:px-20 lg:pt-20 lg:pb-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -163,7 +163,7 @@ export default function ShowcaseTabs() {
                 duration: 0.4,
                 ease: "easeOut",
               }}
-              className="relative z-10 flex h-full items-center justify-center p-8"
+              className="relative z-10 flex h-full items-center justify-center lg:p-8"
             >
               <img
                 src={activeTabData.image}

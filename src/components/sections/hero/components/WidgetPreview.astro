@@ -24,14 +24,14 @@ import widgetd1x3 from '@assets/images/heros/home/widget-d-1x3.png'
 import { Image } from 'astro:assets'
 ---
 
-<div class={`relative w-full overflow-hidden `}>
+<div class="relative w-full overflow-hidden">
   {/* Hidden reference layout - determines sizes */}
   <div class="pointer-events-none opacity-0">
-    <div class="mb-4 flex w-full flex-row gap-4">
+    <div class="mb-4 flex w-full flex-col gap-4 sm:flex-row">
       <div class="flex-1">
         <Image 
           src={widgetd1x1} 
-          alt="" 
+          alt="UI Component Widget Preview - Dashboard Card" 
           class="h-auto w-full object-contain" 
           loading="lazy" 
           decoding="async"
@@ -41,7 +41,7 @@ import { Image } from 'astro:assets'
       <div class="flex-1">
         <Image 
           src={widgetd1x2} 
-          alt="" 
+          alt="UI Component Widget Preview - Analytics Chart" 
           class="h-auto w-full object-contain" 
           loading="lazy" 
           decoding="async"
@@ -52,7 +52,7 @@ import { Image } from 'astro:assets'
     <div class="w-full">
       <Image 
         src={widgetd1x3} 
-        alt="" 
+        alt="UI Component Widget Preview - Full Width Dashboard Layout" 
         class="h-auto w-full object-contain" 
         loading="lazy" 
         decoding="async"
@@ -62,11 +62,11 @@ import { Image } from 'astro:assets'
   </div>
   {/* Animated Widgets */}
   <div class="absolute inset-0 flex flex-col">
-    <div class="mb-4 flex w-full flex-row gap-4">
+    <div class="mb-4 flex w-full flex-col gap-4 sm:flex-row">
       <div class="flex-1">
         <Image 
           src={widgetd1x1} 
-          alt="" 
+          alt="UI Component Widget Preview - Dashboard Card" 
           class="h-auto w-full object-contain" 
           loading="eager" 
           decoding="async"
@@ -78,7 +78,7 @@ import { Image } from 'astro:assets'
       <div class="flex-1">
         <Image 
           src={widgetd1x2} 
-          alt="" 
+          alt="UI Component Widget Preview - Analytics Chart" 
           class="h-auto w-full object-contain" 
           loading="eager" 
           decoding="async"
@@ -91,7 +91,7 @@ import { Image } from 'astro:assets'
     <div class="w-full">
       <Image 
         src={widgetd1x3} 
-        alt="" 
+        alt="UI Component Widget Preview - Full Width Dashboard Layout" 
         class="h-auto w-full object-contain" 
         loading="eager" 
         decoding="async"

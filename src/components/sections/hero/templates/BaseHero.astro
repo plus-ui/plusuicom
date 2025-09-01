@@ -56,13 +56,13 @@ const {
   <Container class="flex flex-1 items-start">
     <div
       class:list={[
-        'flex h-full w-full flex-1 gap-12',
+        'flex h-full w-full flex-1 gap-6 lg:gap-12',
         layout === 'centered' ? 'flex-col items-center justify-center text-center' : '',
-        layout === 'two-column' ? 'flex-row items-start lg:gap-16' : '',
+        layout === 'two-column' ? 'flex-col items-start lg:flex-row lg:gap-16' : '',
       ]}
     >
       <!-- Text Content -->
-      <div class:list={['flex flex-col', layout === 'centered' ? 'max-w-3xl items-center' : '', layout === 'two-column' ? 'order-2 flex-1 pt-16 lg:order-1' : '']}>
+      <div class:list={['flex flex-col', layout === 'centered' ? 'max-w-3xl items-center' : '', layout === 'two-column' ? 'order-2 flex-1 pt-8 lg:order-1 lg:pt-16' : '']}>
         <!-- Trust Badge -->
         <div class:list={['mb-6 items-center space-x-3', layout === 'centered' ? 'flex' : 'hidden']}>
           <div class="flex items-center -space-x-2">
@@ -78,26 +78,26 @@ const {
 
         <!-- Title & Description -->
         <div>
-          <h1 class="font-sans-tight mb-4 flex flex-col text-5xl font-bold tracking-tight lg:text-6xl">
+          <h1 class="font-sans-tight mb-4 flex flex-col text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             {title.map((line) => <span>{line}</span>)}
           </h1>
-          <p class="mb-12 text-xl font-normal">{description}</p>
+          <p class="mb-8 text-lg font-normal sm:mb-12 sm:text-xl">{description}</p>
         </div>
 
         <!-- Tech Badges (Conditional) -->
         {
           showTechBadges && (
-            <div class="mb-12 flex flex-row items-center justify-start gap-2 lg:gap-4">
+            <div class="mb-8 flex flex-col items-start justify-start gap-3 sm:mb-12 sm:flex-row sm:gap-4">
               {techBadges.map((badge, index) => (
                 <>
                   <div class="flex flex-row items-center gap-2 lg:gap-3">
                     <Icon name={badge.icon} class="h-5 w-5" />
-                    <p class="text-base">
+                    <p class="text-sm sm:text-base">
                       <span class="font-normal">{badge.label} </span>
                       <span class="font-bold">{badge.value}</span>
                     </p>
                   </div>
-                  {index < techBadges.length - 1 && <div class="bg-color-divider h-4 w-px" />}
+                  {index < techBadges.length - 1 && <div class="bg-color-divider h-4 w-px hidden sm:block" />}
                 </>
               ))}
             </div>
@@ -105,7 +105,7 @@ const {
         }
 
         <!-- Buttons -->
-        <div class="flex gap-3">
+        <div class="flex flex-col gap-3 sm:flex-row">
           <plus-button kind="outlined" href={secondaryButton.href} target="_blank" external={true}>
             {secondaryButton.icon && <Icon name={secondaryButton.icon} class="h-5 w-5" />}
             {secondaryButton.text}

@@ -58,6 +58,12 @@ const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedIm
     <meta name="author" content="Plus UI Team" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#1e40af" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.iconify.design https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.iconify.design; frame-ancestors 'none';" />
 
     <!-- Sitemap and Additional Links -->
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -181,6 +187,25 @@ const resolvedImage = image ? new URL(image, Astro.site).toString() : resolvedIm
         display: flex;
         align-items: center;
       }
+      
+      /* Mobile optimizations */
+      /* @media (max-width: 640px) {
+        .hero-section {
+          min-height: auto;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        } */
+        
+        /* Ensure proper spacing on mobile */
+        /* .flex-col {
+          gap: 1rem;
+        } */
+        
+        /* Better button spacing on mobile */
+        /* .flex-col > * {
+          width: 100%;
+        } */
+      /* } */
     </style>
 
     <ClientRouter />

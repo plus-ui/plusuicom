@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '@layouts/Layout.astro'
+import { Container } from '@components/layout'
+
+// Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const legalEntries = await getCollection('legal')
+  return legalEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+// Get the entry directly from the prop on render
+const { entry } = Astro.props
+const { Content } = await entry.render()
+---
+
+<Layout title={entry.data.title}>
+  <Container>
+    <div class="mt-14">
+      <div class="mt-8 text-center">
+        <a href="/legal" class="text-color-link flex items-center gap-3 text-base">
+          <i class="fa-solid fa-chevron-left text-sm"></i>
+          <span>Legal</span>
+        </a>
+      </div>
+      <h1 class="mt-5 text-4xl font-semibold">
+        {entry.data.title}
+      </h1>
+    </div>
+
+    <div class="prose prose-base mt-20 w-full max-w-max">
+      <Content />
+      <hr />
+      <div class="text-color-caption mt-3 flex flex-wrap items-center gap-2 md:flex-nowrap">
+        Last update:
+        <time datetime={entry.data.updatedDate.toISOString()}>
+          {entry.data.updatedDate.toDateString()}
+        </time>
+      </div>
+    </div>
+  </Container>
+</Layout>

@@ -95,7 +95,7 @@ const ScrollBasedFeatures: React.FC<ScrollBasedFeaturesProps> = ({
                   className={`flex h-9 w-9 flex-shrink-0 items-center justify-center text-3xl transition-colors duration-300 ${
                     activeFeatureIndex === index
                       ? "text-color-primary"
-                      : "text-color-placeholder"
+                      : "text-color-caption"
                   }`}
                   animate={{
                     scale: activeFeatureIndex === index ? 1.05 : 1,
@@ -111,7 +111,7 @@ const ScrollBasedFeatures: React.FC<ScrollBasedFeaturesProps> = ({
                     className={`mb-3 text-2xl font-semibold transition-colors duration-300 lg:text-3xl ${
                       activeFeatureIndex === index
                         ? "text-color-primary"
-                        : "text-color-placeholder"
+                        : "text-color-caption"
                     }`}
                     animate={{
                       opacity: activeFeatureIndex === index ? 1 : 0.7,

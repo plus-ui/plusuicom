@@ -151,9 +151,11 @@ const footerColumns = [
       title: 'Company',
       links: [
         { title: 'About Us', path: '#' },
-        { title: 'MIT Licence', path: '#' },
-        { title: 'Terms & Conditions', path: '#' },
-        { title: 'Privacy Policy', path: '#' },
+        { title: 'Terms & Conditions', path: '/legal/terms-and-conditions' },
+        { title: 'Privacy Policy', path: '/legal/privacy-policy' },
+        { title: 'Cookie Notice', path: '/legal/cookie-notice' },
+        { title: 'Design Kit License', path: '/legal/plus-ui-design-kit-license' },
+        { title: 'Service Level Agreement', path: '/legal/plus-ui-service-level-agreement-for-technical-support' },
       ],
     },
     {
@@ -204,7 +206,7 @@ const footerColumns = [
         </form>
       </div>
       <!-- SEO Text -->
-      <div class="text-color-placeholder mt-16 space-y-4 text-sm">
+      <div class="text-color-caption mt-16 space-y-4 text-sm">
         <p>&copy; Plus UI {new Date().getFullYear()}</p>
         <p>
           Plus UI offers an integrated Design System and UI Library, featuring a versatile suite of components to elevate your development projects. We streamline the web app development process with
@@ -301,7 +303,7 @@ const footerColumns = [
               {column.map((section) => (
                 <div class="footer-accordion">
                   <button class="flex w-full cursor-pointer items-center justify-between py-2 md:cursor-default md:py-0">
-                    <h4 class="font-semibold text-gray-200">{section.title}</h4>
+                    <h4 class="font-semibold text-color-caption">{section.title}</h4>
                     <Icon name="mdi:chevron-down" class="h-5 w-5 transition-transform md:hidden" />
                   </button>
                   <ul class="mt-1 hidden space-y-2 md:mt-4 md:block">
@@ -311,7 +313,7 @@ const footerColumns = [
                           href={link.path}
                           target={link.path.startsWith('http') ? '_blank' : '_self'}
                           rel={link.path.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          class="flex items-center gap-2 text-gray-400 hover:text-white"
+                          class="flex items-center gap-2 text-color-caption hover:text-color-default"
                         >
                           {link.title}
                           {link.new && (
@@ -335,25 +337,25 @@ const footerColumns = [
         }
       </div>
     </div>
-    <div class="flex flex-col items-center justify-between gap-6 border-t border-gray-800 py-8 md:flex-row md:gap-0">
+    <div class="flex flex-col items-center justify-between gap-6 border-t border-color-default py-8 md:flex-row md:gap-0">
       <div class="flex items-center gap-2">
         <img src={logo.src} alt="Plus UI Logo" class="h-6" />
         <span class="text-lg font-bold">Plus UI</span>
       </div>
-      <p class="text-sm text-gray-500">
+      <p class="text-color-caption text-sm">
         Copyright &copy; {new Date().getFullYear()} Plus UI Inc. All rights reserved.
       </p>
       <div class="flex items-center gap-4">
-        <a href="#" class="text-gray-400 hover:text-white">
+        <a href="#" class="text-color-default hover:text-color-primary" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
           <Icon name="mdi:twitter" class="h-5 w-5" />
         </a>
-        <a href="#" class="text-gray-400 hover:text-white">
+        <a href="#" class="text-color-default hover:text-color-primary" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <Icon name="mdi:linkedin" class="h-5 w-5" />
         </a>
-        <a href="#" class="text-gray-400 hover:text-white">
+        <a href="#" class="text-color-default hover:text-color-primary" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <Icon name="mdi:youtube" class="h-5 w-5" />
         </a>
-        <a href="#" class="text-gray-400 hover:text-white">
+        <a href="#" class="text-color-default hover:text-color-primary" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <Icon name="mdi:instagram" class="h-5 w-5" />
         </a>
       </div>

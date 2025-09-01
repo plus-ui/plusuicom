@@ -2,6 +2,10 @@
 import { Container } from '@components/layout'
 import { Icon } from 'astro-icon/components'
 import { AuroraBackground } from '@components/sections/hero/components'
+import { Image } from 'astro:assets'
+import avatar1 from '@assets/images/heros/avatars/photo-1438761681033-6461ffad8d80.jpeg'
+import avatar2 from '@assets/images/heros/avatars/photo-1472099645785-5658abf4ff4e.jpeg'
+import avatar3 from '@assets/images/heros/avatars/photo-1507003211169-0a1dd7228f2d.jpeg'
 
 export interface Props {
   title: string[]
@@ -62,9 +66,9 @@ const {
         <!-- Trust Badge -->
         <div class:list={['mb-6 items-center space-x-3', layout === 'centered' ? 'flex' : 'hidden']}>
           <div class="flex items-center -space-x-2">
-            <img class="border-color-default h-6 w-6 rounded-full border-2" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User" />
-            <img class="border-color-default h-6 w-6 rounded-full border-2" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face" alt="User" />
-            <img class="border-color-default h-6 w-6 rounded-full border-2" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face" alt="User" />
+            <Image class="border-color-default h-6 w-6 rounded-full border-2" src={avatar1} alt="User" loading="lazy" />
+            <Image class="border-color-default h-6 w-6 rounded-full border-2" src={avatar2} alt="User" loading="lazy" />
+            <Image class="border-color-default h-6 w-6 rounded-full border-2" src={avatar3} alt="User" loading="lazy" />
           </div>
           <span>
             {trustText}
@@ -102,18 +106,14 @@ const {
 
         <!-- Buttons -->
         <div class="flex gap-3">
-          <a href={secondaryButton.href} target="_blank">
-            <plus-button kind="outlined">
-              {secondaryButton.icon && <Icon name={secondaryButton.icon} class="h-5 w-5" />}
-              {secondaryButton.text}
-            </plus-button>
-          </a>
-          <a href={primaryButton.href} target="_blank">
-            <plus-button kind="filled" status="primary">
-              {primaryButton.text}
-              {primaryButton.icon && <i class={primaryButton.icon} />}
-            </plus-button>
-          </a>
+          <plus-button kind="outlined" href={secondaryButton.href} target="_blank" external={true}>
+            {secondaryButton.icon && <Icon name={secondaryButton.icon} class="h-5 w-5" />}
+            {secondaryButton.text}
+          </plus-button>
+          <plus-button kind="filled" status="primary" href={primaryButton.href} target="_blank" external={true}>
+            {primaryButton.text}
+            {primaryButton.icon && <i class={primaryButton.icon} />}
+          </plus-button>
         </div>
       </div>
 

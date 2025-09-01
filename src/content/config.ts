@@ -8,6 +8,8 @@ const legalCollection = defineCollection({
     publishDate: z.string().transform((str) => new Date(str)),
     updatedDate: z.string().transform((str) => new Date(str)),
     category: z.string(),
+    author: z.string(),
+    tags: z.array(z.string()),
   }),
 });
 

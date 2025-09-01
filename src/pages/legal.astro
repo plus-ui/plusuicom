@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '@layouts/Layout.astro'
+import { Container, Section } from '@components/layout'
+
+export const prerender = true
+
+// Get all legal entries
+const legalEntries = await getCollection('legal')
+---
+
+<Layout title="Legal Documents" theme="light" headerTheme="dark">
+  <Section dark padding="sm">
+    <Container>
+      <div class="mt-14">
+        <div class="text-center">
+          <h1 class="text-color-default text-4xl font-semibold">
+            Legal Documents
+          </h1>
+          <p class="text-color-caption mt-4 text-lg">
+            Important legal information and policies for Plus UI
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-20">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {legalEntries.map((entry) => (
+            <a 
+              href={`/legal/${entry.slug}`}
+              class="group block rounded-lg border border-color-default bg-color-surface p-6 transition-all hover:border-color-primary hover:shadow-lg"
+            >
+              <div class="mb-4">
+                <h3 class="text-color-default text-xl font-semibold group-hover:text-color-primary transition-colors">
+                  {entry.data.title}
+                </h3>
+                <p class="text-color-caption mt-2 text-sm leading-relaxed">
+                  {entry.data.snippet}
+                </p>
+              </div>
+              
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-color-caption">
+                  {entry.data.category}
+                </span>
+                <time 
+                  datetime={entry.data.updatedDate.toISOString()}
+                  class="text-color-caption"
+                >
+                  {entry.data.updatedDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  })}
+                </time>
+              </div>
+              
+              <div class="mt-4 flex flex-wrap gap-2">
+                {entry.data.tags.map((tag) => (
+                  <span class="rounded-full bg-color-primary/10 px-3 py-1 text-xs text-color-primary">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-20 text-center">
+        <div class="rounded-lg border border-color-border bg-color-surface p-8">
+          <h2 class="text-color-default text-2xl font-semibold mb-4">
+            Questions about our legal documents?
+          </h2>
+          <p class="text-color-caption mb-6">
+            If you have any questions about our terms, privacy policy, or other legal documents, 
+            please don't hesitate to contact us.
+          </p>
+          <a 
+            href="mailto:support@plusui.com"
+            class="inline-flex items-center gap-2 rounded-lg bg-color-primary px-6 py-3 text-white transition-colors hover:bg-color-primary/90"
+          >
+            <i class="fa-solid fa-envelope"></i>
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

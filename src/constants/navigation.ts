@@ -193,7 +193,7 @@ export const data = [
   },
   {
     title: "Docs",
-    path: "/docs",
+    path: "https://new-docs.plusui.com",
     external: true,
   },
   {

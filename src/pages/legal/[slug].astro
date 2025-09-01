@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
-import { Container } from '@components/layout'
+import { Container, Section } from '@components/layout'
+
+export const prerender = true
 
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -17,8 +19,8 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<Layout title={entry.data.title}>
-  <Container>
+<Layout title={entry.data.title} theme="light" headerTheme="dark">
+  <Section dark padding="sm">
     <div class="mt-14">
       <div class="mt-8 text-center">
         <a href="/legal" class="text-color-link flex items-center gap-3 text-base">
@@ -26,20 +28,20 @@ const { Content } = await entry.render()
           <span>Legal</span>
         </a>
       </div>
-      <h1 class="mt-5 text-4xl font-semibold">
+      <h1 class="text-color-default mt-5 text-4xl font-semibold">
         {entry.data.title}
       </h1>
     </div>
 
-    <div class="prose prose-base mt-20 w-full max-w-max">
+    <div class="prose prose-base text-color-default prose-headings:text-color-default mt-20 w-full max-w-max">
       <Content />
       <hr />
-      <div class="text-color-caption mt-3 flex flex-wrap items-center gap-2 md:flex-nowrap">
+      <div class="text-color-default mt-3 flex flex-wrap items-center gap-2 md:flex-nowrap">
         Last update:
         <time datetime={entry.data.updatedDate.toISOString()}>
           {entry.data.updatedDate.toDateString()}
         </time>
       </div>
     </div>
-  </Container>
+  </Section>
 </Layout>

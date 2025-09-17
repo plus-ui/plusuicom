@@ -185,7 +185,7 @@ export const data = [
   },
   {
     title: "UI Elements",
-    path: "https://new-docs.plusui.com/components/overview/",
+    path: "/ui-elements",
     external: true,
   },
   {

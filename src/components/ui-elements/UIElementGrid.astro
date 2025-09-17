@@ -1,0 +1,36 @@
+---
+import UIElementCard from './UIElementCard.astro'
+
+export interface Props {
+  elements: Array<{
+    data: {
+      title: string
+      description: string
+      category: string
+      slug?: string
+      variantCount?: number
+      variableCount?: number
+      modeSupport?: boolean
+      isPremium?: boolean
+    }
+    slug: string
+  }>
+  emptyMessage?: string
+}
+
+const { elements, emptyMessage } = Astro.props
+---
+
+{elements.length > 0 ? (
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {elements.map(element => (
+      <UIElementCard element={element} />
+    ))}
+  </div>
+) : (
+  emptyMessage && (
+    <div class="text-center py-12">
+      <p class="text-color-placeholder">{emptyMessage}</p>
+    </div>
+  )
+)}

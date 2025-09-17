@@ -1,0 +1,57 @@
+---
+export interface Props {
+  element: {
+    data: {
+      title: string
+      description: string
+      category: string
+      slug?: string
+      variantCount?: number
+      variableCount?: number
+      modeSupport?: boolean
+      isPremium?: boolean
+    }
+    slug: string
+  }
+}
+
+const { element } = Astro.props
+const elementSlug = element.data.slug || element.slug.split('/').pop()
+---
+
+<a 
+  href={`/ui-elements/${element.data.category}/${elementSlug}`}
+  class="block p-4 bg-color-surface border border-color-disabled rounded hover:shadow-md transition-shadow"
+>
+  <div class="mb-4">
+    <div class="w-full h-32 bg-color-default-default rounded flex items-center justify-center">
+      <span class="text-color-default text-sm">Preview</span>
+    </div>
+  </div>
+  
+  <h3 class="font-medium text-base mb-2">{element.data.title}</h3>
+  <p class="text-gray-600 text-sm mb-3">{element.data.description}</p>
+  
+  <div class="flex flex-wrap gap-2">
+    {element.data.variantCount && (
+      <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
+        {element.data.variantCount} Variants
+      </span>
+    )}
+    {element.data.variableCount && (
+      <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+        {element.data.variableCount} Variables
+      </span>
+    )}
+    {element.data.modeSupport && (
+      <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">
+        Mode Support
+      </span>
+    )}
+    {element.data.isPremium && (
+      <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">
+        Premium
+      </span>
+    )}
+  </div>
+</a>

@@ -1,0 +1,123 @@
+---
+export interface Props {
+  currentCategory?: string
+  showCounts?: boolean
+  totalCount?: number
+  categoryData?: Array<{ name: string; count: number }>
+}
+
+const {
+  currentCategory = 'all',
+  showCounts = false,
+  totalCount = 0,
+  categoryData = [],
+} = Astro.props
+
+const allCategory = {
+  name: 'all',
+  icon: 'fa-solid fa-book',
+  label: 'All',
+  subcategories: [],
+}
+
+const categories = [
+  {
+    name: 'foundations',
+    icon: 'fa-regular fa-bookmark',
+    label: 'Foundations',
+    subcategories: ['Colors', 'Typography', 'Spacing', 'Grid System'],
+  },
+  {
+    name: 'components',
+    icon: 'fa-regular fa-clock',
+    label: 'Components',
+    subcategories: ['Buttons', 'Forms', 'Navigation', 'Modals', 'Data Display'],
+  },
+  {
+    name: 'blocks',
+    icon: 'fa-regular fa-calendar-days',
+    label: 'Blocks',
+    subcategories: ['Heroes', 'Features', 'Testimonials', 'CTAs'],
+  },
+  {
+    name: 'pages',
+    icon: 'fa-regular fa-square-check',
+    label: 'Pages',
+    subcategories: ['Landing', 'Dashboard', 'Profile', 'Settings'],
+  },
+  {
+    name: 'templates',
+    icon: 'fa-regular fa-clipboard',
+    label: 'Templates',
+    subcategories: ['Business', 'Portfolio', 'E-commerce', 'Blog'],
+  },
+  {
+    name: 'layouts',
+    icon: 'fa-solid fa-table-columns',
+    label: 'Layouts',
+    subcategories: ['Header', 'Footer', 'Sidebar', 'Content Areas'],
+  },
+  {
+    name: 'free',
+    icon: 'fa-regular fa-square-check',
+    label: 'Free',
+    subcategories: [],
+  },
+]
+
+const getCategoryCount = (categoryName: string) => {
+  if (categoryName === 'all') return totalCount
+  return categoryData.find((cat) => cat.name === categoryName)?.count || 0
+}
+---
+
+<nav class="space-y-4" id="category-navigation text-base">
+  <!-- All Category - Special Treatment -->
+  {
+    (() => {
+      const isActive = currentCategory === allCategory.name
+      const count = getCategoryCount(allCategory.name)
+
+      return (
+        <div class="category-item">
+          <a
+            href="/ui-elements"
+            class={`flex items-center gap-2 px-2 py-1.5 font-semibold transition-colors ${isActive ? 'text-color-primary' : 'text-color-default hover:text-color-primary'}`}
+          >
+            <i class={`${allCategory.icon} w-5 text-base`} />
+            <span class="flex-1">
+              {allCategory.label} ( 1000+ )
+            </span>
+          </a>
+        </div>
+      )
+    })()
+  }
+
+  <!-- Regular Categories -->
+  <div class="space-y-2">
+    {
+      categories.map((category) => {
+        const count = getCategoryCount(category.name)
+        const isActive = currentCategory === category.name
+        const href = `/ui-elements/${category.name}`
+
+        return (
+          <div class="category-item">
+            <div class="flex items-center">
+              <a
+                href={href}
+                class={`flex flex-1 items-center gap-2 px-2 py-1.5 transition-colors ${isActive ? 'text-color-primary' : 'text-color-default hover:text-color-primary'}`}
+              >
+                <i
+                  class={`${category.icon} text-color-placeholder w-4 text-sm`}
+                />
+                <span class="flex-1">{category.label}</span>
+              </a>
+            </div>
+          </div>
+        )
+      })
+    }
+  </div>
+</nav>

@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/lit": "^4.3.0",
     "@astrojs/mdx": "^4.3.3",
+    "@astrojs/prism": "^3.3.0",
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.5.0",
     "@astrojs/vercel": "^8.2.6",
@@ -21,7 +22,7 @@
     "@iconify-json/logos": "^1.2.9",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/react": "^6.0.0",
-    "@plusui/library": "^0.1.11",
+    "@plusui/library": "^0.1.13",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.13.0",
@@ -33,6 +34,7 @@
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.1",
     "react-intersection-observer": "^9.16.0",
+    "shiki": "^3.12.2",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

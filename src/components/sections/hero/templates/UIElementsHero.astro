@@ -1,0 +1,46 @@
+---
+import { Container } from '@components/layout'
+import { Icon } from 'astro-icon/components'
+
+import { SITE_URLS } from '@/constants/urls'
+import { Image } from 'astro:assets'
+// bg image
+import heroImage from '@assets/images/heros/ui-elements/cover.png'
+---
+
+<section class="hero-section bg-color-surface text-color-default relative flex bg-cover bg-center pt-10 pb-16 lg:pt-20 lg:pb-30" style={`background-image: url('${heroImage.src}')`} data-theme="dark">
+  <Container class="flex flex-1 items-start">
+    <div class="flex h-full w-full flex-1 flex-col items-center justify-center text-center">
+      <!-- Trust Badge -->
+      <div class="mb-6 flex items-center">
+        <div class="border-color-default flex items-center gap-2 rounded-full border px-3 py-2 text-sm">
+          <plus-chip kind="filled" shape="full" status="success">NEW</plus-chip>
+          <span>Community design showcase</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+      </div>
+
+      <!-- Title & Description -->
+
+      <h1 class="font-sans-tight mb-4 flex flex-col text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+        <span>The most advanced</span>
+        <span>UI Kit & Design System</span>
+      </h1>
+      <p class="mb-12 max-w-3xl text-lg font-normal sm:text-xl">
+        Payments, auth, gating, CRM, email—it's all here. Ditch the cookie cutter platforms and monetize your membership site, SaaS, course or community.
+      </p>
+
+      <!-- Buttons -->
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <plus-button kind="outlined" href={SITE_URLS.figma} target="_blank" external={true}>
+          <Icon name="logos:figma" class="h-5 w-5" />
+          Preview in Figma
+        </plus-button>
+        <plus-button kind="filled" status="primary" href={SITE_URLS.main} target="_blank" external={true}>
+          Purchase Now
+          <i class="fa-solid fa-arrow-right"></i>
+        </plus-button>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,79 @@
+---
+import { loadCodeExample, type CodeExample } from '../utils/codeLoader'
+
+interface Props {
+  category: string
+  componentName: string  
+  variationId: string
+  variationName?: string
+}
+
+const { 
+  category,
+  componentName,
+  variationId,
+  variationName = 'Component'
+} = Astro.props
+
+let codeExample: CodeExample = {}
+
+try {
+  codeExample = await loadCodeExample(category, componentName, variationId)
+} catch (error) {
+  console.warn(`Failed to load code example for ${variationId}:`, error)
+}
+
+const hasCode = Object.keys(codeExample).length > 0
+---
+
+<div class="playground-section">
+  <!-- Title -->
+  <div class="flex gap-1.5 items-center justify-start w-full mb-3">
+    <h2 class="font-medium text-xl text-color-default leading-7">Playground</h2>
+  </div>
+  
+  <!-- Playground Container -->
+  <div class="relative rounded-lg overflow-hidden">
+    <div class="border border-gray-300 rounded-lg overflow-hidden">
+      <!-- Playground Content -->
+      <div class="flex gap-6 items-start justify-center rounded">
+        <div class="grow flex items-start justify-center min-h-px min-w-px rounded">
+          <!-- Canvas -->
+          <div class="grow flex flex-col h-[378px] items-center justify-center min-h-px min-w-px rounded-lg">
+            <!-- Interactive Preview -->
+            <div class="playground-canvas w-full h-full flex items-center justify-center p-16">
+              {hasCode && codeExample.html && (
+                <Fragment set:html={codeExample.html} />
+              )}
+              {!hasCode && (
+                <div class="text-color-caption text-center">No playground available</div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .playground-section {
+    margin-bottom: 6rem;
+  }
+  
+  .playground-canvas {
+    background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
+                linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
+                linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Interactive playground functionality can be added here
+    console.log('Playground loaded')
+  })
+</script>

@@ -1,0 +1,401 @@
+---
+import { loadCodeExample, type CodeExample } from '../utils/codeLoader'
+import { codeToHtml } from 'shiki'
+
+interface Props {
+  category: string
+  componentName: string  
+  variationId: string
+  variationName?: string
+  pricingTier?: 'free' | 'pro' | 'premium'
+}
+
+const { 
+  category,
+  componentName,
+  variationId,
+  variationName = 'Component',
+  pricingTier = 'free'
+} = Astro.props
+
+let codeExample: CodeExample = {}
+
+try {
+  codeExample = await loadCodeExample(category, componentName, variationId)
+} catch (error) {
+  console.warn(`Failed to load code example for ${variationId}:`, error)
+}
+
+// Process code with syntax highlighting for both light and dark themes
+interface FrameworkData {
+  framework: string
+  code: string
+  highlightedCodeLight: string
+  highlightedCodeDark: string
+}
+
+const availableFrameworks: FrameworkData[] = []
+for (const [framework, code] of Object.entries(codeExample)) {
+  if (code && code.trim().length > 0) {
+    try {
+      const languageMap: Record<string, string> = {
+        html: 'html',
+        react: 'jsx',
+        vue: 'vue',
+        astro: 'astro'
+      }
+      
+      const [highlightedCodeLight, highlightedCodeDark] = await Promise.all([
+        codeToHtml(code, {
+          lang: languageMap[framework] || 'html',
+          theme: 'github-light'
+        }),
+        codeToHtml(code, {
+          lang: languageMap[framework] || 'html',
+          theme: 'github-dark'
+        })
+      ])
+      
+      availableFrameworks.push({ 
+        framework, 
+        code, 
+        highlightedCodeLight, 
+        highlightedCodeDark 
+      })
+    } catch (error) {
+      console.warn(`Failed to highlight ${framework} code:`, error)
+      const fallbackCode = `<pre><code>${code}</code></pre>`
+      availableFrameworks.push({ 
+        framework, 
+        code, 
+        highlightedCodeLight: fallbackCode,
+        highlightedCodeDark: fallbackCode
+      })
+    }
+  }
+}
+
+const hasCode = availableFrameworks.length > 0
+const defaultFramework = availableFrameworks[0]?.framework || 'html'
+---
+
+<div class="variant-section">
+  <!-- Variant Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <h3 class="font-semibold text-xl text-color-default">{variationName}</h3>
+      {pricingTier === 'pro' && (
+      
+        <plus-chip status="primary" shape="full" invert size="sm"><span class="font-semibold">PRO</span></plus-chip>
+      )}
+      {pricingTier === 'premium' && (
+        <plus-chip status="danger" shape="full" invert size="sm"><span class="font-semibold">PREMIUM</span></plus-chip>
+      )}
+    </div>
+    
+    <!-- Controls -->
+    <div class="flex items-center gap-4">
+      <!-- Preview/Code/Data API Tabs -->
+      <plus-segmented-picker size="sm" status="default" shape="circle" id="code-preview-segmented-picker">
+        <plus-segmented-picker-item value="preview" checked>
+          Preview
+        </plus-segmented-picker-item>
+        <plus-segmented-picker-item value="code" disabled={pricingTier !== 'free'}  class={pricingTier !== 'free' ? 'pointer-events-none' : ''}>
+          {pricingTier !== 'free' && (
+            <i class="fa-solid fa-lock text-sm text-color-default"></i>
+          )}
+          Code
+        </plus-segmented-picker-item>
+        <plus-segmented-picker-item value="data-api" disabled={pricingTier !== 'free'}  class={pricingTier !== 'free' ? 'pointer-events-none' : ''}>
+          {pricingTier !== 'free' && (
+            <i class="fa-solid fa-lock text-sm text-color-default"></i>
+          )}
+          Data API
+        </plus-segmented-picker-item>
+      </plus-segmented-picker>
+      
+      <!-- Divider -->
+      <!-- <div class="h-4 w-px bg-gray-400"></div> -->
+      
+      <!-- Framework Dropdown -->
+      <!-- <div class="flex items-start justify-start">
+        <div class="framework-dropdown bg-transparent flex gap-2 items-center justify-center min-h-9 min-w-9 p-2 rounded cursor-pointer hover:bg-gray-50">
+          <span class="framework-label font-medium text-sm text-color-default">{defaultFramework.toUpperCase()}</span>
+          <i class="fa-solid fa-angle-down text-base text-color-default"></i>
+        </div>
+      </div> -->
+      
+      <!-- Divider -->
+      <div class="h-4 w-px bg-color-disabled-default"></div>
+      
+      <!-- Action Buttons -->
+      <div class="flex gap-2 items-center justify-start">
+        <!-- Theme Toggle -->
+        <!-- <button class="theme-toggle bg-color-surface border border-color-default flex gap-2 items-center justify-center min-h-9 min-w-9 p-2 rounded hover:bg-color-default-default transition-colors" title="Toggle theme">
+          <i class="fa-solid fa-moon text-sm text-color-default"></i>
+        </button> -->
+        <plus-button kind="outlined" status="default" size="sm" title="Toggle theme" id="theme-toggle-btn" class>
+          <div class="flex items-center justify-center min-h-5 min-w-5">
+            <i class="fa-solid fa-moon text-sm text-color-default"></i>
+          </div>
+        </plus-button>
+        
+        <!-- Fullscreen -->
+        <!-- <button class="fullscreen-btn bg-color-surface border border-color-default flex gap-2 items-center justify-center min-h-9 min-w-9 p-2 rounded hover:bg-color-default-default transition-colors" title="View fullscreen">
+          <i class="fa-solid fa-expand text-sm text-color-default"></i>
+        </button> -->
+        <plus-button kind="outlined" status="default" size="sm" title="View fullscreen" id="fullscreen-btn">
+          <div class="flex items-center justify-center min-h-5 min-w-5">
+            <i class="fa-solid fa-expand text-sm text-color-default"></i>
+          </div>
+        </plus-button>
+        
+        <!-- Bookmark -->
+        <!-- <button class="bg-color-surface border border-color-default flex gap-2 items-center justify-center min-h-9 min-w-9 p-2 rounded hover:bg-color-default-default transition-colors" title="Bookmark">
+          <i class="fa-regular fa-bookmark text-sm text-color-default"></i>
+        </button> -->
+        <plus-button kind="outlined" status="default" size="sm" title="Bookmark" id="bookmark-btn">
+          <div class="flex items-center justify-center min-h-5 min-w-5">
+            <i class="fa-regular fa-bookmark text-sm text-color-default"></i>
+          </div>
+        </plus-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative rounded-2xl overflow-hidden">
+    <div class="border-[3px] border-gray-300 rounded-2xl overflow-hidden">
+      <!-- Preview Tab -->
+      <div class="tab-content preview-content">
+        <div class="flex gap-2 items-center justify-start w-full">
+          <!-- Main Preview -->
+          <div class="flex items-center justify-between rounded-tl-lg rounded-tr-lg w-full">
+            <div class="main-preview bg-color-surface flex gap-12 grow items-center justify-center min-h-px min-w-px overflow-hidden p-16 "  data-theme="light">
+              <!-- Component Preview -->
+              <div class="preview-canvas w-full min-h-[300px] flex items-center justify-center" >
+                {hasCode && codeExample.html && (
+                  <Fragment set:html={codeExample.html} />
+                )}
+                {!hasCode && (
+                  <div class="text-color-caption text-center">No preview available</div>
+                )}
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- Code Tab -->
+      <div class="tab-content code-content hidden">
+        {pricingTier !== 'free' ? (
+          <!-- Premium Blocked State -->
+          <div class="p-16 text-center bg-color-surface">
+            <div class="max-w-md mx-auto">
+              <div class="w-16 h-16 bg-color-warning-default rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg class="w-8 h-8 text-color-default" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-color-default mb-3">
+                {pricingTier === 'pro' ? 'Pro Feature' : 'Premium Feature'}
+              </h3>
+              <p class="text-color-caption mb-8 leading-relaxed">
+                {pricingTier === 'pro' 
+                  ? 'Upgrade to Pro to access the source code for this component and unlock advanced features.'
+                  : 'Upgrade to Premium to access the source code for this component and unlock all advanced features.'
+                }
+              </p>
+              <button class="px-8 py-3 bg-color-primary-default text-white rounded-lg font-medium hover:bg-color-primary-hovered transition-colors">
+                {pricingTier === 'pro' ? 'Upgrade to Pro' : 'Upgrade to Premium'}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <!-- Free Code Content -->
+          <div class="code-display">
+            {availableFrameworks.map((framework) => (
+              <div class="framework-code hidden" data-framework={framework.framework}>
+                <div class="code-container" data-theme="light">
+                  <Fragment set:html={framework.highlightedCodeLight} />
+                </div>
+                <div class="code-container hidden" data-theme="dark">
+                  <Fragment set:html={framework.highlightedCodeDark} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Data API Tab -->
+      <div class="tab-content data-api-content hidden">
+        <div class="p-16 text-center bg-color-surface">
+          <div class="max-w-md mx-auto">
+            <div class="w-16 h-16 bg-color-warning-default rounded-full flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-color-default" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-color-default mb-3">Data API Coming Soon</h3>
+            <p class="text-color-caption mb-8 leading-relaxed">
+              This feature will be available in a future update.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .variant-section {
+    margin-bottom: 6rem;
+  }
+  
+  .tab-content {
+    display: block;
+  }
+  
+  .tab-content.hidden {
+    display: none;
+  }
+  
+  .tab-btn.active {
+    background-color: white;
+  }
+  
+  .framework-code.hidden {
+    display: none;
+  }
+  
+  .code-container.hidden {
+    display: none;
+  }
+  
+  .code-display {
+    background: #f8f9fa;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  
+  .code-display pre {
+    margin: 0;
+    background: transparent !important;
+  }
+  
+  .code-display code {
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Dark theme styles */
+  [data-theme="dark"] .code-container {
+    background: #1a1a1a;
+  }
+  
+  [data-theme="dark"] .preview-canvas {
+    background: #1a1a1a;
+    color: white;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabContents = document.querySelectorAll('.tab-content')
+    const frameworkDropdown = document.querySelector('.framework-dropdown')
+    const frameworkCodes = document.querySelectorAll('.framework-code')
+    const themeToggle = document.querySelector('#theme-toggle-btn')
+    const codeContainers = document.querySelectorAll('.code-container')
+    const codePreviewSegmentedPicker = document.querySelector('#code-preview-segmented-picker')
+    
+    let currentFramework = 'html'
+    let currentTheme = 'light'
+    
+    if (codePreviewSegmentedPicker) {
+      codePreviewSegmentedPicker.addEventListener('plus-segmented-picker-item-changed', event => {
+        const value = (event as CustomEvent).detail.value
+        console.log(value)
+        tabContents.forEach(content => {
+          content.classList.add('hidden')
+        })
+        const targetContent = document.querySelector(`.${value}-content`)
+        if (targetContent) {
+          targetContent.classList.remove('hidden')
+        }
+
+        if (value === 'code') {
+          showFrameworkCode(currentFramework)
+        }
+      })
+    }
+    
+    // Framework switching
+    if (frameworkDropdown) {
+      frameworkDropdown.addEventListener('click', function() {
+        // Simple cycle through available frameworks
+        const frameworks = Array.from(frameworkCodes).map(el => (el as HTMLElement).dataset.framework).filter(Boolean) as string[]
+        const currentIndex = frameworks.indexOf(currentFramework)
+        const nextIndex = (currentIndex + 1) % frameworks.length
+        currentFramework = frameworks[nextIndex]
+        
+        // Update dropdown label
+        const label = this.querySelector('.framework-label')
+        if (label) {
+          label.textContent = currentFramework.toUpperCase()
+        }
+        
+        // Show the selected framework code
+        showFrameworkCode(currentFramework)
+      })
+    }
+    
+    // Theme toggle functionality
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        currentTheme = currentTheme === 'light' ? 'dark' : 'light'
+        
+        // Toggle preview theme
+        const previewCanvas = document.querySelector('.main-preview')
+        if (previewCanvas) {
+          previewCanvas.setAttribute('data-theme', currentTheme)
+        }
+        
+        // Toggle code theme
+        codeContainers.forEach(container => {
+          if ((container as HTMLElement).dataset.theme === currentTheme) {
+            container.classList.remove('hidden')
+          } else {
+            container.classList.add('hidden')
+          }
+        })
+      })
+    }
+    
+    // Fullscreen functionality
+    const fullscreenBtn = document.querySelector('.fullscreen-btn')
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', function() {
+        const previewCanvas = document.querySelector('.preview-canvas')
+        if (previewCanvas?.requestFullscreen) {
+          previewCanvas.requestFullscreen()
+        }
+      })
+    }
+    
+    function showFrameworkCode(framework) {
+      frameworkCodes.forEach(code => {
+        if ((code as HTMLElement).dataset.framework === framework) {
+          code.classList.remove('hidden')
+        } else {
+          code.classList.add('hidden')
+        }
+      })
+    }
+    
+    // Initialize with default framework
+    showFrameworkCode(currentFramework)
+  })
+</script>

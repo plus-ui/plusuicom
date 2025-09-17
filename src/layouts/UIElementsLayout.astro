@@ -1,0 +1,54 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { Container } from '@components/layout'
+import { UIElementsHero } from '@components/sections/hero'
+import CategoryNavigation from '@components/navigation/CategoryNavigation.astro'
+
+export interface Props {
+  title: string
+  currentCategory?: string
+  showHero?: boolean
+  showCounts?: boolean
+  totalCount?: number
+  theme?: 'light' | 'dark'
+  headerTheme?: 'light' | 'dark'
+  categoryData?: Array<{ name: string; count: number }>
+}
+
+const {
+  title,
+  currentCategory = 'all',
+  showHero = false,
+  showCounts = false,
+  totalCount = 0,
+  theme = 'light',
+  headerTheme = 'dark',
+  categoryData = [],
+} = Astro.props
+---
+
+<Layout title={title} theme={theme} headerTheme={headerTheme}>
+  {showHero && <UIElementsHero />}
+  <Container>
+    <div
+      class="flex min-h-[calc(100vh-20rem)] flex-col gap-8 py-16 lg:flex-row lg:gap-12"
+    >
+      <!-- Left Sidebar Filter -->
+      <aside class="w-full flex-shrink-0 lg:w-60">
+        <div class="lg:sticky lg:top-16">
+          <CategoryNavigation
+            currentCategory={currentCategory}
+            showCounts={showCounts}
+            totalCount={totalCount}
+            categoryData={categoryData}
+          />
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="min-w-0 flex-1">
+        <slot />
+      </main>
+    </div>
+  </Container>
+</Layout>

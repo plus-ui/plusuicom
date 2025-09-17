@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content'
+import UIElementsLayout from '@layouts/UIElementsLayout.astro'
+import UIElementGrid from '@components/ui-elements/UIElementGrid.astro'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const categories = [
+    'foundations',
+    'components',
+    'blocks',
+    'pages',
+    'templates',
+    'layouts',
+    'free',
+  ]
+
+  return categories.map((category) => ({
+    params: { category },
+  }))
+}
+
+const { category } = Astro.params
+
+// Get all UI elements for this category
+const allElements = await getCollection('ui-elements', ({ data }) => {
+  return data.category === category
+})
+
+const totalCount = allElements.length
+---
+
+<UIElementsLayout
+  title={`${category?.charAt(0).toUpperCase()}${category?.slice(1)} - UI Elements`}
+  currentCategory={category}
+  showHero={true}
+  showCounts={false}
+  totalCount={1000}
+>
+  <div class="border-color-disabled mb-6 border-b pb-4">
+    <h1 class="text-2xl font-semibold capitalize">
+      {category}
+      <span class="text-color-placeholder font-medium">({totalCount})</span>
+    </h1>
+  </div>
+
+  <!-- <div class="mb-6 flex items-center justify-between">
+    <h2 class="text-color-default text-xl font-medium capitalize">
+      {category}
+      <span class="text-color-placeholder font-normal"> ({totalCount})</span>
+    </h2>
+  </div> -->
+
+  <!-- Grid of Elements -->
+  <UIElementGrid
+    elements={allElements}
+    emptyMessage={`No ${category} elements found.`}
+  />
+</UIElementsLayout>

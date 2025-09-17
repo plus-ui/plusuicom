@@ -11,7 +11,21 @@ export default defineConfig({
   site: "https://plusui.com",
   output: "server", // Server-side rendering için gerekli
   adapter: vercel(),
-  integrations: [mdx(), sitemap(), icon(), react()],
+  integrations: [
+    mdx(), 
+    sitemap(), 
+    icon(), 
+    react()
+  ],
+
+  // Syntax highlighting configuration
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light',
+      langs: ['html', 'css', 'javascript', 'typescript', 'jsx', 'tsx', 'vue', 'astro', 'json'],
+      wrap: true
+    }
+  },
   
   // Image optimization
   image: {

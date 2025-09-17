@@ -1,0 +1,48 @@
+---
+import UIElementGrid from './UIElementGrid.astro'
+
+export interface Props {
+  category: {
+    name: string
+    count: number
+    elements: Array<{
+      data: {
+        title: string
+        description: string
+        category: string
+        slug?: string
+        variantCount?: number
+        variableCount?: number
+        modeSupport?: boolean
+        isPremium?: boolean
+      }
+      slug: string
+    }>
+  }
+  showViewAll?: boolean
+  maxItems?: number
+}
+
+const { category, showViewAll = true, maxItems = 6 } = Astro.props
+const displayElements = category.elements.slice(0, maxItems)
+---
+
+{category.count > 0 && (
+  <section class="mb-4 text-color-default">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl capitalize text-color-default font-medium">
+        {category.name} <span class="text-color-placeholder font-normal"> ({category.count})</span>
+      </h2>
+      {showViewAll && category.count > maxItems && (
+        <a 
+          href={`/ui-elements/${category.name}`}
+          class="text-color-default hover:text-color-primary text-sm font-medium"
+        >
+          View all →
+        </a>
+      )}
+    </div>
+    
+    <UIElementGrid elements={displayElements} />
+  </section>
+)}

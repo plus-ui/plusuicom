@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content'
+import UIElementsLayout from '@layouts/UIElementsLayout.astro'
+import CategorySection from '@components/ui-elements/CategorySection.astro'
+
+export const prerender = true
+
+// Get all UI elements
+const allElements = await getCollection('ui-elements')
+
+// Group by category and count
+const categories = [
+  'foundations',
+  'components',
+  'blocks',
+  'pages',
+  'templates',
+  'layouts',
+  'free',
+]
+const categoryData = categories.map((category) => ({
+  name: category,
+  count: allElements.filter((item) => item.data.category === category).length,
+  elements: allElements
+    .filter((item) => item.data.category === category)
+    .slice(0, 6), // Show first 6
+}))
+
+const totalCount = allElements.length
+
+// Get selected category from URL params
+const url = new URL(Astro.request.url)
+const selectedCategory = url.searchParams.get('category') || 'all'
+
+// Filter elements based on selected category
+const filteredElements =
+  selectedCategory === 'all'
+    ? allElements
+    : allElements.filter((item) => item.data.category === selectedCategory)
+
+const filteredCategoryData =
+  selectedCategory === 'all'
+    ? categoryData
+    : categoryData.filter((cat) => cat.name === selectedCategory)
+---
+
+<UIElementsLayout
+  title="UI Elements"
+  currentCategory={selectedCategory}
+  showHero={true}
+  showCounts={false}
+  totalCount={1000}
+  categoryData={categoryData}
+>
+  <div class="border-color-disabled mb-9 border-b pb-4">
+    <h1 class="text-2xl font-semibold">
+      All <span class="text-color-placeholder font-medium">({totalCount})</span>
+    </h1>
+  </div>
+
+  <!-- Category Sections -->
+  {
+    filteredCategoryData.map((category) => (
+      <CategorySection category={category} showViewAll={true} maxItems={6} />
+    ))
+  }
+</UIElementsLayout>

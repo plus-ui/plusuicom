@@ -1,0 +1,21 @@
+---
+import {Container, SectionHead} from "@components/layout";
+import Layout from "./Layout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title} theme="light" headerTheme="dark">
+  <Container>
+    <SectionHead>
+      <Fragment slot="title">{frontmatter.title}</Fragment>
+      <Fragment slot="desc">
+        Last updated on {frontmatter.date}
+      </Fragment>
+    </SectionHead>
+
+    <div class="mx-auto prose mt-10">
+      <slot />
+    </div>
+  </Container>
+</Layout>

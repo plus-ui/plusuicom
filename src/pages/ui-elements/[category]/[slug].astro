@@ -1,0 +1,366 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '@layouts/Layout.astro'
+import { Container } from '@components/layout'
+import Playground from '@components/Playground.astro'
+import CodePreview from '@components/CodePreview.astro'
+import { Icon } from 'astro-icon/components'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const allElements = await getCollection('ui-elements')
+  
+  return allElements.map(element => ({
+    params: {
+      category: element.data.category,
+      slug: element.data.slug || element.slug.split('/').pop()
+    },
+    props: { element }
+  }))
+}
+
+const { element } = Astro.props
+const { category } = Astro.params
+const { data, render } = element
+const { Content } = await render()
+---
+
+<Layout title={`${data.title} - UI Elements`}>
+  <Container class="py-16 flex flex-col lg:gap-24 gap-16">
+      
+      <!-- Header Section -->
+      <header class="">
+        
+        <!-- Top Navigation Row -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 gap-4 sm:gap-0">
+          <!-- Breadcrumb -->
+          <nav class="flex items-center" aria-label="Breadcrumb">
+            <div class="flex items-center gap-2.5">
+              <a 
+                href="/ui-elements" 
+                class=" font-medium text-lg text-color-placeholder hover:text-color-default transition-colors duration-200"
+              >
+                UI Elements
+              </a>
+              <span class=" font-medium text-sm text-color-placeholder">/</span>
+              <a 
+                href={`/ui-elements/${category}`} 
+                class=" font-medium text-lg text-color-placeholder hover:text-color-default transition-colors duration-200 capitalize"
+              >
+                {category}
+              </a>
+              <span class=" font-medium text-sm text-color-placeholder">/</span>
+              <span class=" font-medium text-lg text-color-default">
+                {data.title}
+              </span>
+            </div>
+          </nav>
+          
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-3">
+            {data.figmaUrl && ( 
+              <plus-button size="sm" kind="outlined" href={data.figmaUrl} target="_blank" external={true}>
+                <Icon name="logos:figma" class="w-3.5 h-3.5 flex-shrink-0" />
+                <span>Preview in Figma</span>
+              </plus-button>
+            )}
+
+            {data.docsUrl && (
+              <plus-button size="sm" kind="outlined" href={data.docsUrl} target="_blank" external={true}>
+                <span>Go to docs</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </plus-button>
+            )}
+          </div>
+        </div>
+
+        <!-- Title & Description Section -->
+        <div class="pt-10">
+          <!-- Title -->
+            <h1 class="mb-3 font-semibold text-3xl text-color-default leading-9">
+              {data.title}
+            </h1>
+
+          <!-- Description -->
+            <p class="mb-7 font-normal text-lg text-color-default leading-7">
+              {data.description}
+            </p>
+          
+          <!-- Chips/Tags -->
+          <div class="flex flex-wrap items-start gap-4">
+            {data.variantCount && (
+              <plus-chip kind="filled" shape="full" status="default" invert>
+                <i class="fa-solid fa-check"></i>
+                <span>{data.variantCount} Variant</span>
+              </plus-chip>
+            )}
+            
+            {data.variableCount && (
+              <plus-chip kind="filled" shape="full" status="default" invert>
+                <i class="fa-solid fa-check"></i>
+                <span>{data.variableCount} Variables</span>
+              </plus-chip>
+            )}
+            
+            {data.modeSupport && (
+              <plus-chip kind="filled" shape="full" status="default" invert>
+                <i class="fa-solid fa-check"></i>
+                <span>Mode Support</span>
+              </plus-chip>
+            )}
+          </div>
+        </div>
+        
+      </header>
+
+      <!-- Playground Section -->
+      {(data.displayMode === 'playground' || data.displayMode === 'both') && data.hasPlayground && (
+        <Playground 
+          category={data.category}
+          componentName={data.slug || element.slug.split('/').pop() || 'unknown'}
+          variationId="default"
+          variationName={data.title}
+        />
+      )}
+
+      <!-- Variants Section -->
+      {data.variations && data.variations.length > 0 && (
+        <div class="space-y-24">
+          {data.variations.map((variation, index) => (
+            <div>
+              {variation.displayMode === 'codepreview' ? (
+                <CodePreview 
+                  category={data.category}
+                  componentName={data.slug || element.slug.split('/').pop() || 'unknown'}
+                  variationId={variation.id}
+                  variationName={variation.name}
+                  pricingTier={variation.pricingTier}
+                />
+              ) : (
+                <Playground 
+                  category={data.category}
+                  componentName={data.slug || element.slug.split('/').pop() || 'unknown'}
+                  variationId={variation.id}
+                  variationName={variation.name}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- Legacy Variants Section (for backward compatibility) -->
+      {data.variations && data.variations.length > 0 && data.variations.some(v => !v.displayMode) && (
+        <div class="space-y-16">
+          {data.variations.filter(v => !v.displayMode).map((variation, index) => (
+            <div class="space-y-6">
+              <!-- Variant Header -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <h3 class="text-xl font-semibold text-color-default">{variation.name}</h3>
+                  {variation.pricingTier === 'pro' && (
+                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">
+                      PRO
+                    </span>
+                  )}
+                  {variation.pricingTier === 'premium' && (
+                    <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold">
+                      PREMIUM
+                    </span>
+                  )}
+                </div>
+
+                <!-- Controls -->
+                <div class="flex items-center gap-3">
+                  <!-- Preview/Code Toggle -->
+                  <div class="inline-flex bg-color-default-default rounded-lg p-1">
+                    <button 
+                      class="variant-tab-btn active px-4 py-2 text-sm font-medium rounded-md transition-colors bg-color-surface text-color-default"
+                      data-variant={index}
+                      data-tab="preview"
+                    >
+                      Preview
+                    </button>
+                    <button 
+                      class={`variant-tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                        variation.pricingTier !== 'free' 
+                          ? 'text-color-caption cursor-not-allowed' 
+                          : 'text-color-caption hover:text-color-default hover:bg-color-surface'
+                      }`}
+                      data-variant={index}
+                      data-tab="code"
+                      disabled={variation.pricingTier !== 'free'}
+                    >
+                      {variation.pricingTier !== 'free' && (
+                        <svg class="w-3.5 h-3.5 mr-1.5 inline" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                        </svg>
+                      )}
+                      Code
+                    </button>
+                  </div>
+
+                  <div class="w-px h-4 bg-color-default"></div>
+
+                  <!-- Theme Toggle -->
+                  <button class="variant-theme-toggle p-2 hover:bg-color-default-default rounded-lg transition-colors" data-variant={index} title="Toggle theme">
+                    <svg class="w-4 h-4 text-color-default" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                  </button>
+
+                  <!-- Bookmark -->
+                  <button class="p-2 hover:bg-color-default-default rounded-lg transition-colors" title="Bookmark">
+                    <svg class="w-4 h-4 text-color-default" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                    </svg>
+                  </button>
+                  
+                  <!-- Fullscreen -->
+                  <button class="variant-fullscreen-btn p-2 hover:bg-color-default-default rounded-lg transition-colors" data-variant={index} title="View fullscreen">
+                    <svg class="w-4 h-4 text-color-default" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Variant Content -->
+              <div class="border-2 border-color-default rounded-2xl overflow-hidden">
+                <!-- Preview Tab -->
+                <div class={`variant-content variant-preview-${index}`}>
+                  <div class="bg-color-surface p-12 min-h-[400px] flex items-center justify-center" data-theme="light" data-variant={index}>
+                    <div class="w-full">
+                      <CodePreview 
+                        category={data.category}
+                        componentName={data.slug || element.slug.split('/').pop() || 'unknown'}
+                        variationId={variation.id}
+                        variationName={variation.name}
+                        pricingTier={variation.pricingTier || 'free'}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Code Tab -->
+                <div class={`variant-content variant-code-${index} hidden`}>
+                  {variation.pricingTier !== 'free' ? (
+                    <!-- Premium Blocked State -->
+                    <div class="p-16 text-center bg-color-surface">
+                      <div class="max-w-md mx-auto">
+                        <div class="w-16 h-16 bg-color-warning-default rounded-full flex items-center justify-center mb-6 mx-auto">
+                          <svg class="w-8 h-8 text-color-default" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                          </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-color-default mb-3">
+                          {variation.pricingTier === 'pro' ? 'Pro Feature' : 'Premium Feature'}
+                        </h3>
+                        <p class="text-color-caption mb-8 leading-relaxed">
+                          {variation.pricingTier === 'pro' 
+                            ? 'Upgrade to Pro to access the source code for this component and unlock advanced features.'
+                            : 'Upgrade to Premium to access the source code for this component and unlock all advanced features.'
+                          }
+                        </p>
+                        <button class="px-8 py-3 bg-color-primary-default text-white rounded-lg font-medium hover:bg-color-primary-hovered transition-colors">
+                          {variation.pricingTier === 'pro' ? 'Upgrade to Pro' : 'Upgrade to Premium'}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <!-- Free Code Content -->
+                    <CodePreview 
+                      category={data.category}
+                      componentName={data.slug || element.slug.split('/').pop() || 'unknown'}
+                      variationId={variation.id}
+                      variationName={variation.name}
+                      pricingTier="free"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- Content Documentation -->
+      <div class="mt-24 prose prose-lg max-w-none">
+        <Content />
+      </div>
+  </Container>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Variant tab switching
+    const tabButtons = document.querySelectorAll('.variant-tab-btn')
+    
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (this.disabled) return
+        
+        const variantIndex = this.dataset.variant
+        const targetTab = this.dataset.tab
+        
+        // Update tab buttons for this variant
+        document.querySelectorAll(`[data-variant="${variantIndex}"].variant-tab-btn`).forEach(button => {
+          button.classList.remove('active', 'bg-color-surface', 'text-color-default')
+          button.classList.add('text-color-caption', 'hover:text-color-default', 'hover:bg-color-surface')
+        })
+        this.classList.add('active', 'bg-color-surface', 'text-color-default')
+        this.classList.remove('text-color-caption', 'hover:text-color-default', 'hover:bg-color-surface')
+        
+        // Update content visibility for this variant
+        document.querySelectorAll(`.variant-preview-${variantIndex}, .variant-code-${variantIndex}`).forEach(content => {
+          content.classList.add('hidden')
+        })
+        
+        const targetContent = document.querySelector(`.variant-${targetTab}-${variantIndex}`)
+        if (targetContent) {
+          targetContent.classList.remove('hidden')
+        }
+      })
+    })
+    
+    // Theme toggle for variants
+    const themeToggleButtons = document.querySelectorAll('.variant-theme-toggle')
+    
+    themeToggleButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const variantIndex = this.dataset.variant
+        const previewArea = document.querySelector(`[data-variant="${variantIndex}"][data-theme]`)
+        
+        if (previewArea) {
+          const currentTheme = previewArea.getAttribute('data-theme')
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+          previewArea.setAttribute('data-theme', newTheme)
+          
+          if (newTheme === 'dark') {
+            previewArea.classList.remove('bg-color-surface')
+            previewArea.classList.add('bg-gray-900')
+          } else {
+            previewArea.classList.remove('bg-gray-900')
+            previewArea.classList.add('bg-color-surface')
+          }
+        }
+      })
+    })
+    
+    // Fullscreen toggle
+    const fullscreenButtons = document.querySelectorAll('.variant-fullscreen-btn')
+    
+    fullscreenButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const variantIndex = this.dataset.variant
+        const previewContent = document.querySelector(`.variant-preview-${variantIndex}`)
+        
+        if (previewContent?.requestFullscreen) {
+          previewContent.requestFullscreen()
+        }
+      })
+    })
+  })
+</script>
+</Layout>

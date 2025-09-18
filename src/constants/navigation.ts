@@ -190,7 +190,7 @@ export const data = [
   },
   {
     title: "Playground",
-    path: "#",
+    path: "/playground",
     external: true,
   },
   {

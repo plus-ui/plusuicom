@@ -10,7 +10,7 @@ modeSupport: true
 pricingTier: "free"
 displayMode: "codepreview"
 hasPlayground: false
-figmaUrl: "https://www.figma.com/design/ShZ3wQGgTDbKft8dG4oqqe/System-16"
+figmaUrl: "https://www.figma.com/@plusui"
 docsUrl: "/docs/blocks/hero"
 variations:
   - id: "hero-centered"

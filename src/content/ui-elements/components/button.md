@@ -10,7 +10,7 @@ modeSupport: true
 pricingTier: "free"
 displayMode: "playground"
 hasPlayground: true
-figmaUrl: "https://www.figma.com/design/ShZ3wQGgTDbKft8dG4oqqe/System-16"
+figmaUrl: "https://www.figma.com/@plusui"
 docsUrl: "/docs/components/button"
 ---
 

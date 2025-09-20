@@ -4,7 +4,7 @@ dist/
 .astro/
 
 # dependencies
-node_modules/
+/node_modules/
 
 # logs
 npm-debug.log*
@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # vscode
 .vscode/
+.vercel/

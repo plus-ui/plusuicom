@@ -20,9 +20,11 @@ This is an Astro-based UI component library website built with server-side rende
 - **Styling**: Tailwind CSS 4.x with Vite plugin
 - **Interactive Components**: React 19.x for client-side interactivity
 - **Content Management**: Astro Content Collections with Zod schemas
-- **Icons**: Astro Icon with Iconify integration
+- **Icons**: Astro Icon with Iconify integration, FontAwesome icons
 - **Animations**: Framer Motion for React components
+- **Core Library**: `@plusui/library` as the component system foundation
 - **Deployment**: Vercel serverless adapter
+- **Code Formatting**: Prettier with Astro and Tailwind plugins
 
 ### Content Collections
 The site uses three main content collections defined in `src/content/config.ts`:
@@ -30,7 +32,14 @@ The site uses three main content collections defined in `src/content/config.ts`:
 - `legal` - Legal documents and pages  
 - `ui-elements` - UI components with variations, code examples, and metadata
 
-The `ui-elements` collection supports multiple categories: foundations, components, blocks, pages, templates, layouts, free.
+The `ui-elements` collection supports multiple categories: foundations, components, blocks, pages, templates, layouts.
+
+**UI Elements Features**:
+- Pricing tiers: free, pro, premium
+- Display modes: playground, codepreview, both
+- Multi-framework code examples (HTML, React, Vue, Astro)
+- Playground parameters for interactive components
+- Variations with individual pricing tiers
 
 ### Key Architecture Patterns
 
@@ -40,15 +49,20 @@ The `ui-elements` collection supports multiple categories: foundations, componen
 - `ui-elements/` - UI element showcase components
 - `navigation/` - Navigation-specific components
 
-**Page Structure**: 
-- Static pages in `src/pages/` for main routes
+**Page Structure**:
+- Static pages in `src/pages/` for main routes (index, design-system, ui-library, playground)
 - Dynamic routes for blog (`[...page].astro`, `[slug].astro`) and UI elements (`[category]/[slug].astro`)
+- Error pages (404.astro, 500.astro)
+- Legal pages with dynamic routing (`[slug].astro`)
 - Content-driven pages using Astro Content Collections
 
 **Navigation System**: Complex mega-dropdown navigation defined in `src/constants/navigation.ts` with support for:
-- Multi-level mega dropdowns
-- Product cards with features and integrations
+- Multi-level mega dropdowns with different types (products, discover)
+- Product cards with features, integrations, and status badges
+- Link collections with icons and badges
+- Featured content sections with CTAs
 - External links and internal routing
+- Disabled/coming soon states
 
 ### Environment Configuration
 Uses Astro's type-safe environment variables with defaults:
@@ -58,10 +72,12 @@ Uses Astro's type-safe environment variables with defaults:
 - `PUBLIC_DOCS_GUIDES_URL` (default: https://new-docs.plusui.com/guides)
 
 ### Build Optimization
-- Manual chunk splitting for vendor libraries (React) and icons
-- SSR configuration for `@plusui/library` components
-- Image optimization with Sharp service
+- Manual chunk splitting for vendor libraries (React) and icons (FontAwesome)
+- SSR configuration for `@plusui/library` components with noExternal config
+- Image optimization with Sharp service and unlimited input pixels
 - Build caching and optimization for performance
+- Syntax highlighting with Shiki for multiple languages
+- Optimized dependency handling with explicit includes
 
 ### Component Library Integration
 Uses `@plusui/library` as the core component system. Components are imported and used throughout the site for consistent UI patterns.
@@ -121,3 +137,11 @@ The project uses semantic color naming with this pattern:
 - `src/styles/global.css` - Global styles and imports
 
 Always refer to these theme files for available color tokens before using any color classes.
+
+## Code Formatting
+
+The project uses Prettier with specific plugins:
+- `prettier-plugin-astro` for Astro file formatting
+- `prettier-plugin-tailwindcss` for Tailwind class sorting
+
+Always ensure code formatting is consistent with the project's Prettier configuration.

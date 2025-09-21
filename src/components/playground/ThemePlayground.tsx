@@ -195,11 +195,31 @@ export default function ThemePlayground() {
     borderRadius: 4,
   });
 
+  // Helper function to check if a color is from Tailwind palette and get the palette
+  const getTailwindPalette = (colorValue: string): ColorPalette | null => {
+    for (const colorName of Object.keys(colors) as ColorName[]) {
+      const palette = colors[colorName];
+      // Check if any shade in this palette matches the color value
+      for (const shade of Object.keys(palette) as unknown as (keyof ColorPalette)[]) {
+        if (palette[shade].toLowerCase() === colorValue.toLowerCase()) {
+          return palette;
+        }
+      }
+    }
+    return null;
+  };
+
+  // Helper function to get color palette (Tailwind or generated)
+  const getColorPalette = (colorValue: string): ColorPalette => {
+    const tailwindPalette = getTailwindPalette(colorValue);
+    return tailwindPalette || generateColorPalette(colorValue);
+  };
+
   const [primaryPalette, setPrimaryPalette] = useState<ColorPalette>(
-    generateColorPalette("#6366f1"),
+    getColorPalette("#6366f1"),
   );
   const [neutralPalette, setNeutralPalette] = useState<ColorPalette>(
-    generateColorPalette("#6b7280"),
+    getColorPalette("#6b7280"),
   );
   const [showMorePrimaryColors, setShowMorePrimaryColors] = useState(false);
   const [showMoreNeutralColors, setShowMoreNeutralColors] = useState(false);
@@ -223,11 +243,11 @@ export default function ThemePlayground() {
   };
 
   useEffect(() => {
-    setPrimaryPalette(generateColorPalette(settings.primaryColor));
+    setPrimaryPalette(getColorPalette(settings.primaryColor));
   }, [settings.primaryColor]);
 
   useEffect(() => {
-    setNeutralPalette(generateColorPalette(settings.neutralColor));
+    setNeutralPalette(getColorPalette(settings.neutralColor));
   }, [settings.neutralColor]);
 
   const updateSetting = (key: keyof ThemeSettings, value: any) => {
@@ -235,8 +255,8 @@ export default function ThemePlayground() {
   };
 
   const generateCSSVariables = () => {
-    const primaryPalette = generateColorPalette(settings.primaryColor);
-    const neutralPalette = generateColorPalette(settings.neutralColor);
+    const primaryPalette = getColorPalette(settings.primaryColor);
+    const neutralPalette = getColorPalette(settings.neutralColor);
 
     return `/* Generated Theme Variables */
 @theme {

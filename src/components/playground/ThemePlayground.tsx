@@ -756,218 +756,7 @@ export default function ThemePlayground() {
         {/* Theme Preview Grid */}
         <div className="">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            {/* Card 1: Music Player */}
-            <div
-              className="bg-color-surface border-color-disabled overflow-hidden border"
-              style={{ borderRadius: `${settings.borderRadius * 2}px` }}
-            >
-              <div className="space-y-4 px-8 py-4">
-                {/* Album Cover */}
-                <div
-                  className="relative h-36 w-full overflow-hidden bg-gradient-to-br from-green-400 to-blue-500 pb-6"
-                  style={{
-                    borderRadius: `${settings.borderRadius}px`,
-                  }}
-                >
-                  <div className="absolute inset-0"></div>
-                </div>
-
-                {/* Song Info */}
-                <div className="text-center">
-                  <h4 className="text-color-default mb-1 text-xl font-bold">
-                    Calm Down
-                  </h4>
-                  <p className="text-color-caption text-sm">Song by Rema</p>
-                </div>
-
-                {/* Play Button */}
-                <div className="flex justify-center">
-                  <button className="bg-color-primary-default text-color-primary-invert-default flex h-16 w-16 items-center justify-center rounded-full transition-colors">
-                    {/* <div
-                      className="ml-1 h-0 w-0 border-t-[6px] border-b-[6px] border-l-[8px] border-t-transparent border-b-transparent"
-                      style={{
-                        borderLeftColor: "var(--preview-color-primary-100)",
-                      }}
-                    ></div> */}
-                    <i className="fa-solid fa-pause text-color-primary-invert text-3xl"></i>
-                  </button>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-color-primary">01:26</span>
-                    <span className="text-color-caption">03:26</span>
-                  </div>
-                  <div className="bg-color-disabled-default h-1 w-full overflow-hidden rounded-full">
-                    <div className="bg-color-primary-default relative h-full w-1/3 rounded-full">
-                      <div className="bg-color-primary-default absolute top-1/2 right-0 h-3 w-3 translate-x-1/2 -translate-y-1/2 transform rounded-full shadow-sm"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Product Card */}
-            <div
-              className="bg-color-primary-invert-default border-color-disabled overflow-hidden border"
-              style={{ borderRadius: `${settings.borderRadius * 2}px` }}
-            >
-              <div className="space-y-4 p-6">
-                {/* Product Header */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="text-color-default text-lg font-bold">
-                      Nike ZOOM Vaporfly
-                    </h4>
-                    <p className="text-color-caption text-sm">NEXT Premium</p>
-                  </div>
-                  <button className="text-color-caption transition-colors">
-                    <span className="text-xl">
-                      <i className="fa-regular fa-heart"></i>
-                    </span>
-                  </button>
-                </div>
-
-                {/* Rating */}
-                <div className="flex gap-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span key={star} className="text-color-primary text-sm">
-                      <i className="fa-solid fa-star"></i>
-                    </span>
-                  ))}
-                </div>
-
-                {/* Product Image */}
-                <div
-                  className="relative h-48 w-full overflow-hidden rounded-lg bg-gradient-to-br from-green-400 to-blue-500"
-                  style={{ borderRadius: `${settings.borderRadius * 2}px` }}
-                >
-                  <div className="bg-opacity-10 absolute inset-0"></div>
-                </div>
-
-                {/* Price and Button */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <div className="text-color-caption rounded px-2 py-1 opacity-50">
-                      <span className="font-semibold">$</span>
-                    </div>
-                    <span className="text-color-default text-lg font-bold">
-                      254.99
-                    </span>
-                  </div>
-                  <button
-                    className="bg-color-primary-default text-color-base px-4 py-2 transition-colors"
-                    style={{ borderRadius: `${settings.borderRadius}px` }}
-                  >
-                    Add to Card
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: Analytics Widget */}
-            <div
-              className="bg-color-surface border-color-disabled overflow-hidden border"
-              style={{ borderRadius: `${settings.borderRadius * 2}px` }}
-            >
-              <div className="space-y-4 p-5">
-                {/* Header */}
-                <div className="flex items-center justify-between">
-                  <h4 className="text-color-default font-medium">
-                    Visiting summary
-                  </h4>
-                  <button className="text-color-caption transition-colors">
-                    <span className="text-lg">
-                      <i className="fa-solid fa-ellipsis"></i>
-                    </span>
-                  </button>
-                </div>
-
-                {/* Stats */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-color-caption text-sm">Decrease</span>
-                    <span className="text-color-danger text-sm">↓</span>
-                    <span className="text-color-default font-bold">0%</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-color-default text-2xl font-bold">
-                      4.4$
-                    </span>
-                  </div>
-                </div>
-
-                {/* Divider */}
-                <div className="bg-color-disabled-default h-px w-full"></div>
-
-                {/* Browser Stats */}
-                <div className="space-y-3">
-                  {[
-                    { name: "Chrome", progress: 100, logos: ["logos:chrome"] },
-                    { name: "Safari", progress: 80, logos: ["logos:safari"] },
-                    { name: "Firefox", progress: 60, logos: ["logos:firefox"] },
-                    {
-                      name: "Edge",
-                      progress: 40,
-                      logos: ["logos:microsoft-edge"],
-                    },
-                  ].map((browser, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex items-center justify-center">
-                          {browser.logos.map((logo) => (
-                            <Icon icon={logo} className="h-6 w-6" />
-                          ))}
-                        </div>
-                        <span className="text-color-default text-sm">
-                          {browser.name}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="bg-color-default-default h-2 w-12 overflow-hidden rounded-full">
-                          <div
-                            className="bg-color-primary-default h-full rounded-full"
-                            style={{ width: `${browser.progress}%` }}
-                          ></div>
-                        </div>
-                        <span className="text-color-primary text-xs font-medium">
-                          100%
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Divider */}
-                <div className="bg-color-disabled-default h-px w-full"></div>
-
-                {/* Income Widget */}
-                <div className="flex items-center gap-3">
-                  <div className="relative h-12 w-12">
-                    <div className="border-color-default h-full w-full rounded-full border-4"></div>
-                    <div className="border-color-primary absolute inset-0 rotate-45 rounded-full border-4 border-t-transparent border-l-transparent"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-color-default text-xs font-medium">
-                        30%
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-color-default text-sm font-medium">
-                      Income this week
-                    </p>
-                    <p className="text-color-caption text-xs">
-                      $39k less than last week
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+          
             {/* Card 4: Profile Card */}
             <div
               className="bg-color-surface border-color-disabled overflow-hidden border"
@@ -1404,6 +1193,219 @@ export default function ThemePlayground() {
                 </div>
               </div>
             </div>
+
+              {/* Card 1: Music Player */}
+              <div
+              className="bg-color-surface border-color-disabled overflow-hidden border"
+              style={{ borderRadius: `${settings.borderRadius * 2}px` }}
+            >
+              <div className="space-y-4 px-8 py-4">
+                {/* Album Cover */}
+                <div
+                  className="relative h-36 w-full overflow-hidden bg-gradient-to-br from-green-400 to-blue-500 pb-6"
+                  style={{
+                    borderRadius: `${settings.borderRadius}px`,
+                  }}
+                >
+                  <div className="absolute inset-0"></div>
+                </div>
+
+                {/* Song Info */}
+                <div className="text-center">
+                  <h4 className="text-color-default mb-1 text-xl font-bold">
+                    Calm Down
+                  </h4>
+                  <p className="text-color-caption text-sm">Song by Rema</p>
+                </div>
+
+                {/* Play Button */}
+                <div className="flex justify-center">
+                  <button className="bg-color-primary-default text-color-primary-invert-default flex h-16 w-16 items-center justify-center rounded-full transition-colors">
+                    {/* <div
+                      className="ml-1 h-0 w-0 border-t-[6px] border-b-[6px] border-l-[8px] border-t-transparent border-b-transparent"
+                      style={{
+                        borderLeftColor: "var(--preview-color-primary-100)",
+                      }}
+                    ></div> */}
+                    <i className="fa-solid fa-pause text-color-primary-invert text-3xl"></i>
+                  </button>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-color-primary">01:26</span>
+                    <span className="text-color-caption">03:26</span>
+                  </div>
+                  <div className="bg-color-disabled-default h-1 w-full overflow-hidden rounded-full">
+                    <div className="bg-color-primary-default relative h-full w-1/3 rounded-full">
+                      <div className="bg-color-primary-default absolute top-1/2 right-0 h-3 w-3 translate-x-1/2 -translate-y-1/2 transform rounded-full shadow-sm"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Product Card */}
+            <div
+              className="bg-color-primary-invert-default border-color-disabled overflow-hidden border"
+              style={{ borderRadius: `${settings.borderRadius * 2}px` }}
+            >
+              <div className="space-y-4 p-6">
+                {/* Product Header */}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h4 className="text-color-default text-lg font-bold">
+                      Nike ZOOM Vaporfly
+                    </h4>
+                    <p className="text-color-caption text-sm">NEXT Premium</p>
+                  </div>
+                  <button className="text-color-caption transition-colors">
+                    <span className="text-xl">
+                      <i className="fa-regular fa-heart"></i>
+                    </span>
+                  </button>
+                </div>
+
+                {/* Rating */}
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span key={star} className="text-color-primary text-sm">
+                      <i className="fa-solid fa-star"></i>
+                    </span>
+                  ))}
+                </div>
+
+                {/* Product Image */}
+                <div
+                  className="relative h-48 w-full overflow-hidden rounded-lg bg-gradient-to-br from-green-400 to-blue-500"
+                  style={{ borderRadius: `${settings.borderRadius * 2}px` }}
+                >
+                  <div className="bg-opacity-10 absolute inset-0"></div>
+                </div>
+
+                {/* Price and Button */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    <div className="text-color-caption rounded px-2 py-1 opacity-50">
+                      <span className="font-semibold">$</span>
+                    </div>
+                    <span className="text-color-default text-lg font-bold">
+                      254.99
+                    </span>
+                  </div>
+                  <button
+                    className="bg-color-primary-default text-color-base px-4 py-2 transition-colors"
+                    style={{ borderRadius: `${settings.borderRadius}px` }}
+                  >
+                    Add to Card
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Analytics Widget */}
+            <div
+              className="bg-color-surface border-color-disabled overflow-hidden border"
+              style={{ borderRadius: `${settings.borderRadius * 2}px` }}
+            >
+              <div className="space-y-4 p-5">
+                {/* Header */}
+                <div className="flex items-center justify-between">
+                  <h4 className="text-color-default font-medium">
+                    Visiting summary
+                  </h4>
+                  <button className="text-color-caption transition-colors">
+                    <span className="text-lg">
+                      <i className="fa-solid fa-ellipsis"></i>
+                    </span>
+                  </button>
+                </div>
+
+                {/* Stats */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-color-caption text-sm">Decrease</span>
+                    <span className="text-color-danger text-sm">↓</span>
+                    <span className="text-color-default font-bold">0%</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-color-default text-2xl font-bold">
+                      4.4$
+                    </span>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="bg-color-disabled-default h-px w-full"></div>
+
+                {/* Browser Stats */}
+                <div className="space-y-3">
+                  {[
+                    { name: "Chrome", progress: 100, logos: ["logos:chrome"] },
+                    { name: "Safari", progress: 80, logos: ["logos:safari"] },
+                    { name: "Firefox", progress: 60, logos: ["logos:firefox"] },
+                    {
+                      name: "Edge",
+                      progress: 40,
+                      logos: ["logos:microsoft-edge"],
+                    },
+                  ].map((browser, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex items-center justify-center">
+                          {browser.logos.map((logo) => (
+                            <Icon icon={logo} className="h-6 w-6" />
+                          ))}
+                        </div>
+                        <span className="text-color-default text-sm">
+                          {browser.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="bg-color-default-default h-2 w-12 overflow-hidden rounded-full">
+                          <div
+                            className="bg-color-primary-default h-full rounded-full"
+                            style={{ width: `${browser.progress}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-color-primary text-xs font-medium">
+                          100%
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <div className="bg-color-disabled-default h-px w-full"></div>
+
+                {/* Income Widget */}
+                <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12">
+                    <div className="border-color-default h-full w-full rounded-full border-4"></div>
+                    <div className="border-color-primary absolute inset-0 rotate-45 rounded-full border-4 border-t-transparent border-l-transparent"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-color-default text-xs font-medium">
+                        30%
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-color-default text-sm font-medium">
+                      Income this week
+                    </p>
+                    <p className="text-color-caption text-xs">
+                      $39k less than last week
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

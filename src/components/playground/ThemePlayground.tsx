@@ -725,24 +725,24 @@ export default function ThemePlayground() {
           <h3 className="text-color-default mb-4 font-medium">
             Primary Color Palette
           </h3>
-          <div className="flex items-start justify-between gap-1 lg:gap-2 flex-wrap">
+          <div className="flex items-start justify-between gap-1 lg:gap-2">
             {Object.entries(primaryPalette).map(([shade, color]) => (
               <div
                 key={shade}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center flex-1"
               >
                 <div
-                  className="relative mb-2 flex h-16 w-full items-end justify-center overflow-hidden rounded md:p-2 p-1"
+                  className="relative mb-2 flex h-16 w-full items-end justify-center overflow-hidden rounded md:p-2 sm:p-1 p-0.5" 
                   style={{ backgroundColor: color }}
                 >
                   <div className="text-center">
                     <div
-                      className={`lg:text-sm text-xs font-medium ${parseInt(shade) >= 500 ? "text-white" : "text-gray-900"}`}
+                      className={`lg:text-sm md:text-xs text-xxxs font-medium ${parseInt(shade) >= 500 ? "text-white" : "text-gray-900"}`}
                     >
                       {shade}
                     </div>
                     <div
-                      className={`lg:text-xs text-xxxs ${parseInt(shade) >= 500 ? "text-white" : "text-gray-900"}`}
+                      className={` hidden md:block lg:text-xs text-xxxs ${parseInt(shade) >= 500 ? "text-white" : "text-gray-900"}`}
                     >
                       {color.toUpperCase().slice(1)}
                     </div>

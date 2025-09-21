@@ -1,4 +1,4 @@
-@layer dark {
+
   [data-theme="dark"] {
     --background-color-color-surface: var(--color-base-black);
     --background-color-color-disabled-default: var(--color-neutral-800);
@@ -222,4 +222,4 @@
     --border-color-color-ring: var(--color-blue-300);
     --border-color-color-disabled: var(--color-neutral-300);
   }
-}
+

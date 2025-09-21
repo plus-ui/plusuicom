@@ -22,7 +22,7 @@
     "@iconify-json/logos": "^1.2.9",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/react": "^6.0.0",
-    "@plusui/library": "^0.1.13",
+    "@plusui/library": "^0.1.14",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.13.0",

@@ -32,12 +32,6 @@ const totalCount = allElements.length
 const url = new URL(Astro.request.url)
 const selectedCategory = url.searchParams.get('category') || 'all'
 
-// Filter elements based on selected category
-const filteredElements =
-  selectedCategory === 'all'
-    ? allElements
-    : allElements.filter((item) => item.data.category === selectedCategory)
-
 const filteredCategoryData =
   selectedCategory === 'all'
     ? categoryData

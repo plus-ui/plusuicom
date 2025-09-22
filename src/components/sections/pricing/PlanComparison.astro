@@ -1,0 +1,269 @@
+---
+import { Container, Section } from '@components/layout'
+import ComparisonAccordion from '@components/ui-elements/ComparisonAccordion'
+
+const comparisonData = [
+  {
+    id: 'design-system',
+    title: 'Design System',
+    features: [
+      {
+        name: 'Variables',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Foundations',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Components',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Blocks',
+        values: {
+          community: false,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Templates',
+        hasTooltip: true,
+        values: {
+          community: false,
+          pro: '1 template',
+          premium: 'All templates',
+          enterprise: 'Custom',
+        }
+      },
+      {
+        name: 'Theme & Customisation',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      }
+    ]
+  },
+  {
+    id: 'ui-library',
+    title: 'UI Library',
+    features: [
+      {
+        name: 'CSS Variables',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Components',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Blocks',
+        values: {
+          community: false,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Templates',
+        values: {
+          community: false,
+          pro: '1 template',
+          premium: 'All templates',
+          enterprise: 'Custom',
+        }
+      },
+      {
+        name: 'Framework support',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Theme & Customisation',
+        values: {
+          community: true,
+          pro: true,
+          premium: true,
+          enterprise: true,
+        }
+      }
+    ]
+  },
+  {
+    id: 'plus-analytics',
+    title: 'Plus Analytics',
+    features: [
+      {
+        name: 'Monitoring dashboard',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Performance overview',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Flow tracker',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Automatic reporting',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Virtual assistant (NEW)',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'Custom Domain',
+        values: {
+          community: false,
+          pro: false,
+          premium: false,
+          enterprise: true,
+        }
+      }
+    ]
+  },
+  {
+    id: 'plus-ai',
+    title: 'Plus AI',
+    features: [
+      {
+        name: 'Autopilot credits',
+        values: {
+          community: false,
+          pro: '25',
+          premium: '100',
+          enterprise: 'Custom',
+        }
+      },
+      {
+        name: 'Design to code Figma plugin',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      },
+      {
+        name: 'From screenshot to design',
+        values: {
+          community: false,
+          pro: false,
+          premium: true,
+          enterprise: true,
+        }
+      }
+    ]
+  },
+  {
+    id: 'support',
+    title: 'Support',
+    features: [
+      {
+        name: 'Updates',
+        values: {
+          community: 'Standard',
+          pro: '1 year',
+          premium: '1 year',
+          enterprise: 'Life-time',
+        }
+      },
+      {
+        name: 'Feature request',
+        values: {
+          community: false,
+          pro: 'Standard',
+          premium: 'Prioritised',
+          enterprise: 'Unlimited',
+        }
+      },
+      {
+        name: 'Support response',
+        values: {
+          community: '1 week',
+          pro: '24 hours',
+          premium: '12 hours',
+          enterprise: '1 hour',
+        }
+      },
+      {
+        name: 'Communication',
+        values: {
+          community: 'Platform',
+          pro: 'Email address',
+          premium: 'Discord',
+          enterprise: 'Private Slack',
+        }
+      }
+    ]
+  }
+];
+---
+
+<Section>
+  <Container>
+    <ComparisonAccordion categories={comparisonData} client:load />
+  </Container>
+</Section>

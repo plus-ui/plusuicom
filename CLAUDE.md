@@ -45,12 +45,13 @@ The `ui-elements` collection supports multiple categories: foundations, componen
 
 **Component Organization**: Components are organized in a hierarchical structure under `src/components/`:
 - `layout/` - Base layout components (Container, Section, Navbar, Footer)
-- `sections/` - Page sections with templates for different page types
+- `sections/` - Page sections with templates for different page types (hero, features, faq, proof, specifications, resources)
 - `ui-elements/` - UI element showcase components
 - `navigation/` - Navigation-specific components
+- `playground/` - Interactive components (ThemePlayground, ColorPlayground)
 
 **Page Structure**:
-- Static pages in `src/pages/` for main routes (index, design-system, ui-library, playground)
+- Static pages in `src/pages/` for main routes (index, design-system, ui-library, playground, pricing)
 - Dynamic routes for blog (`[...page].astro`, `[slug].astro`) and UI elements (`[category]/[slug].astro`)
 - Error pages (404.astro, 500.astro)
 - Legal pages with dynamic routing (`[slug].astro`)
@@ -87,8 +88,10 @@ Uses `@plusui/library` as the core component system. Components are imported and
 - `astro.config.mjs` - Main Astro configuration with SSR, integrations, and build settings
 - `src/content/config.ts` - Content collection schemas and validation
 - `src/constants/navigation.ts` - Site navigation structure and mega-dropdown configuration
+- `src/constants/colors.ts` - Color definitions and palettes for theme system
 - `src/layouts/` - Main layout templates
 - `src/components/sections/hero/templates/` - Different hero variations for each page type
+- `src/components/playground/` - Interactive theme and color playground components
 
 ## Working with Content
 

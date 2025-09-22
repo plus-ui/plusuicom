@@ -1,0 +1,120 @@
+---
+import { Container, Section } from '@components/layout'
+import PricingCard from '@components/ui-elements/PricingCard.astro'
+
+const pricingPlans = [
+  {
+    title: "Community",
+    description: "Jump in and create something",
+    price: "$0",
+    period: "forever",
+    buttonText: "Start for free",
+    buttonVariant: "secondary" as const,
+    features: [
+      "Free Design System on Figma",
+      "Free UI Library",
+      "Basic Blocks",
+      "Limited access to PlusHub"
+    ],
+    avatars: [
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80",
+      "https://images.unsplash.com/photo-1494790108755-2616b612a88a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80"
+    ],
+    targetAudience: "New designers or developers",
+    audienceDescription: "New to the industry and Plus UI usual projects are basic 1-page."
+  },
+  {
+    title: "Pro",
+    description: "Jump in and create something",
+    price: "$24",
+    originalPrice: "$32",
+    period: "per monthly",
+    buttonText: "Get Started",
+    buttonVariant: "primary" as const,
+    features: [
+      "Pro Design System on Figma",
+      "Pro UI Library",
+      "Advanced Blocks",
+      "Full access to PlusHub"
+    ],
+    isPopular: true,
+    icon: "gem",
+    iconColor: "text-color-info",
+    avatars: [
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80",
+      "https://images.unsplash.com/photo-1494790108755-2616b612a88a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80"
+    ],
+    targetAudience: "New designers or developers",
+    audienceDescription: "New to the industry and Plus UI usual projects are basic 1-page.",
+    additionalText: "Billed $288 annually"
+  },
+  {
+    title: "Premium",
+    description: "Jump in and create something",
+    price: "$20",
+    originalPrice: "$32",
+    period: "per monthly",
+    buttonText: "Get Started",
+    buttonVariant: "primary" as const,
+    features: [
+      "Pro Design System on Figma",
+      "Pro UI Library",
+      "Advanced Blocks",
+      "Full access to PlusHub"
+    ],
+    isDisabled: true,
+    icon: "gem",
+    iconColor: "text-color-danger",
+    avatars: [
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80",
+      "https://images.unsplash.com/photo-1494790108755-2616b612a88a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=70&h=70&q=80"
+    ],
+    targetAudience: "New designers or developers",
+    audienceDescription: "New to the industry and Plus UI usual projects are basic 1-page.",
+    additionalText: "Billed $288 annually"
+  },
+  {
+    title: "Enterprise",
+    description: "Fit for business, dressed in a tux",
+    price: "Custom",
+    period: "",
+    buttonText: "Get contact",
+    buttonVariant: "outline" as const,
+    features: [
+      "Free Design System on Figma",
+      "Free UI Library",
+      "Basic Blocks",
+      "Limited access to PlusHub"
+    ],
+    additionalText: "Includes all features +",
+    targetAudience: "Agency or Team",
+    audienceDescription: "For large teams and organizations that need a custom and flexibility."
+  }
+];
+---
+
+<Section>
+  <Container>
+    <!-- Header -->
+    <div class="text-center mb-8 sm:mb-12 lg:mb-16">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-color-default mb-3 sm:mb-4 px-4">
+        Flexible Plans for Every Need
+      </h2>
+      <p class="text-base sm:text-lg text-color-caption max-w-2xl mx-auto px-4">
+        From individuals to enterprises, choose the plan that fits your scale and goals.
+      </p>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-6 lg:px-0">
+      {pricingPlans.map((plan) => (
+        <div class="w-full max-w-sm mx-auto lg:max-w-none">
+          <PricingCard {...plan} />
+        </div>
+      ))}
+    </div>
+  </Container>
+</Section>

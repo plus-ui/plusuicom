@@ -200,7 +200,7 @@ export const data = [
   },
   {
     title: "Pricing",
-    path: "#",
+    path: "/pricing",
     external: true,
   },
   {

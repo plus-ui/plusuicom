@@ -350,7 +350,7 @@ export default function ThemePlayground() {
   } as React.CSSProperties;
 
   return (
-    <div className="flex min-h-screen items-stretch justify-center lg:gap-9 gap-2">
+    <div className="flex min-h-screen items-stretch justify-center lg:gap-9 gap-2 font-sans">
       {/* Left Panel - Controls */}
       <div className="flex lg:w-64 w-56 flex-col gap-4 pt-24 pb-24">
         {/* Primary Color Section */}
@@ -858,8 +858,8 @@ export default function ThemePlayground() {
                     <path
                       d="M236 23.7919C245.643 23.7919 245.643 55.4895 258.857 54.9943C272.071 54.499 272.071 30.2305 278.5 21.3155C284.929 12.4005 296 24.2871 296 24.2871"
                       stroke="var(--background-color-color-default-default)"
-                      stroke-width="4"
-                      stroke-linecap="round"
+                      strokeWidth="4"
+                      strokeLinecap="round"
                     />
                     <path
                       d="M236 24C236 28.4183 232.418 32 228 32C223.582 32 220 28.4183 220 24C220 19.5817 223.582 16 228 16C232.418 16 236 19.5817 236 24ZM223.404 24C223.404 26.5383 225.462 28.596 228 28.596C230.538 28.596 232.596 26.5383 232.596 24C232.596 21.4617 230.538 19.404 228 19.404C225.462 19.404 223.404 21.4617 223.404 24Z"
@@ -879,13 +879,13 @@ export default function ThemePlayground() {
                         gradientTransform="translate(228 22) rotate(90) scale(21.5)"
                       >
                         <stop
-                          stop-color="var(--background-color-color-primary-default)"
-                          stop-opacity="0.51"
+                        stopColor="var(--background-color-color-primary-default)"
+                        stopOpacity="0.51"
                         />
                         <stop
                           offset="1"
-                          stop-color="var(--background-color-color-primary-default)"
-                          stop-opacity="0"
+                          stopColor="var(--background-color-color-primary-default)"
+                          stopOpacity="0"
                         />
                       </radialGradient>
                     </defs>
@@ -999,7 +999,7 @@ export default function ThemePlayground() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_10_3260)">
+                    <g clipPath="url(#clip0_10_3260)">
                       <path
                         opacity="0.1"
                         d="M132 220C83.3989 220 44 180.601 44 132C44 83.3989 83.3989 44 132 44C180.601 44 220 83.3989 220 132C220 180.601 180.601 220 132 220ZM132 52.8C88.259 52.8 52.8 88.2591 52.8 132C52.8 175.741 88.259 211.2 132 211.2C175.741 211.2 211.2 175.741 211.2 132C211.2 88.2591 175.741 52.8 132 52.8Z"
@@ -1153,22 +1153,22 @@ export default function ThemePlayground() {
                       <path
                         d="M55 27C54.513 20.692 51.7057 14.775 47.1038 10.3572C42.5019 5.93931 36.421 3.32363 30 3"
                         stroke="#93C5FD"
-                        stroke-width="6"
+                        strokeWidth="6"
                       />
                       <path
                         d="M28 3C22.5192 3.29858 17.2666 5.28688 12.9675 8.69032C8.66843 12.0937 5.53502 16.7444 4 22"
                         stroke="#7367FF"
-                        stroke-width="6"
+                        strokeWidth="6"
                       />
                       <path
                         d="M3.37458 24C2.54093 29.0623 3.10565 34.2737 5 39"
                         stroke="white"
-                        stroke-width="6"
+                        strokeWidth="6"
                       />
                       <path
                         d="M6 41.6466C8.82713 46.6795 13.2407 50.6368 18.5532 52.9017C23.8657 55.1667 29.7786 55.6123 35.3709 54.1689C40.9632 52.7256 45.9207 49.4745 49.4711 44.922C53.0215 40.3696 54.9654 34.7715 55 29"
                         stroke="#A5B4FC"
-                        stroke-width="6"
+                        strokeWidth="6"
                       />
                     </svg>
                   </div>
@@ -1377,8 +1377,8 @@ export default function ThemePlayground() {
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="flex items-center justify-center">
-                          {browser.logos.map((logo) => (
-                            <Icon icon={logo} className="h-6 w-6" />
+                          {browser.logos.map((logo, logoIdx) => (
+                            <Icon key={logoIdx} icon={logo} className="h-6 w-6" />
                           ))}
                         </div>
                         <span className="text-color-default text-sm">

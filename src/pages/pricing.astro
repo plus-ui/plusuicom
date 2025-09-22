@@ -1,0 +1,27 @@
+---
+import Layout from '@layouts/Layout.astro'
+
+// Section imports
+import { PricingHero } from '@components/sections'
+import { PricingPlans, PlanComparison } from '@components/sections/pricing'
+import { Container } from '@/components/layout'
+---
+
+<Layout
+  title="Plus UI Playground - High-Quality UI Components"
+  description="Professional UI component library for Astro, React, Vue and more. Build beautiful, accessible interfaces faster with our comprehensive design system."
+  keywords="UI library, component library, Astro components, React components, Vue components, design system, web development, frontend, UI kit, interface design"
+  theme="light"
+  headerTheme="light"
+>
+  <main class="bg-color-default-default">
+    <!-- Hero Section -->
+    <PricingHero />
+
+    <!-- Pricing Plans Section -->
+    <PricingPlans />
+
+    <!-- Compare Plans Section -->
+    <PlanComparison />
+  </main>
+</Layout>

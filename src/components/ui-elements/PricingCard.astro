@@ -1,0 +1,176 @@
+---
+export interface Props {
+  title: string
+  description: string
+  price: string
+  originalPrice?: string
+  period: string
+  buttonText: string
+  buttonVariant?: 'primary' | 'secondary' | 'outline'
+  features: string[]
+  isPopular?: boolean
+  isDisabled?: boolean
+  avatars?: string[]
+  targetAudience?: string
+  audienceDescription?: string
+  icon?: string
+  iconColor?: string
+  additionalText?: string
+}
+
+const {
+  title,
+  description,
+  price,
+  originalPrice,
+  period,
+  buttonText,
+  buttonVariant = 'secondary',
+  features,
+  isPopular = false,
+  isDisabled = false,
+  avatars = [],
+  targetAudience,
+  audienceDescription,
+  icon,
+  iconColor = 'text-color-primary',
+  additionalText,
+} = Astro.props
+---
+
+<div
+  class={`
+    relative flex flex-col gap-4 sm:gap-6 p-4 sm:p-6 rounded bg-color-surface border border-color-default h-auto sm:h-[640px] min-h-[500px] sm:min-h-[640px]
+    ${isDisabled ? 'opacity-25' : ''}
+  `}
+>
+  <!-- Header -->
+  <div class="flex flex-col gap-4 sm:gap-6">
+    <!-- Title Section -->
+    <div class="flex flex-col gap-1">
+      {
+        icon ? (
+          <div class="flex items-center gap-2 sm:gap-3">
+            <i class={`fa-solid fa-${icon} text-lg sm:text-xl ${iconColor}`} />
+            <h3 class="text-color-default text-lg font-bold sm:text-xl">
+              {title}
+            </h3>
+          </div>
+        ) : (
+          <h3 class="text-color-default text-lg font-bold sm:text-xl">
+            {title}
+          </h3>
+        )
+      }
+      <p class="text-color-caption text-xs font-medium">{description}</p>
+    </div>
+
+    <!-- Price Section -->
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1">
+        <div class="flex flex-wrap items-start gap-2 sm:flex-nowrap">
+          {
+            originalPrice && (
+              <div class="flex items-center gap-2.5">
+                <span class="text-color-disabled text-2xl font-bold line-through sm:text-3xl">
+                  {originalPrice}
+                </span>
+              </div>
+            )
+          }
+          <div class="flex items-center gap-2.5">
+            <span class="text-color-default text-2xl font-bold sm:text-3xl"
+              >{price}</span
+            >
+          </div>
+        </div>
+        <p class="text-color-caption text-sm font-medium">{period}</p>
+      </div>
+      <div class="flex items-end gap-1">
+        <p class="text-color-placeholder text-xs font-normal">
+          {additionalText || ''}&nbsp;
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="flex flex-col gap-2.5">
+      <button
+        class={`cursor-pointer flex items-center justify-center gap-2 min-h-9 min-w-9 px-2 py-2 rounded text-sm font-medium
+          ${
+            buttonVariant === 'primary'
+              ? 'bg-color-primary-default text-color-default-invert'
+              : buttonVariant === 'outline'
+                ? 'bg-color-surface border border-color-default text-color-default'
+                : 'bg-color-default-default text-color-default'
+          }
+        `}
+      >
+        {buttonText}
+      </button>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="flex items-center justify-center">
+    <div class="bg-color-divider h-px flex-1"></div>
+  </div>
+
+  <!-- Features -->
+  <div class="flex min-h-[120px] flex-1 flex-col gap-2 sm:min-h-[160px]">
+    {
+      features.map((feature) => (
+        <div class="flex items-start gap-2">
+          <div class="mt-0.5 flex h-3.5 w-3.5 items-center justify-center">
+            <i
+              class={`fa-solid fa-check text-xs sm:text-sm ${isPopular ? iconColor : 'text-color-default'}`}
+            />
+          </div>
+          <p class="text-color-default text-xs leading-relaxed font-normal sm:text-sm">
+            {feature}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Divider -->
+  <div class="flex items-center justify-center">
+    <div class="bg-color-divider h-px flex-1"></div>
+  </div>
+
+  <!-- Trust Section -->
+  {
+    (avatars.length > 0 || targetAudience || audienceDescription) && (
+      <div class="mt-auto flex flex-col gap-2">
+        {avatars.length > 0 && (
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center -space-x-2 pr-2 sm:-space-x-2.5 sm:pr-2.5">
+              {avatars.map((avatar, index) => (
+                <div class="border-color-default bg-color-disabled-default relative h-6 w-6 overflow-hidden rounded-full border sm:h-8 sm:w-8">
+                  {avatar && (
+                    <img
+                      src={avatar}
+                      alt=""
+                      class="h-full w-full object-cover"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            {targetAudience && (
+              <p class="text-color-default text-xs font-medium sm:text-sm">
+                {targetAudience}
+              </p>
+            )}
+          </div>
+        )}
+        {audienceDescription && (
+          <p class="text-color-caption text-xs leading-relaxed font-normal">
+            {audienceDescription}
+          </p>
+        )}
+      </div>
+    )
+  }
+</div>

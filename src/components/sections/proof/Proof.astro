@@ -12,12 +12,12 @@ import github from '@assets/images/brand-logos/github.png'
 const logos = [amazon, asana, atlassian, canva, databricks, atlassian, asana, github, canva]
 ---
 
-<Section dark padding="sm"> 
+<Section padding="sm"> 
   <div class="relative flex flex-row flex-nowrap items-center justify-center gap-6 overflow-hidden sm:gap-11">
     <div class="pointer-events-none absolute top-0 left-0 z-10 h-full w-16 bg-gradient-to-r from-[var(--background-color-color-surface)] to-transparent"></div>
 
     <div class="pointer-events-none absolute top-0 right-0 z-10 h-full w-16 bg-gradient-to-l from-[var(--background-color-color-surface)] to-transparent"></div>
 
-    {logos.map((logo) => <Image src={logo} alt="Company Logo" class="h-5 w-auto object-contain sm:h-9" loading="lazy" decoding="async" fetchpriority="low" />)}
+    {logos.map((logo) => <Image src={logo} alt="Company Logo" class="h-5 w-auto object-contain sm:h-9 filter invert-50 " loading="lazy" decoding="async" fetchpriority="low" />)}
   </div>
 </Section>

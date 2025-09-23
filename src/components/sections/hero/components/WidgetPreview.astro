@@ -1,104 +1,36 @@
 ---
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import type { Variants } from 'framer-motion'
-import widgetd1x1 from '@assets/images/heros/home/widget-d-1x1.jpg'
-import widgetd1x2 from '@assets/images/heros/home/widget-d-1x2.jpg'
-import widgetd1x3 from '@assets/images/heros/home/widget-d-1x3.jpg'
-// import widget1x1 from '@assets/images/heros/home/widget-1x1.png'
-// import widget1x2 from '@assets/images/heros/home/widget-1x2.png'
-// import widget1x3 from '@assets/images/heros/home/widget-1x3.png'
-// import widget2x1 from '@assets/images/heros/home/widget-2x1.png'
-// import widget2x2 from '@assets/images/heros/home/widget-2x2.png'
-// import widget2x3 from '@assets/images/heros/home/widget-2x3.png'
-// import widget3x1 from '@assets/images/heros/home/widget-3x1.png'
-// import widget3x2 from '@assets/images/heros/home/widget-3x2.png'
-// import widget3x3 from '@assets/images/heros/home/widget-3x3.png'
-// import widget4x1 from '@assets/images/heros/home/widget-4x1.png'
-// import widget4x2 from '@assets/images/heros/home/widget-4x2.png'
-// import widget4x3 from '@assets/images/heros/home/widget-4x3.png'
-// import widget5x1 from '@assets/images/heros/home/widget-5x1.png'
-// import widget5x2 from '@assets/images/heros/home/widget-5x2.png'
-// import widget5x3 from '@assets/images/heros/home/widget-5x3.png'
-
-import { Image } from 'astro:assets'
+import StatCard from './StatCard'
+import EventCard from './EventCard'
+import ProgressCard from './ProgressCard'
 ---
 
-<div class="relative w-full overflow-hidden">
+<div class="relative w-full mb-6">
   {/* Hidden reference layout - determines sizes */}
   <div class="pointer-events-none opacity-0">
     <div class="mb-4 flex w-full flex-col gap-4 sm:flex-row">
       <div class="flex-1">
-        <Image 
-          src={widgetd1x1} 
-          alt="UI Component Widget Preview - Dashboard Card" 
-          class="h-auto w-full object-contain" 
-          loading="lazy" 
-          decoding="async"
-          fetchpriority="low"
-        />
+        <div class="h-[24.5rem] w-full"></div>
       </div>
       <div class="flex-1">
-        <Image 
-          src={widgetd1x2} 
-          alt="UI Component Widget Preview - Analytics Chart" 
-          class="h-auto w-full object-contain" 
-          loading="lazy" 
-          decoding="async"
-          fetchpriority="low"
-        />
+        <div class="h-[24.5rem] w-full"></div>
       </div>
     </div>
     <div class="w-full">
-      <Image 
-        src={widgetd1x3} 
-        alt="UI Component Widget Preview - Full Width Dashboard Layout" 
-        class="h-auto w-full object-contain" 
-        loading="lazy" 
-        decoding="async"
-        fetchpriority="low"
-      />
+      <div class="h-[25.3125rem] w-full"></div>
     </div>
   </div>
   {/* Animated Widgets */}
   <div class="absolute inset-0 flex flex-col">
     <div class="mb-4 flex w-full flex-col gap-4 sm:flex-row">
       <div class="flex-1">
-        <Image 
-          src={widgetd1x1} 
-          alt="UI Component Widget Preview - Dashboard Card" 
-          class="h-auto w-full object-contain" 
-          loading="eager" 
-          decoding="async"
-          fetchpriority="high"
-          width={608}
-          height={376}
-        />
+        <StatCard client:load />
       </div>
       <div class="flex-1">
-        <Image 
-          src={widgetd1x2} 
-          alt="UI Component Widget Preview - Analytics Chart" 
-          class="h-auto w-full object-contain" 
-          loading="eager" 
-          decoding="async"
-          fetchpriority="high"
-          width={608}
-          height={376}
-        />
+        <EventCard client:load />
       </div>
     </div>
     <div class="w-full">
-      <Image 
-        src={widgetd1x3} 
-        alt="UI Component Widget Preview - Full Width Dashboard Layout" 
-        class="h-auto w-full object-contain" 
-        loading="eager" 
-        decoding="async"
-        fetchpriority="high"
-        width={1216}
-        height={376}
-      />
+      <ProgressCard client:load />
     </div>
   </div>
 </div>
